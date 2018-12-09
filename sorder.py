@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'sorder.ui',
 # licensing of 'sorder.ui' applies.
 #
-# Created: Sun Dec  9 17:49:29 2018
+# Created: Sun Dec  9 18:33:27 2018
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -577,7 +577,7 @@ class Ui_SOrderEdit(object):
         QtCore.QMetaObject.connectSlotsByName(SOrderEdit)
 
     def retranslateUi(self, SOrderEdit):
-        SOrderEdit.setWindowTitle(QtWidgets.QApplication.translate("SOrderEdit", "Dialog", None, -1))
+        SOrderEdit.setWindowTitle(QtWidgets.QApplication.translate("SOrderEdit", "Ordem de Serviço", None, -1))
         self.label_33.setText(QtWidgets.QApplication.translate("SOrderEdit", "Status:", None, -1))
         self.label_17.setText(QtWidgets.QApplication.translate("SOrderEdit", "Ordem de Serviço", None, -1))
         self.label_23.setText(QtWidgets.QApplication.translate("SOrderEdit", "OS:", None, -1))
