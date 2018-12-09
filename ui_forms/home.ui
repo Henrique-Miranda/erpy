@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Home</class>
+ <widget class="QMainWindow" name="Home">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>635</width>
+    <height>396</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>HL INFORMÁTICA</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>IMG/logoblack.png</normaloff>IMG/logoblack.png</iconset>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <spacer name="hSearch">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="leSearch">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string> Pesquisar...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbSearch">
+          <property name="maximumSize">
+           <size>
+            <width>29</width>
+            <height>29</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>../../Imagens/Icones/123368-color-startups-and-new-business/png/magnifying-glass.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="hsSearch_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <spacer name="hsCbox_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QComboBox" name="cbSearch">
+          <item>
+           <property name="text">
+            <string>Ordem de Serviço</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Cliente</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Produto</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>CPF</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Marca</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Modelo</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="hsCbox_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>30</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="pbClient">
+        <property name="text">
+         <string>Clientes</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>IMG/team.png</normaloff>IMG/team.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbSo">
+        <property name="text">
+         <string>Ordem de Serviço</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>IMG/documentation.png</normaloff>IMG/documentation.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbStock">
+        <property name="text">
+         <string>Estoque</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>IMG/store.png</normaloff>IMG/store.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbFinancial">
+        <property name="text">
+         <string>Financeiro</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>IMG/diagram-1.png</normaloff>IMG/diagram-1.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="pbSales">
+        <property name="text">
+         <string>Ponto de Vendas</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>IMG/website.png</normaloff>IMG/website.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbTeam">
+        <property name="text">
+         <string>Equipe</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>IMG/employees.png</normaloff>IMG/employees.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbProvider">
+        <property name="text">
+         <string>Fornecedores</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>IMG/truck-1.png</normaloff>IMG/truck-1.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbSettings">
+        <property name="text">
+         <string>Ajustes</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>IMG/cogwheel.png</normaloff>IMG/cogwheel.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>635</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Ar&amp;quivo</string>
+    </property>
+    <widget class="QMenu" name="menuNew">
+     <property name="title">
+      <string>&amp;Novo</string>
+     </property>
+     <addaction name="actionClient"/>
+     <addaction name="actionSo"/>
+     <addaction name="actionProduct"/>
+     <addaction name="actionProvider"/>
+    </widget>
+    <widget class="QMenu" name="menuPesquisar">
+     <property name="title">
+      <string>&amp;Pesquisar</string>
+     </property>
+     <addaction name="actionClient_2"/>
+     <addaction name="actionSo_2"/>
+     <addaction name="actionProduct_2"/>
+     <addaction name="actionProvider_2"/>
+    </widget>
+    <addaction name="menuNew"/>
+    <addaction name="menuPesquisar"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>A&amp;juda</string>
+    </property>
+    <addaction name="actionManual"/>
+    <addaction name="actionSupport"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuExit">
+    <property name="title">
+     <string>Sair</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
+   <addaction name="menuExit"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionManual">
+   <property name="text">
+    <string>&amp;Manual</string>
+   </property>
+  </action>
+  <action name="actionSupport">
+   <property name="text">
+    <string>&amp;Suporte</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>S&amp;obre</string>
+   </property>
+  </action>
+  <action name="actionClient">
+   <property name="text">
+    <string>&amp;Cliente</string>
+   </property>
+  </action>
+  <action name="actionSo">
+   <property name="text">
+    <string>&amp;Ordem Serviço</string>
+   </property>
+  </action>
+  <action name="actionProduct">
+   <property name="text">
+    <string>&amp;Produto</string>
+   </property>
+  </action>
+  <action name="actionProvider">
+   <property name="text">
+    <string>&amp;Fornecedor</string>
+   </property>
+  </action>
+  <action name="actionClient_2">
+   <property name="text">
+    <string>&amp;Cliente</string>
+   </property>
+  </action>
+  <action name="actionSo_2">
+   <property name="text">
+    <string>&amp;Ordem Serviço</string>
+   </property>
+  </action>
+  <action name="actionProduct_2">
+   <property name="text">
+    <string>&amp;Produto</string>
+   </property>
+  </action>
+  <action name="actionProvider_2">
+   <property name="text">
+    <string>&amp;Fornecedor</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
