@@ -14,6 +14,10 @@ SqlCipher<br>
 Encrypted sqlite3 database using SqlCipher.<br>
 Modern GUI<br>
 
+<b>Initial Login:</b><br>
+User: admin<br>
+Password: 12345<br>
+
 <b>Screenshots:</b><br>
 
  ![Login](https://raw.githubusercontent.com/Henrique-Miranda/InfoCad/master/Screenshots/login.png
