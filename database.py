@@ -18,9 +18,36 @@ class Database(object):
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             login TEXT NOT NULL,
-            passwd TEXT);
+            passwd TEXT);            
             '''
         )
+        
+        self.cursor.execute(
+            '''
+            CREATE TABLE IF NOT EXISTS clients (
+            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            regdate TEXT NOT NULL,
+            regType TEXT NOT NULL,
+            blocked INTEGER NOT NULL DEFAULT 0,
+            name TEXT NOT NULL,
+            birth TEXT NOT NULL,
+            sex TEXT NOT NULL,
+            cpfcnpj TEXT NOT NULL UNIQUE,
+            rgie TEXT UNIQUE,
+            tel1 TEXT,
+            tel2 TEXT,
+            tel3 TEXT,
+            email TEXT UNIQUE,
+            cep TEXT,
+            adress TEXT,
+            number TEXT,
+            adress2 TEXT,
+            district TEXT,
+            city TEXT,
+            state TEXT,
+            contry TEXT);
+            '''
+            )
 
         self.cursor.execute(
             '''

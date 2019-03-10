@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>622</width>
-    <height>598</height>
+    <height>628</height>
    </rect>
   </property>
   <property name="font">
@@ -135,8 +135,17 @@
         </item>
         <item>
          <widget class="QRadioButton" name="radioButton">
+          <property name="whatsThis">
+           <string/>
+          </property>
+          <property name="accessibleName">
+           <string/>
+          </property>
+          <property name="accessibleDescription">
+           <string/>
+          </property>
           <property name="text">
-           <string>Pessoa F&amp;ísica</string>
+           <string>PF</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -154,8 +163,11 @@
         </item>
         <item>
          <widget class="QRadioButton" name="radioButton_2">
+          <property name="whatsThis">
+           <string comment="Pessoa Jurídica" extracomment="Pessoa Jurídica">Pessoa Jurídica</string>
+          </property>
           <property name="text">
-           <string>Pessoa &amp;Jurídica</string>
+           <string>PJ</string>
           </property>
           <attribute name="buttonGroup">
            <string notr="true">buttonGroup</string>
@@ -477,10 +489,14 @@
         <item>
          <widget class="QLineEdit" name="leStreet"/>
         </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLabel" name="lbNumber">
           <property name="text">
-           <string>Nº</string>
+           <string>Nº:</string>
           </property>
          </widget>
         </item>
@@ -493,6 +509,16 @@
            </size>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbComp">
+          <property name="text">
+           <string>Complemento:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="leComp"/>
         </item>
        </layout>
       </item>
@@ -558,6 +584,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pbDelete">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Excluir</string>
        </property>
@@ -565,6 +594,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pbNew">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Nova OS</string>
        </property>
@@ -596,7 +628,6 @@
   <tabstop>leMail</tabstop>
   <tabstop>leCep</tabstop>
   <tabstop>leStreet</tabstop>
-  <tabstop>leNumber</tabstop>
   <tabstop>leDistrict</tabstop>
   <tabstop>leCity</tabstop>
   <tabstop>leState</tabstop>
