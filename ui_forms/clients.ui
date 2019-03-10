@@ -54,28 +54,40 @@
      </item>
      <item>
       <widget class="QLineEdit" name="leCodCli">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="maximumSize">
         <size>
          <width>130</width>
          <height>16777215</height>
         </size>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="lbdatecadcli">
-       <property name="text">
-        <string>Cadastrado em:</string>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QDateEdit" name="dateEdit_2">
+      <widget class="QLabel" name="lbDateTimeAlt">
+       <property name="text">
+        <string>Cadastro:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateTimeEdit" name="dateTimeCad">
        <property name="enabled">
         <bool>false</bool>
        </property>
-       <property name="wrapping">
-        <bool>false</bool>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
        </property>
        <property name="readOnly">
         <bool>true</bool>
@@ -83,29 +95,36 @@
        <property name="buttonSymbols">
         <enum>QAbstractSpinBox::NoButtons</enum>
        </property>
-       <property name="specialValueText">
-        <string/>
+       <property name="accelerated">
+        <bool>false</bool>
        </property>
-       <property name="displayFormat">
-        <string>dd/MM/yy</string>
-       </property>
-       <property name="timeSpec">
-        <enum>Qt::LocalTime</enum>
+       <property name="showGroupSeparator" stdset="0">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="hs1">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QLabel" name="lbDateTimeAlt2">
+       <property name="text">
+        <string>Alterado:</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateTimeEdit" name="dateTimeAlt">
+       <property name="enabled">
+        <bool>false</bool>
        </property>
-      </spacer>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -135,6 +154,9 @@
         </item>
         <item>
          <widget class="QRadioButton" name="radioButton">
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
           <property name="whatsThis">
            <string/>
           </property>
@@ -163,6 +185,9 @@
         </item>
         <item>
          <widget class="QRadioButton" name="radioButton_2">
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
           <property name="whatsThis">
            <string comment="Pessoa Jurídica" extracomment="Pessoa Jurídica">Pessoa Jurídica</string>
           </property>
@@ -176,6 +201,9 @@
         </item>
         <item>
          <widget class="QCheckBox" name="checkBox">
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
           <property name="text">
            <string>Bloquear?</string>
           </property>
@@ -209,14 +237,14 @@
          <widget class="QLineEdit" name="leName"/>
         </item>
         <item>
-         <widget class="QLabel" name="lbborn">
+         <widget class="QLabel" name="lbBirthFun">
           <property name="text">
            <string>Nascimento:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QDateEdit" name="dateEdit">
+         <widget class="QDateEdit" name="deBirthFun">
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::UpDownArrows</enum>
           </property>
@@ -260,24 +288,41 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="lbCpf">
+         <widget class="QLabel" name="lbCpfCnpj">
           <property name="text">
            <string>CPF:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="leCpf"/>
+         <widget class="QLineEdit" name="leCpfCnpj">
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly</set>
+          </property>
+          <property name="inputMask">
+           <string>000.000.000-00</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QLabel" name="lbRg">
+         <widget class="QLabel" name="lbRgIe">
           <property name="text">
            <string>RG:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="leRg"/>
+         <widget class="QLineEdit" name="leRgIe">
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly</set>
+          </property>
+          <property name="inputMask">
+           <string>00.000.000-0</string>
+          </property>
+          <property name="text">
+           <string>..-</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -300,7 +345,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="leCell1"/>
+         <widget class="QLineEdit" name="leCell1">
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly</set>
+          </property>
+          <property name="inputMask">
+           <string>(00)00000-0000</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QComboBox" name="cbCell1">
@@ -345,9 +397,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="leCell2"/>
-        </item>
-        <item>
          <widget class="QComboBox" name="cbCell2">
           <property name="maximumSize">
            <size>
@@ -382,6 +431,22 @@
           </item>
          </widget>
         </item>
+        <item>
+         <widget class="QLineEdit" name="leCell2">
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly</set>
+          </property>
+          <property name="inputMask">
+           <string>(00)00000-0000</string>
+          </property>
+          <property name="text">
+           <string>()-</string>
+          </property>
+          <property name="placeholderText">
+           <string>TELLL</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -400,6 +465,21 @@
             <width>120</width>
             <height>16777215</height>
            </size>
+          </property>
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly</set>
+          </property>
+          <property name="inputMask">
+           <string>(00)0000-0000</string>
+          </property>
+          <property name="cursorPosition">
+           <number>1</number>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -459,6 +539,12 @@
             <width>150</width>
             <height>16777215</height>
            </size>
+          </property>
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly</set>
+          </property>
+          <property name="inputMask">
+           <string>00000-000</string>
           </property>
          </widget>
         </item>
@@ -615,14 +701,13 @@
  </widget>
  <tabstops>
   <tabstop>leName</tabstop>
-  <tabstop>dateEdit</tabstop>
+  <tabstop>deBirthFun</tabstop>
   <tabstop>rbM</tabstop>
   <tabstop>rbF</tabstop>
-  <tabstop>leCpf</tabstop>
-  <tabstop>leRg</tabstop>
+  <tabstop>leCpfCnpj</tabstop>
+  <tabstop>leRgIe</tabstop>
   <tabstop>leCell1</tabstop>
   <tabstop>cbCell1</tabstop>
-  <tabstop>leCell2</tabstop>
   <tabstop>cbCell2</tabstop>
   <tabstop>leTel</tabstop>
   <tabstop>leMail</tabstop>
@@ -636,13 +721,12 @@
   <tabstop>pbDelete</tabstop>
   <tabstop>pbNew</tabstop>
   <tabstop>pbExit</tabstop>
-  <tabstop>dateEdit_2</tabstop>
   <tabstop>checkBox</tabstop>
  </tabstops>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>
