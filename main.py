@@ -1,5 +1,5 @@
 import sys, os
-from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog
+from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem
 from PySide2 import QtCore
 from database import Database
 from login import Ui_Login
@@ -34,6 +34,20 @@ class App(Ui_Login):
             msg.exec_()
             print('Dados inválidos.')
 
+    def loadSearch(self, data, local):
+        banco = Database('database.db')
+        if local == 'Cliente': local = 'clients'
+        sql = f"SELECT * FROM '{local}' WHERE name LIKE '{data}%'"
+        resultado = banco.queryDB(sql)
+        print('sql: ', sql)
+        print(resultado)
+        self.home.tableWidget.setRowCount(len(resultado))
+        self.home.tableWidget.setColumnCount(len(resultado[0]))
+        self.home.tableWidget.setHorizontalHeaderLabels(['os', 'Cadastro', 'Alterado', 'Tipo', 'Bloqueado', 'Nome'])
+        for column, item in enumerate(resultado):
+            for n, i in enumerate(item):
+                self.home.tableWidget.setItem(column, n, QTableWidgetItem(str(i)))
+
     def openHome(self):
         print('Abrindo Home')
         self.Home = QMainWindow()
@@ -41,6 +55,7 @@ class App(Ui_Login):
         self.home.setupUi(self.Home)
         self.home.pbClient.clicked.connect(self.openCliEdit)
         self.home.pbSo.clicked.connect(self.openSO)
+        self.home.leSearch.returnPressed.connect(lambda: self.loadSearch(self.home.leSearch.text(), self.home.cbSearch.currentText()))
         self.Home.show()
 
     def openCliEdit(self):

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>635</width>
-    <height>396</height>
+    <height>395</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,6 +22,153 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="pbClient">
+        <property name="text">
+         <string>Clientes</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../IMG/team.png</normaloff>../IMG/team.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbSo">
+        <property name="text">
+         <string>Ordem de Serviço</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../IMG/documentation.png</normaloff>../IMG/documentation.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbStock">
+        <property name="text">
+         <string>Estoque</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../IMG/store.png</normaloff>../IMG/store.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbFinancial">
+        <property name="text">
+         <string>Financeiro</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../IMG/diagram-1.png</normaloff>../IMG/diagram-1.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="pbSales">
+        <property name="text">
+         <string>Ponto de Vendas</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../IMG/website.png</normaloff>../IMG/website.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbTeam">
+        <property name="text">
+         <string>Equipe</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../IMG/employees.png</normaloff>../IMG/employees.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbProvider">
+        <property name="text">
+         <string>Fornecedores</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../IMG/truck-1.png</normaloff>../IMG/truck-1.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbSettings">
+        <property name="text">
+         <string>Ajustes</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../IMG/cogwheel.png</normaloff>../IMG/cogwheel.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -61,7 +208,7 @@
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap>../../Imagens/Icones/123368-color-startups-and-new-business/png/magnifying-glass.png</pixmap>
+           <pixmap>../IMG/magnifying-glass.png</pixmap>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -150,148 +297,41 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
-       <widget class="QPushButton" name="pbClient">
-        <property name="text">
-         <string>Clientes</string>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>IMG/team.png</normaloff>IMG/team.png</iconset>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
         </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pbSo">
-        <property name="text">
-         <string>Ordem de Serviço</string>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>IMG/documentation.png</normaloff>IMG/documentation.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
-        </property>
-        <property name="checkable">
+        <property name="showGrid">
          <bool>false</bool>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pbStock">
-        <property name="text">
-         <string>Estoque</string>
+        <property name="gridStyle">
+         <enum>Qt::NoPen</enum>
         </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>IMG/store.png</normaloff>IMG/store.png</iconset>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
+        <property name="cornerButtonEnabled">
+         <bool>true</bool>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pbFinancial">
-        <property name="text">
-         <string>Financeiro</string>
+        <property name="rowCount">
+         <number>5</number>
         </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>IMG/diagram-1.png</normaloff>IMG/diagram-1.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="pbSales">
-        <property name="text">
-         <string>Ponto de Vendas</string>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>IMG/website.png</normaloff>IMG/website.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pbTeam">
-        <property name="text">
-         <string>Equipe</string>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>IMG/employees.png</normaloff>IMG/employees.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pbProvider">
-        <property name="text">
-         <string>Fornecedores</string>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>IMG/truck-1.png</normaloff>IMG/truck-1.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pbSettings">
-        <property name="text">
-         <string>Ajustes</string>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>IMG/cogwheel.png</normaloff>IMG/cogwheel.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
-        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <row/>
+        <row/>
+        <row/>
+        <row/>
+        <row/>
        </widget>
       </item>
      </layout>
