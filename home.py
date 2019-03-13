@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'home.ui',
 # licensing of 'home.ui' applies.
 #
-# Created: Sun Mar 10 21:13:53 2019
+# Created: Mon Mar 11 12:05:13 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -116,7 +116,6 @@ class Ui_Home(object):
         self.cbSearch.addItem("")
         self.cbSearch.addItem("")
         self.cbSearch.addItem("")
-        self.cbSearch.addItem("")
         self.horizontalLayout_4.addWidget(self.cbSearch)
         spacerItem3 = QtWidgets.QSpacerItem(30, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem3)
@@ -127,15 +126,17 @@ class Ui_Home(object):
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.tableWidget.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.tableWidget.setShowGrid(True)
+        self.tableWidget.setShowGrid(False)
         self.tableWidget.setGridStyle(QtCore.Qt.NoPen)
         self.tableWidget.setWordWrap(True)
         self.tableWidget.setCornerButtonEnabled(True)
+        self.tableWidget.setRowCount(0)
+        self.tableWidget.setColumnCount(0)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
         self.tableWidget.horizontalHeader().setVisible(True)
-        self.tableWidget.verticalHeader().setVisible(True)
+        self.tableWidget.verticalHeader().setVisible(False)
         self.horizontalLayout_5.addWidget(self.tableWidget)
         self.verticalLayout_2.addLayout(self.horizontalLayout_5)
         Home.setCentralWidget(self.centralwidget)
@@ -209,12 +210,11 @@ class Ui_Home(object):
         self.pbProvider.setText(QtWidgets.QApplication.translate("Home", "Fornecedores", None, -1))
         self.pbSettings.setText(QtWidgets.QApplication.translate("Home", "Ajustes", None, -1))
         self.leSearch.setPlaceholderText(QtWidgets.QApplication.translate("Home", " Pesquisar...", None, -1))
-        self.cbSearch.setItemText(0, QtWidgets.QApplication.translate("Home", "Ordem de Serviço", None, -1))
-        self.cbSearch.setItemText(1, QtWidgets.QApplication.translate("Home", "Cliente", None, -1))
+        self.cbSearch.setItemText(0, QtWidgets.QApplication.translate("Home", "Cliente", None, -1))
+        self.cbSearch.setItemText(1, QtWidgets.QApplication.translate("Home", "Ordem de Serviço", None, -1))
         self.cbSearch.setItemText(2, QtWidgets.QApplication.translate("Home", "Produto", None, -1))
-        self.cbSearch.setItemText(3, QtWidgets.QApplication.translate("Home", "CPF", None, -1))
-        self.cbSearch.setItemText(4, QtWidgets.QApplication.translate("Home", "Marca", None, -1))
-        self.cbSearch.setItemText(5, QtWidgets.QApplication.translate("Home", "Modelo", None, -1))
+        self.cbSearch.setItemText(3, QtWidgets.QApplication.translate("Home", "Fornecedor", None, -1))
+        self.cbSearch.setItemText(4, QtWidgets.QApplication.translate("Home", "Funcionário", None, -1))
         self.menuFile.setTitle(QtWidgets.QApplication.translate("Home", "Ar&quivo", None, -1))
         self.menuNew.setTitle(QtWidgets.QApplication.translate("Home", "&Novo", None, -1))
         self.menuPesquisar.setTitle(QtWidgets.QApplication.translate("Home", "&Pesquisar", None, -1))
@@ -231,4 +231,3 @@ class Ui_Home(object):
         self.actionSo_2.setText(QtWidgets.QApplication.translate("Home", "&Ordem Serviço", None, -1))
         self.actionProduct_2.setText(QtWidgets.QApplication.translate("Home", "&Produto", None, -1))
         self.actionProvider_2.setText(QtWidgets.QApplication.translate("Home", "&Fornecedor", None, -1))
-

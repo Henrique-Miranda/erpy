@@ -249,12 +249,12 @@
          <widget class="QComboBox" name="cbSearch">
           <item>
            <property name="text">
-            <string>Ordem de Serviço</string>
+            <string>Cliente</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Cliente</string>
+            <string>Ordem de Serviço</string>
            </property>
           </item>
           <item>
@@ -264,17 +264,12 @@
           </item>
           <item>
            <property name="text">
-            <string>CPF</string>
+            <string>Fornecedor</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Marca</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Modelo</string>
+            <string>Funcionário</string>
            </property>
           </item>
          </widget>
@@ -319,7 +314,10 @@
          <bool>true</bool>
         </property>
         <property name="rowCount">
-         <number>5</number>
+         <number>0</number>
+        </property>
+        <property name="columnCount">
+         <number>0</number>
         </property>
         <attribute name="horizontalHeaderVisible">
          <bool>true</bool>
@@ -327,11 +325,6 @@
         <attribute name="verticalHeaderVisible">
          <bool>false</bool>
         </attribute>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
        </widget>
       </item>
      </layout>

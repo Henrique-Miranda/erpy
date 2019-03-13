@@ -1,6 +1,6 @@
 import sys, os
 from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem
-from PySide2 import QtCore
+from PySide2 import QtCore, Qt
 from database import Database
 from login import Ui_Login
 from home import Ui_Home
@@ -37,16 +37,23 @@ class App(Ui_Login):
     def loadSearch(self, data, local):
         banco = Database('database.db')
         if local == 'Cliente': local = 'clients'
+        if local == 'Ordem de Serviço': local = 'service_order'
         sql = f"SELECT * FROM '{local}' WHERE name LIKE '{data}%'"
         resultado = banco.queryDB(sql)
         print('sql: ', sql)
         print(resultado)
         self.home.tableWidget.setRowCount(len(resultado))
         self.home.tableWidget.setColumnCount(len(resultado[0]))
-        self.home.tableWidget.setHorizontalHeaderLabels(['os', 'Cadastro', 'Alterado', 'Tipo', 'Bloqueado', 'Nome'])
+        self.home.tableWidget.setHorizontalHeaderLabels(['Código', 'Nome', 'Nascimento', 'Sexo', 'CPF', 'RG', 'Celular 1',
+        'Celular 2', 'Telefone 3', 'E-Mail', 'CEP', 'Endereço', 'Número', 'Complemento', 'Bairro', 'Cidade', 'Estado', 'País'])
         for column, item in enumerate(resultado):
-            for n, i in enumerate(item):
-                self.home.tableWidget.setItem(column, n, QTableWidgetItem(str(i)))
+            self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
+            self.home.tableWidget.setItem(column, 1, QTableWidgetItem(str(item[5])))
+            self.home.tableWidget.setItem(column, 2, QTableWidgetItem(str(item[6])))
+            self.home.tableWidget.setItem(column, 3, QTableWidgetItem(str(item[7])))
+            self.home.tableWidget.setItem(column, 4, QTableWidgetItem(str(item[8])))
+            self.home.tableWidget.setItem(column, 5, QTableWidgetItem(str(item[9])))
+        self.home.tableWidget.itemDoubleClicked.connect(lambda: self.openCliEdit(data = int(resultado[self.home.tableWidget.currentRow()][0])))
 
     def openHome(self):
         print('Abrindo Home')
@@ -58,7 +65,7 @@ class App(Ui_Login):
         self.home.leSearch.returnPressed.connect(lambda: self.loadSearch(self.home.leSearch.text(), self.home.cbSearch.currentText()))
         self.Home.show()
 
-    def openCliEdit(self):
+    def openCliEdit(self, data = 0):
         def setAdress(cep):
             try:
                 result = ViaCEP(cep)
@@ -72,6 +79,50 @@ class App(Ui_Login):
                 self.cliedit.leNumber.setFocus()
             except:
                 pass
+
+        def loadCli(data, field = "id"):
+            banco = Database('database.db')
+            sql = f"""SELECT * FROM clients WHERE {field}='{data}'"""
+            print('SQL:', sql)
+            banco.queryDB(sql)
+            resultado = banco.queryDB(sql)
+            print('Resultado: ', resultado)
+            self.cliedit.leCodCli.setText(str(resultado[0][0]))
+            self.cliedit.dateTimeCad.setEnabled(True)
+            self.cliedit.dateTimeCad.setDateTime(QtCore.QDateTime.fromString(resultado[0][1], QtCore.Qt.ISODate))
+            self.cliedit.dateTimeAlt.setEnabled(True)
+            self.cliedit.dateTimeAlt.setDateTime(QtCore.QDateTime.fromString(resultado[0][2], QtCore.Qt.ISODate))
+            if resultado[0][3] == 'PF':
+                self.cliedit.radioButton.setChecked(True)
+            else:
+                self.cliedit.radioButton_2.setChecked(False)
+            if resultado[0][4] and not self.cliedit.checkBox.checkState():
+                self.cliedit.checkBox.setChecked(True)
+            elif not resultado[0][4] and self.cliedit.checkBox.checkState():
+                self.cliedit.checkBox.setChecked(False)
+            self.cliedit.leName.setText(resultado[0][5])
+            self.cliedit.deBirthFun.setDate(QtCore.QDate.fromString(resultado[0][6], QtCore.Qt.ISODate))
+            if resultado[0][7] == 'F':
+                self.cliedit.rbF.setChecked(True)
+            else:
+                self.cliedit.rbM.setChecked(True)
+            self.cliedit.leCpfCnpj.setText(resultado[0][8])
+            self.cliedit.leRgIe.setText(resultado[0][9])
+            self.cliedit.leCell1.setText(resultado[0][10])
+            self.cliedit.leCell2.setText(resultado[0][11])
+            self.cliedit.leTel.setText(resultado[0][12])
+            self.cliedit.leMail.setText(resultado[0][13])
+            self.cliedit.leCep.setText(resultado[0][14])
+            self.cliedit.leStreet.setText(resultado[0][15])
+            self.cliedit.leNumber.setText(resultado[0][16])
+            self.cliedit.leComp.setText(resultado[0][17])
+            self.cliedit.leDistrict.setText(resultado[0][18])
+            self.cliedit.leCity.setText(resultado[0][19])
+            self.cliedit.leState.setText(resultado[0][20])
+            self.cliedit.leContry.setText(resultado[0][21])
+            self.cliedit.leCodCli.setEnabled(True)
+            self.cliedit.pbDelete.setEnabled(True)
+            self.cliedit.pbNew.setEnabled(True)
 
         def saveCli():
             try:
@@ -87,8 +138,6 @@ class App(Ui_Login):
                 if rgie == '':
                     rgie = None
                 email = self.cliedit.leMail.text().strip()
-                if email == '':
-                    email = None
 
                 sql = f"""INSERT INTO clients (regdate, altdate, regtype, blocked,
                 name, birthFun, sex, cpfcnpj, rgie, tel1, tel2, tel3, email, cep,
@@ -104,46 +153,7 @@ class App(Ui_Login):
                 '{self.cliedit.leNumber.text()}', '{self.cliedit.leComp.text()}',
                 '{self.cliedit.leDistrict.text()}', '{self.cliedit.leCity.text()}',
                 '{self.cliedit.leState.text()}', '{self.cliedit.leContry.text()}')"""
-                banco.queryDB(sql)
-                sql = f"SELECT * FROM clients WHERE cpfcnpj='{self.cliedit.leCpfCnpj.text()}' OR rgie='{self.cliedit.leRgIe.text()}' OR email='{self.cliedit.leMail.text()}'"
-                resultado = banco.queryDB(sql)
-                print('Resultado: ', resultado)
-                self.cliedit.leCodCli.setText(str(resultado[0][0]))
-                self.cliedit.dateTimeCad.setEnabled(True)
-                self.cliedit.dateTimeCad.setDateTime(QtCore.QDateTime.fromString(resultado[0][1], QtCore.Qt.ISODate))
-                self.cliedit.dateTimeAlt.setEnabled(True)
-                self.cliedit.dateTimeAlt.setDateTime(QtCore.QDateTime.fromString(resultado[0][2], QtCore.Qt.ISODate))
-                if resultado[0][3] == 'PF':
-                    self.cliedit.radioButton.setChecked(True)
-                else:
-                    self.cliedit.radioButton_2.setChecked(False)
-                if resultado[0][4] and not self.cliedit.checkBox.checkState():
-                    self.cliedit.checkBox.setChecked(True)
-                elif not resultado[0][4] and self.cliedit.checkBox.checkState():
-                    self.cliedit.checkBox.setChecked(False)
-                self.cliedit.leName.setText(resultado[0][5])
-                self.cliedit.deBirthFun.setDate(QtCore.QDate.fromString(resultado[0][6], QtCore.Qt.ISODate))
-                if resultado[0][7] == 'F':
-                    self.cliedit.rbF.setChecked(True)
-                else:
-                    self.cliedit.rbM.setChecked(True)
-                self.cliedit.leCpfCnpj.setText(resultado[0][8])
-                self.cliedit.leRgIe.setText(resultado[0][9])
-                self.cliedit.leCell1.setText(resultado[0][10])
-                self.cliedit.leCell2.setText(resultado[0][11])
-                self.cliedit.leTel.setText(resultado[0][12])
-                self.cliedit.leMail.setText(resultado[0][13])
-                self.cliedit.leCep.setText(resultado[0][14])
-                self.cliedit.leStreet.setText(resultado[0][15])
-                self.cliedit.leNumber.setText(resultado[0][16])
-                self.cliedit.leComp.setText(resultado[0][17])
-                self.cliedit.leDistrict.setText(resultado[0][18])
-                self.cliedit.leCity.setText(resultado[0][19])
-                self.cliedit.leState.setText(resultado[0][20])
-                self.cliedit.leContry.setText(resultado[0][21])
-                self.cliedit.leCodCli.setEnabled(True)
-                self.cliedit.pbDelete.setEnabled(True)
-                self.cliedit.pbNew.setEnabled(True)
+                loadCli()
 
             except sqlite3.IntegrityError as e:
                 msg = QMessageBox()
@@ -192,6 +202,8 @@ class App(Ui_Login):
         self.cliedit.leCep.editingFinished.connect(lambda: setAdress(self.cliedit.leCep.text()))
         self.cliedit.pbSave.clicked.connect(lambda: saveCli())
         self.CliEdit.show()
+        if data != 0:
+            loadCli(data)
 
     def openSO(self):
         print('Abrindo SO edit')
