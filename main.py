@@ -12,7 +12,7 @@ from pycpfcnpj import cpfcnpj as cpfcnpjv
 
 class App(Ui_Login):
     def __ini__(self):
-                pass
+        pass
 
     def loginCheck(self):
         print('Checando login')
