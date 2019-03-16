@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'clients.ui',
 # licensing of 'clients.ui' applies.
 #
-# Created: Sat Mar 16 00:29:17 2019
+# Created: Sat Mar 16 19:10:53 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -321,10 +321,6 @@ class Ui_ClientEdit(object):
         self.pbNew.setEnabled(False)
         self.pbNew.setObjectName("pbNew")
         self.hl10.addWidget(self.pbNew)
-        self.pushButton = QtWidgets.QPushButton(ClientEdit)
-        self.pushButton.setEnabled(False)
-        self.pushButton.setObjectName("pushButton")
-        self.hl10.addWidget(self.pushButton)
         self.pbDelete = QtWidgets.QPushButton(ClientEdit)
         self.pbDelete.setEnabled(False)
         self.pbDelete.setObjectName("pbDelete")
@@ -405,7 +401,6 @@ class Ui_ClientEdit(object):
         self.lbContry.setText(QtWidgets.QApplication.translate("ClientEdit", "País:", None, -1))
         self.pbSave.setText(QtWidgets.QApplication.translate("ClientEdit", "Salvar", None, -1))
         self.pbNew.setText(QtWidgets.QApplication.translate("ClientEdit", "Nova OS", None, -1))
-        self.pushButton.setText(QtWidgets.QApplication.translate("ClientEdit", "Alterar", None, -1))
         self.pbDelete.setText(QtWidgets.QApplication.translate("ClientEdit", "Excluir", None, -1))
         self.pbExit.setText(QtWidgets.QApplication.translate("ClientEdit", "Sair", None, -1))
 

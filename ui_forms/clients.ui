@@ -707,16 +707,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Alterar</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="pbDelete">
        <property name="enabled">
         <bool>false</bool>
@@ -782,7 +772,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>
