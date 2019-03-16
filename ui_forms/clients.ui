@@ -300,7 +300,10 @@
            <set>Qt::ImhDigitsOnly</set>
           </property>
           <property name="inputMask">
-           <string>000.000.000-00</string>
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>14</number>
           </property>
          </widget>
         </item>
@@ -317,10 +320,13 @@
            <set>Qt::ImhDigitsOnly</set>
           </property>
           <property name="inputMask">
-           <string>00.000.000-0</string>
+           <string/>
           </property>
           <property name="text">
-           <string>..-</string>
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>12</number>
           </property>
          </widget>
         </item>
@@ -350,7 +356,10 @@
            <set>Qt::ImhDigitsOnly</set>
           </property>
           <property name="inputMask">
-           <string>(00)00000-0000</string>
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>14</number>
           </property>
          </widget>
         </item>
@@ -362,6 +371,11 @@
             <height>16777215</height>
            </size>
           </property>
+          <item>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
           <item>
            <property name="text">
             <string>Oi</string>
@@ -406,6 +420,11 @@
           </property>
           <item>
            <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
             <string>Vivo</string>
            </property>
           </item>
@@ -437,13 +456,16 @@
            <set>Qt::ImhDigitsOnly</set>
           </property>
           <property name="inputMask">
-           <string>(00)00000-0000</string>
+           <string/>
           </property>
           <property name="text">
-           <string>()-</string>
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>14</number>
           </property>
           <property name="placeholderText">
-           <string>TELLL</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -470,10 +492,13 @@
            <set>Qt::ImhDigitsOnly</set>
           </property>
           <property name="inputMask">
-           <string>(00)0000-0000</string>
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>13</number>
           </property>
           <property name="cursorPosition">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="placeholderText">
            <string/>
@@ -544,7 +569,10 @@
            <set>Qt::ImhDigitsOnly</set>
           </property>
           <property name="inputMask">
-           <string>00000-000</string>
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>9</number>
           </property>
          </widget>
         </item>
@@ -669,22 +697,32 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pbDelete">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Excluir</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="pbNew">
        <property name="enabled">
         <bool>false</bool>
        </property>
        <property name="text">
         <string>Nova OS</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Alterar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pbDelete">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Excluir</string>
        </property>
       </widget>
      </item>
@@ -709,22 +747,40 @@
   <tabstop>leCell1</tabstop>
   <tabstop>cbCell1</tabstop>
   <tabstop>cbCell2</tabstop>
+  <tabstop>leCell2</tabstop>
   <tabstop>leTel</tabstop>
   <tabstop>leMail</tabstop>
   <tabstop>leCep</tabstop>
   <tabstop>leStreet</tabstop>
+  <tabstop>leNumber</tabstop>
+  <tabstop>leComp</tabstop>
   <tabstop>leDistrict</tabstop>
   <tabstop>leCity</tabstop>
   <tabstop>leState</tabstop>
   <tabstop>leContry</tabstop>
   <tabstop>pbSave</tabstop>
   <tabstop>pbDelete</tabstop>
-  <tabstop>pbNew</tabstop>
   <tabstop>pbExit</tabstop>
-  <tabstop>checkBox</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pbExit</sender>
+   <signal>clicked()</signal>
+   <receiver>ClientEdit</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>577</x>
+     <y>605</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>622</x>
+     <y>579</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <buttongroups>
   <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>

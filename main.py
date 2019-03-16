@@ -43,7 +43,7 @@ class App(Ui_Login):
         print('sql: ', sql)
         print(resultado)
         self.home.tableWidget.setRowCount(len(resultado))
-        self.home.tableWidget.setColumnCount(len(resultado[0]))
+        self.home.tableWidget.setColumnCount(18)
         self.home.tableWidget.setHorizontalHeaderLabels(['Código', 'Nome', 'Nascimento', 'Sexo', 'CPF', 'RG', 'Celular 1',
         'Celular 2', 'Telefone 3', 'E-Mail', 'CEP', 'Endereço', 'Número', 'Complemento', 'Bairro', 'Cidade', 'Estado', 'País'])
         for column, item in enumerate(resultado):
@@ -138,7 +138,6 @@ class App(Ui_Login):
                 if rgie == '':
                     rgie = None
                 email = self.cliedit.leMail.text().strip()
-
                 sql = f"""INSERT INTO clients (regdate, altdate, regtype, blocked,
                 name, birthFun, sex, cpfcnpj, rgie, tel1, tel2, tel3, email, cep,
                 adress, number, adress2, district, city, state, contry)
@@ -153,7 +152,8 @@ class App(Ui_Login):
                 '{self.cliedit.leNumber.text()}', '{self.cliedit.leComp.text()}',
                 '{self.cliedit.leDistrict.text()}', '{self.cliedit.leCity.text()}',
                 '{self.cliedit.leState.text()}', '{self.cliedit.leContry.text()}')"""
-                loadCli()
+                banco.queryDB(sql)
+                loadCli(self.cliedit.leCpfCnpj.text().strip(), "cpfcnpj")
 
             except sqlite3.IntegrityError as e:
                 msg = QMessageBox()
@@ -200,7 +200,23 @@ class App(Ui_Login):
         self.cliedit.radioButton_2.clicked.connect(cnpj)
         self.cliedit.radioButton.clicked.connect(cpf)
         self.cliedit.leCep.editingFinished.connect(lambda: setAdress(self.cliedit.leCep.text()))
-        self.cliedit.pbSave.clicked.connect(lambda: saveCli())
+        self.cliedit.pbSave.clicked.connect(saveCli)
+        def mask(widget, length):
+            widget.setInputMask("")
+            widget.setMaxLength(length)
+
+        self.cliedit.leCpfCnpj.textEdited.connect(lambda: mask(self.cliedit.leCpfCnpj, 11))
+        self.cliedit.leCpfCnpj.editingFinished.connect(lambda: self.cliedit.leCpfCnpj.setInputMask(QApplication.translate("ClientEdit","000.000.000-00", None, -1)))
+        self.cliedit.leRgIe.textEdited.connect(lambda: mask(self.cliedit.leRgIe, 9))
+        self.cliedit.leRgIe.editingFinished.connect(lambda: self.cliedit.leRgIe.setInputMask(QApplication.translate("ClientEdit","00.000.000-0", None, -1)))
+        self.cliedit.leCell1.textEdited.connect(lambda: mask(self.cliedit.leCell1, 11))
+        self.cliedit.leCell1.editingFinished.connect(lambda: self.cliedit.leCell1.setInputMask(QApplication.translate("ClientEdit","(00)00000-0000", None, -1)))
+        self.cliedit.leCell2.textEdited.connect(lambda: mask(self.cliedit.leCell2, 11))
+        self.cliedit.leCell2.editingFinished.connect(lambda: self.cliedit.leCell2.setInputMask(QApplication.translate("ClientEdit","(00)00000-0000", None, -1)))
+        self.cliedit.leTel.textEdited.connect(lambda: mask(self.cliedit.leTel, 10))
+        self.cliedit.leTel.editingFinished.connect(lambda: self.cliedit.leTel.setInputMask(QApplication.translate("ClientEdit","(00)0000-0000", None, -1)))
+        self.cliedit.leCep.textEdited.connect(lambda: mask(self.cliedit.leCep, 8))
+        self.cliedit.leCep.editingFinished.connect(lambda: self.cliedit.leCep.setInputMask(QApplication.translate("ClientEdit","00000-000", None, -1)))
         self.CliEdit.show()
         if data != 0:
             loadCli(data)
