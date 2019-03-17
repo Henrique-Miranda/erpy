@@ -35,10 +35,15 @@ class App(Ui_Login):
             print('Dados inválidos.')
 
     def loadSearch(self, data, local):
+        try:
+            if len(data) == 11 and data.isnumeric():
+                data = '{}.{}.{}-{}'.format(data[0:3], data[3:6], data[6:9], data[9:])
+        except:
+            pass
         banco = Database('database.db')
         if local == 'Cliente': local = 'clients'
         if local == 'Ordem de Serviço': local = 'service_order'
-        sql = f"SELECT * FROM '{local}' WHERE name LIKE '{data}%'"
+        sql = f"SELECT * FROM '{local}' WHERE name LIKE '{data}%' OR cpfcnpj LIKE '{data}%'"
         resultado = banco.queryDB(sql)
         print('sql: ', sql)
         print(resultado)
@@ -125,6 +130,16 @@ class App(Ui_Login):
             self.cliedit.leCodCli.setEnabled(True)
             self.cliedit.pbDelete.setEnabled(True)
             self.cliedit.pbNew.setEnabled(True)
+
+        def delCli(id):
+            banco = Database('database.db')
+            sql = f"""DELETE FROM clients WHERE id = '{id}'"""
+            banco.queryDB(sql)
+            msg = QMessageBox()
+            msg.setWindowTitle('Cliente foi excluído')
+            msg.setText('Este cliente foi deletado com sucesso!')
+            msg.exec_()
+            self.cliedit.pbExit.click()
 
         def saveCli():
             try:
@@ -270,6 +285,7 @@ class App(Ui_Login):
         self.cliedit.radioButton.clicked.connect(cpf)
         self.cliedit.leCep.editingFinished.connect(lambda: setAdress(self.cliedit.leCep.text()))
         self.cliedit.pbSave.clicked.connect(saveCli)
+        self.cliedit.pbDelete.clicked.connect(lambda: delCli(int(self.cliedit.leCodCli.text())))
         self.cliedit.leCpfCnpj.textEdited.connect(lambda: mask(self.cliedit.leCpfCnpj))
         self.cliedit.leCpfCnpj.editingFinished.connect(lambda: mask(self.cliedit.leCpfCnpj, '000.000.000-00'))
         self.cliedit.leRgIe.textEdited.connect(lambda: mask(self.cliedit.leRgIe))

@@ -403,4 +403,3 @@ class Ui_ClientEdit(object):
         self.pbNew.setText(QtWidgets.QApplication.translate("ClientEdit", "Nova OS", None, -1))
         self.pbDelete.setText(QtWidgets.QApplication.translate("ClientEdit", "Excluir", None, -1))
         self.pbExit.setText(QtWidgets.QApplication.translate("ClientEdit", "Sair", None, -1))
-
