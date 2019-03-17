@@ -116,6 +116,9 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="focusPolicy">
       <enum>Qt::TabFocus</enum>
      </property>
@@ -167,7 +170,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit"/>
+             <widget class="QLineEdit" name="lineEdit">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="label_2">
@@ -178,6 +185,12 @@
             </item>
             <item>
              <widget class="QDateEdit" name="dateEdit">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
               <property name="displayFormat">
                <string>dd/MM/yyyy</string>
               </property>
@@ -199,8 +212,11 @@
               <property name="text">
                <string>M</string>
               </property>
-              <property name="checked">
+              <property name="checkable">
                <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -219,7 +235,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_2"/>
+             <widget class="QLineEdit" name="lineEdit_2">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="label_4">
@@ -229,7 +249,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_3"/>
+             <widget class="QLineEdit" name="lineEdit_3">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -248,7 +272,10 @@
                <bool>false</bool>
               </property>
               <property name="readOnly">
-               <bool>true</bool>
+               <bool>false</bool>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
               </property>
               <property name="displayFormat">
                <string>dd/MM/yyyy</string>
@@ -292,7 +319,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_4"/>
+             <widget class="QLineEdit" name="lineEdit_4">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QComboBox" name="comboBox">
@@ -301,6 +332,9 @@
                 <width>70</width>
                 <height>16777215</height>
                </size>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
               </property>
               <item>
                <property name="text">
@@ -337,7 +371,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_5"/>
+             <widget class="QLineEdit" name="lineEdit_5">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QComboBox" name="comboBox_2">
@@ -393,6 +431,9 @@
                 <height>16777215</height>
                </size>
               </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item>
@@ -421,6 +462,9 @@
                 <width>1677215</width>
                 <height>16777215</height>
                </size>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -452,6 +496,9 @@
                 <height>16777215</height>
                </size>
               </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item>
@@ -479,7 +526,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_8"/>
+             <widget class="QLineEdit" name="lineEdit_8">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="label_10">
@@ -510,7 +561,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_10"/>
+             <widget class="QLineEdit" name="lineEdit_10">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QLabel" name="label_12">
@@ -520,7 +575,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_11"/>
+             <widget class="QLineEdit" name="lineEdit_11">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -538,6 +597,9 @@
               <property name="maxLength">
                <number>2</number>
               </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item>
@@ -548,7 +610,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_14"/>
+             <widget class="QLineEdit" name="lineEdit_14">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
             <item>
              <spacer name="horizontalSpacer_4">
@@ -616,14 +682,17 @@
            <property name="focusPolicy">
             <enum>Qt::StrongFocus</enum>
            </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
            <item>
             <property name="text">
-             <string>Smartphone</string>
+             <string>Notebook</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Notebook</string>
+             <string>Smartphone</string>
             </property>
            </item>
            <item>
@@ -633,12 +702,27 @@
            </item>
            <item>
             <property name="text">
+             <string>Celular</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
              <string>Netbook</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Celular</string>
+             <string>Desktop</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Pendrive</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>HD</string>
             </property>
            </item>
            <item>
@@ -710,11 +794,41 @@
             </sizepolicy>
            </property>
            <property name="editable">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <item>
             <property name="text">
              <string>Apple</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>BLU</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>HUAWEI</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Gateway</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Itautec</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Microsoft</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Microboard</string>
             </property>
            </item>
            <item>
@@ -740,6 +854,21 @@
            <item>
             <property name="text">
              <string>Lenovo</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Seagate</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>WD</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Hitachi</string>
             </property>
            </item>
            <item>
@@ -1299,6 +1428,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_4">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Imprimir</string>
        </property>
@@ -1306,6 +1438,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_3">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Nova OS</string>
        </property>
@@ -1313,6 +1448,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Entregar</string>
        </property>
