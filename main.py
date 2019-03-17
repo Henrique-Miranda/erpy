@@ -136,7 +136,7 @@ class App(Ui_Login):
             sql = f"""DELETE FROM clients WHERE id = '{id}'"""
             banco.queryDB(sql)
             msg = QMessageBox()
-            msg.setWindowTitle('Cliente foi excluído')
+            msg.setWindowTitle('Cliente foi excluído.')
             msg.setText('Este cliente foi deletado com sucesso!')
             msg.exec_()
             self.cliedit.pbExit.click()
@@ -239,7 +239,6 @@ class App(Ui_Login):
                 else:
                     widget.setInputMask('')
 
-
             if widget == self.cliedit.leCell1 or widget == self.cliedit.leCell2:
                 widget.setMaxLength(15)
                 if self.cliedit.leCell1.text() or self.cliedit.leCell2.text():
@@ -254,15 +253,12 @@ class App(Ui_Login):
                 else:
                     widget.setInputMask('')
 
-
-
             if widget == self.cliedit.leCep:
                 widget.setMaxLength(9)
                 if self.cliedit.leCep.text():
                     widget.setInputMask(maskk)
                 else:
                     widget.setInputMask('')
-
 
 
         def cnpj():

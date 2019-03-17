@@ -55,7 +55,7 @@ class Database(object):
         self.cursor.execute(
             '''
             INSERT INTO users (name, login, passwd)
-            VALUES ("Admininstrator", "admin", "12345")
+            VALUES ("Admininstrator", "admin", "admin")
             '''
         )
         self.conn.commit()
