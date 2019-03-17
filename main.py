@@ -316,10 +316,19 @@ class App(Ui_Login):
             loadCli(data)
 
     def openSO(self):
+        def saveOs():
+            print('Salvando OS...')
+            pass
+
+        def loadOs():
+            pass
         print('Abrindo SO edit')
         self.SOrder = QDialog()
         self.sorder = Ui_SOrderEdit()
         self.sorder.setupUi(self.SOrder)
+        self.sorder.pbSave.clicked.connect(saveOs)
+        self.sorder.pbSearch.clicked.connect(lambda: self.openCliEdit(1))
+        self.sorder.pbSearch.clicked.connect(self.sorder.pbExit.click)
         self.SOrder.show()
 
 

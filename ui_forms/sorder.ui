@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>794</width>
-    <height>607</height>
+    <width>752</width>
+    <height>646</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,42 +18,13 @@
     <normaloff>IMG/logoblack.png</normaloff>IMG/logoblack.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetFixedSize</enum>
+   </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_12">
      <item>
-      <widget class="QLabel" name="label_33">
-       <property name="maximumSize">
-        <size>
-         <width>50</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Status:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_34">
-       <property name="maximumSize">
-        <size>
-         <width>150</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_17">
+      <widget class="QLabel" name="lbWindow">
        <property name="maximumSize">
         <size>
          <width>250</width>
@@ -77,8 +48,47 @@
        </property>
       </widget>
      </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_23">
      <item>
-      <widget class="QLabel" name="label_23">
+      <widget class="QLabel" name="lbStatus1">
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string>Status:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbStatus2">
+       <property name="maximumSize">
+        <size>
+         <width>150</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Em análise</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbOs">
        <property name="maximumSize">
         <size>
          <width>30</width>
@@ -100,15 +110,58 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_29">
-       <property name="maximumSize">
-        <size>
-         <width>100</width>
-         <height>16777215</height>
-        </size>
+      <widget class="QLineEdit" name="leOs">
+       <property name="enabled">
+        <bool>false</bool>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbEntryDate">
+       <property name="text">
+        <string>Data de entrada:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateTimeEdit" name="dtEntryDate">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbOutDate">
+       <property name="text">
+        <string>Data de saída:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateTimeEdit" name="dtOutDate">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
        </property>
       </widget>
      </item>
@@ -129,7 +182,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="elideMode">
       <enum>Qt::ElideNone</enum>
@@ -142,7 +195,7 @@
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Dados do Cliente</string>
+       <string>Dados do cliente</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
@@ -161,127 +214,24 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>Nome:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_2">
-              <property name="text">
-               <string>Nascimento:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDateEdit" name="dateEdit">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-              <property name="buttonSymbols">
-               <enum>QAbstractSpinBox::NoButtons</enum>
-              </property>
-              <property name="displayFormat">
-               <string>dd/MM/yyyy</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QLabel" name="label_16">
-              <property name="text">
-               <string>Sexo:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButton">
-              <property name="text">
-               <string>M</string>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButton_2">
-              <property name="text">
-               <string>F</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>CPF:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_2">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_4">
-              <property name="text">
-               <string>RG:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_3">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_16">
             <item>
-             <widget class="QLabel" name="label_32">
+             <widget class="QLabel" name="lbCodCli">
               <property name="text">
-               <string>Data de Cadastro:</string>
+               <string>Código do cliente:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="dateEdit_4">
-              <property name="frame">
-               <bool>false</bool>
+             <widget class="QLineEdit" name="leCodCli">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
               </property>
               <property name="readOnly">
-               <bool>false</bool>
-              </property>
-              <property name="buttonSymbols">
-               <enum>QAbstractSpinBox::NoButtons</enum>
-              </property>
-              <property name="displayFormat">
-               <string>dd/MM/yyyy</string>
-              </property>
-              <property name="currentSectionIndex">
-               <number>0</number>
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -300,6 +250,114 @@
             </item>
            </layout>
           </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="lbName">
+              <property name="text">
+               <string>Nome:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leName">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pbSearch">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>../IMG/magnifying-glass.png</normaloff>../IMG/magnifying-glass.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbBirth">
+              <property name="text">
+               <string>Nascimento:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateEdit" name="dtBirth">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="displayFormat">
+               <string>dd/MM/yyyy</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="lbSex">
+              <property name="text">
+               <string>Sexo:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rbM">
+              <property name="text">
+               <string>M</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rbF">
+              <property name="text">
+               <string>F</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbCpfCnpj">
+              <property name="text">
+               <string>CPF:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leCpfCnpj">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbRgIe">
+              <property name="text">
+               <string>RG:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leRgIe">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>
@@ -312,21 +370,21 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QLabel" name="label_5">
+             <widget class="QLabel" name="lbCell1">
               <property name="text">
                <string>Celular 1</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_4">
+             <widget class="QLineEdit" name="leCel1">
               <property name="readOnly">
                <bool>true</bool>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox">
+             <widget class="QComboBox" name="cbCell1">
               <property name="maximumSize">
                <size>
                 <width>70</width>
@@ -338,7 +396,7 @@
               </property>
               <item>
                <property name="text">
-                <string>Oi</string>
+                <string/>
                </property>
               </item>
               <item>
@@ -353,32 +411,37 @@
               </item>
               <item>
                <property name="text">
-                <string>Claro</string>
+                <string>Nextel</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Nextel</string>
+                <string>Oi</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Claro</string>
                </property>
               </item>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_6">
+             <widget class="QLabel" name="lbCell2">
               <property name="text">
                <string>Celular 2:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_5">
+             <widget class="QLineEdit" name="leCell2">
               <property name="readOnly">
                <bool>true</bool>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_2">
+             <widget class="QComboBox" name="cbCell2">
               <property name="maximumSize">
                <size>
                 <width>70</width>
@@ -387,6 +450,16 @@
               </property>
               <item>
                <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Nextel</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
                 <string>Vivo</string>
                </property>
               </item>
@@ -397,17 +470,12 @@
               </item>
               <item>
                <property name="text">
-                <string>Claro</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Nextel</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
                 <string>Oi</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Claro</string>
                </property>
               </item>
              </widget>
@@ -417,14 +485,14 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
-             <widget class="QLabel" name="label_7">
+             <widget class="QLabel" name="lbTel">
               <property name="text">
                <string>Telefone:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_6">
+             <widget class="QLineEdit" name="leTel">
               <property name="maximumSize">
                <size>
                 <width>120</width>
@@ -437,7 +505,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_8">
+             <widget class="QLabel" name="lbEmail">
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
@@ -450,7 +518,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_7">
+             <widget class="QLineEdit" name="leEmail">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -482,14 +550,69 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_8">
             <item>
-             <widget class="QLabel" name="label_14">
+             <widget class="QLabel" name="lbAdress">
+              <property name="text">
+               <string>Logradouro:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leAdress">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbNumber">
+              <property name="text">
+               <string>Nº</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leNumber">
+              <property name="maximumSize">
+               <size>
+                <width>60</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QLabel" name="lbAdress2">
+              <property name="text">
+               <string>Complemento:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leAdress2">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbCep">
               <property name="text">
                <string>CEP:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_13">
+             <widget class="QLineEdit" name="leCep">
               <property name="maximumSize">
                <size>
                 <width>150</width>
@@ -501,99 +624,47 @@
               </property>
              </widget>
             </item>
-            <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
-             <widget class="QLabel" name="label_9">
-              <property name="text">
-               <string>Logradouro:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_8">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_10">
-              <property name="text">
-               <string>Nº</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_9">
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_6">
-            <item>
-             <widget class="QLabel" name="label_11">
+             <widget class="QLabel" name="lbDistrict">
               <property name="text">
                <string>Bairro:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_10">
+             <widget class="QLineEdit" name="leDistrict">
               <property name="readOnly">
                <bool>true</bool>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_12">
+             <widget class="QLabel" name="lbCity">
               <property name="text">
                <string>Cidade:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_11">
+             <widget class="QLineEdit" name="leCity">
               <property name="readOnly">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
-             <widget class="QLabel" name="label_13">
+             <widget class="QLabel" name="lbState">
               <property name="text">
                <string>Estado:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_12">
+             <widget class="QLineEdit" name="leState">
               <property name="maxLength">
                <number>2</number>
               </property>
@@ -603,31 +674,18 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_15">
+             <widget class="QLabel" name="lbContry">
               <property name="text">
                <string>País:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_14">
+             <widget class="QLineEdit" name="leContry">
               <property name="readOnly">
                <bool>true</bool>
               </property>
              </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </item>
@@ -647,13 +705,13 @@
        <bool>false</bool>
       </property>
       <attribute name="title">
-       <string>Dados do Equipamento</string>
+       <string>Dados do equipamento</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_10">
          <item>
-          <widget class="QLabel" name="label_18">
+          <widget class="QLabel" name="lbType">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -661,12 +719,12 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Equipamento:</string>
+            <string>Tipo</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_3">
+          <widget class="QComboBox" name="cbType">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -687,6 +745,11 @@
            </property>
            <item>
             <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
              <string>Notebook</string>
             </property>
            </item>
@@ -702,7 +765,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Celular</string>
+             <string>Desktop</string>
             </property>
            </item>
            <item>
@@ -712,7 +775,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Desktop</string>
+             <string>Celular</string>
             </property>
            </item>
            <item>
@@ -773,7 +836,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_19">
+          <widget class="QLabel" name="lbBrand">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -786,7 +849,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_4">
+          <widget class="QComboBox" name="cbBrand">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -798,7 +861,42 @@
            </property>
            <item>
             <property name="text">
+             <string/>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Acer</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Alcatel</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Q-Mobile</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Xiaomi</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>OnePlus</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
              <string>Apple</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Asus</string>
             </property>
            </item>
            <item>
@@ -808,12 +906,67 @@
            </item>
            <item>
             <property name="text">
-             <string>HUAWEI</string>
+             <string>CCE</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Compaq</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Dell</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>DL</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>D-Link</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Huawei</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Quantum</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>BlackBerry</string>
             </property>
            </item>
            <item>
             <property name="text">
              <string>Gateway</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>ZTE</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Multilaser</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>HTC</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Bright</string>
             </property>
            </item>
            <item>
@@ -873,17 +1026,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Asus</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
              <string>Positivo</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>DL</string>
             </property>
            </item>
            <item>
@@ -894,11 +1037,6 @@
            <item>
             <property name="text">
              <string>Qbex</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Dell</string>
             </property>
            </item>
            <item>
@@ -914,16 +1052,6 @@
            <item>
             <property name="text">
              <string>Lenoxx</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>CCE</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Compaq</string>
             </property>
            </item>
            <item>
@@ -958,17 +1086,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Acer</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
              <string>How</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>D-Link</string>
             </property>
            </item>
            <item>
@@ -989,7 +1107,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_20">
+          <widget class="QLabel" name="lbModel">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -1002,7 +1120,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_17">
+          <widget class="QLineEdit" name="cbModel">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -1012,7 +1130,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_21">
+          <widget class="QLabel" name="lbColor">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -1025,7 +1143,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_18">
+          <widget class="QLineEdit" name="cbColor">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -1039,94 +1157,108 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_11">
          <item>
-          <widget class="QLabel" name="label_30">
-           <property name="text">
-            <string>IMEI:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="lineEdit_20">
-           <property name="maxLength">
-            <number>15</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_22">
+          <widget class="QLabel" name="lbNs">
            <property name="text">
             <string>N/S:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_19"/>
+          <widget class="QLineEdit" name="leNs"/>
          </item>
          <item>
-          <widget class="QLabel" name="label_24">
+          <widget class="QLabel" name="lbBarCode">
            <property name="text">
-            <string>Cod. Barras:</string>
+            <string>Cod. barras:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_21"/>
+          <widget class="QLineEdit" name="leBarCode"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_24">
+         <item>
+          <widget class="QLabel" name="lbImei1">
+           <property name="text">
+            <string>IMEI 1:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="leImei1">
+           <property name="maxLength">
+            <number>15</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lbImei2">
+           <property name="text">
+            <string>IMEI 2</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="leImei2"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_13">
          <item>
-          <widget class="QLabel" name="label_25">
+          <widget class="QLabel" name="lbAcessories">
            <property name="text">
             <string>Acessórios:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_15"/>
+          <widget class="QLineEdit" name="leAcessories"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_14">
          <item>
-          <widget class="QLabel" name="label_26">
+          <widget class="QLabel" name="lbDeviceStatus">
            <property name="text">
-            <string>Estado do Equipamento:</string>
+            <string>Estado do equipamento:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_16"/>
+          <widget class="QLineEdit" name="leDeviceStatus"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_15">
          <item>
-          <widget class="QLabel" name="label_27">
+          <widget class="QLabel" name="lbDefect">
            <property name="text">
-            <string>Defeito Reclamado:</string>
+            <string>Defeito reclamado:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_22"/>
+          <widget class="QLineEdit" name="leDefect"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_17">
          <item>
-          <widget class="QLabel" name="label_42">
+          <widget class="QLabel" name="lbObs1">
            <property name="text">
             <string>Observação:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QTextEdit" name="textEdit"/>
+          <widget class="QTextEdit" name="teObs1"/>
          </item>
         </layout>
        </item>
@@ -1138,97 +1270,37 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_8">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_23">
-         <item>
-          <widget class="QLabel" name="label_28">
-           <property name="text">
-            <string>Data de entrada:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDateEdit" name="dateEdit_2">
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-           <property name="buttonSymbols">
-            <enum>QAbstractSpinBox::NoButtons</enum>
-           </property>
-           <property name="displayFormat">
-            <string>dd/MM/yyyy</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_31">
-           <property name="text">
-            <string>Data de Saída:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDateEdit" name="dateEdit_3">
-           <property name="frame">
-            <bool>true</bool>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-           <property name="buttonSymbols">
-            <enum>QAbstractSpinBox::NoButtons</enum>
-           </property>
-           <property name="displayFormat">
-            <string>dd/MM/yyyy</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_18">
          <item>
-          <widget class="QLabel" name="label_35">
+          <widget class="QLabel" name="lbDefectsFound">
            <property name="text">
             <string>Defeitos encontrados:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_23"/>
+          <widget class="QLineEdit" name="leDefectsFound"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_19">
          <item>
-          <widget class="QLabel" name="label_36">
+          <widget class="QLabel" name="lbServiceDone">
            <property name="text">
             <string>Serviço executado:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_24"/>
+          <widget class="QLineEdit" name="leServiceDone"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_9">
          <item>
-          <widget class="QLabel" name="label_37">
+          <widget class="QLabel" name="lbBudgetTable">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -1250,7 +1322,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QTableWidget" name="tableWidget_2">
+          <widget class="QTableWidget" name="twBudget">
            <property name="maximumSize">
             <size>
              <width>16777215</width>
@@ -1297,6 +1369,11 @@
              <string>Sub Total</string>
             </property>
            </column>
+           <item row="0" column="3">
+            <property name="text">
+             <string/>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>
@@ -1304,97 +1381,48 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_21">
          <item>
-          <widget class="QLabel" name="label_38">
+          <widget class="QLabel" name="lbPartsValue">
            <property name="text">
             <string>Valor peças:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_25"/>
+          <widget class="QLineEdit" name="lePartsValue"/>
          </item>
          <item>
-          <widget class="QLabel" name="label_40">
+          <widget class="QLabel" name="lbServiceValue">
            <property name="text">
-            <string>Valor Serviço:</string>
+            <string>Valor serviço:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_26"/>
+          <widget class="QLineEdit" name="leServiceValue"/>
          </item>
          <item>
-          <widget class="QLabel" name="label_41">
+          <widget class="QLabel" name="lbTotalValue">
            <property name="text">
             <string>Total:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_27"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_22">
-         <item>
-          <widget class="QRadioButton" name="radioButton_3">
-           <property name="text">
-            <string>Em Orçamento</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButton_4">
-           <property name="text">
-            <string>A&amp;guardando Aprovação</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButton_5">
-           <property name="text">
-            <string>Aprovado</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButton_6">
-           <property name="text">
-            <string>Rec&amp;usado</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButton_8">
-           <property name="text">
-            <string>Consertado</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButton_7">
-           <property name="text">
-            <string>Devo&amp;lver</string>
-           </property>
-          </widget>
+          <widget class="QLineEdit" name="leTotalValue"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_20">
          <item>
-          <widget class="QLabel" name="label_39">
+          <widget class="QLabel" name="lbObs2">
            <property name="text">
             <string>Observações:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_28"/>
+          <widget class="QLineEdit" name="leObs2"/>
          </item>
         </layout>
        </item>
@@ -1402,15 +1430,38 @@
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
-       <string>Histórico do Cliente</string>
+       <string>Histórico do cliente</string>
       </attribute>
-      <widget class="QTableView" name="tableView">
+      <widget class="QLabel" name="lbTotalSpent">
        <property name="geometry">
         <rect>
-         <x>5</x>
+         <x>210</x>
+         <y>390</y>
+         <width>71</width>
+         <height>78</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Total gasto:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="leTotalSpent">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>410</y>
+         <width>179</width>
+         <height>32</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="twCliHistory">
+       <property name="geometry">
+        <rect>
+         <x>45</x>
          <y>11</y>
-         <width>761</width>
-         <height>421</height>
+         <width>681</width>
+         <height>371</height>
         </rect>
        </property>
       </widget>
@@ -1418,16 +1469,65 @@
     </widget>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_22">
+     <item>
+      <widget class="QRadioButton" name="rbAnalysis">
+       <property name="text">
+        <string>Em análise</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rbBudget">
+       <property name="text">
+        <string>Com orçamento</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_5">
+       <property name="text">
+        <string>Aprovado</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rbApproved">
+       <property name="text">
+        <string>Rec&amp;usado</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rbFixed">
+       <property name="text">
+        <string>Consertado</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rbDelivery">
+       <property name="text">
+        <string>Devo&amp;lver</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_9">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pbSave">
        <property name="text">
         <string>Salvar</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="pbPrint">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1437,7 +1537,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="pbNewOs">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1447,7 +1547,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="pbDelivery">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -1456,10 +1556,34 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="pbExit">
+       <property name="text">
+        <string>Sair</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pbExit</sender>
+   <signal>clicked()</signal>
+   <receiver>SOrderEdit</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>663</x>
+     <y>532</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>712</x>
+     <y>563</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
