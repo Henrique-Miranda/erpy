@@ -48,9 +48,10 @@ class App(Ui_Login):
         print('sql: ', sql)
         print(resultado)
         self.home.tableWidget.setRowCount(len(resultado))
-        self.home.tableWidget.setColumnCount(18)
-        self.home.tableWidget.setHorizontalHeaderLabels(['Código', 'Nome', 'Nascimento', 'Sexo', 'CPF', 'RG', 'Celular 1',
-        'Celular 2', 'Telefone 3', 'E-Mail', 'CEP', 'Endereço', 'Número', 'Complemento', 'Bairro', 'Cidade', 'Estado', 'País'])
+        self.home.tableWidget.setColumnCount(12)
+        self.home.tableWidget.setHorizontalHeaderLabels(['Código', 'Nome', 'Nascimento', 'Sexo', 'CPF/CNPJ', 'RG/IE', 'Operadora 1', 'Celular 1',
+        'Operadora 2', 'Celular 2', 'Telefone 3', 'E-Mail'])
+
         for column, item in enumerate(resultado):
             self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
             self.home.tableWidget.setItem(column, 1, QTableWidgetItem(str(item[5])))
@@ -58,7 +59,14 @@ class App(Ui_Login):
             self.home.tableWidget.setItem(column, 3, QTableWidgetItem(str(item[7])))
             self.home.tableWidget.setItem(column, 4, QTableWidgetItem(str(item[8])))
             self.home.tableWidget.setItem(column, 5, QTableWidgetItem(str(item[9])))
-        self.home.tableWidget.itemDoubleClicked.connect(lambda: self.openCliEdit(data = int(resultado[self.home.tableWidget.currentRow()][0])))
+            self.home.tableWidget.setItem(column, 6, QTableWidgetItem(str(item[10])))
+            self.home.tableWidget.setItem(column, 7, QTableWidgetItem(str(item[11])))
+            self.home.tableWidget.setItem(column, 8, QTableWidgetItem(str(item[12])))
+            self.home.tableWidget.setItem(column, 9, QTableWidgetItem(str(item[13])))
+            self.home.tableWidget.setItem(column, 10, QTableWidgetItem(str(item[14])))
+            self.home.tableWidget.setItem(column, 11, QTableWidgetItem(str(item[15])))
+            self.home.tableWidget.setItem(column, 12, QTableWidgetItem(str(item[16])))
+        self.home.tableWidget.itemDoubleClicked.connect(lambda: self.openCliEdit(int(resultado[self.home.tableWidget.currentRow()][0])))
 
     def openHome(self):
         print('Abrindo Home')
@@ -99,8 +107,16 @@ class App(Ui_Login):
             self.cliedit.dateTimeAlt.setDateTime(QtCore.QDateTime.fromString(resultado[0][2], QtCore.Qt.ISODate))
             if resultado[0][3] == 'PF':
                 self.cliedit.radioButton.setChecked(True)
+                self.cliedit.leCpfCnpj.setMaxLength(14)
             else:
-                self.cliedit.radioButton_2.setChecked(False)
+                self.cliedit.lbCpfCnpj.setText('CNPJ')
+                self.cliedit.lbRgIe.setText('IE')
+                self.cliedit.lbBirthFun.setText('Fundação')
+                self.cliedit.rbF.hide()
+                self.cliedit.rbM.hide()
+                self.cliedit.lbSex.hide()
+                self.cliedit.radioButton_2.setChecked(True)
+                self.cliedit.leCpfCnpj.setMaxLength(18)
             if resultado[0][4] and not self.cliedit.checkBox.checkState():
                 self.cliedit.checkBox.setChecked(True)
             elif not resultado[0][4] and self.cliedit.checkBox.checkState():
@@ -148,7 +164,8 @@ class App(Ui_Login):
                 assert name != '', 'Digite o nome do cliente!'
                 birth = self.cliedit.deBirthFun.date().toString(QtCore.Qt.ISODate)
                 idade = int(QtCore.QDate.currentDate().toString(QtCore.Qt.ISODate)[0:4]) - int(birth[0:4])
-                assert idade >= 18, 'Este cliente tem menos de 18 anos!'
+                if self.cliedit.buttonGroup.checkedButton() == 'PF':
+                    assert idade >= 18, 'Este cliente tem menos de 18 anos!'
                 cpfcnpj = self.cliedit.leCpfCnpj.text().strip()
                 assert cpfcnpjv.validate(cpfcnpj) == True, 'CPF/CNPJ inválido!'
                 rgie = self.cliedit.leRgIe.text().strip()
