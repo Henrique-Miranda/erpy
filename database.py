@@ -9,9 +9,12 @@ class Database(object):
         self.conn = sqlite3.connect(self.dbname)
         self.cursor = self.conn.cursor()
         self.cursor.execute("PRAGMA key='mypassword'")
+        self.cursor.execute("PRAGMA foreign_keys = ON")
+
 
     def createDB(self):
         self.connDB()
+
         self.cursor.execute(
             '''
             CREATE TABLE IF NOT EXISTS users (
@@ -28,8 +31,8 @@ class Database(object):
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             regdate TEXT NOT NULL,
             altdate TEXT NOT NULL,
-            regType TEXT NOT NULL,
-            blocked INTEGER NOT NULL DEFAULT 0,
+            regType TEXT DEFAULT 'PF',
+            blocked INTEGER DEFAULT 0,
             name TEXT NOT NULL,
             birthFun TEXT NOT NULL,
             sex TEXT,
@@ -39,7 +42,7 @@ class Database(object):
             cell1 TEXT,
             cell2op TEXT,
             cell2 TEXT,
-            tel3 TEXT,
+            tel TEXT,
             email TEXT,
             cep TEXT,
             adress TEXT,
@@ -54,8 +57,44 @@ class Database(object):
 
         self.cursor.execute(
             '''
+            CREATE TABLE IF NOT EXISTS service_order (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            idCli INTEGER NOT NULL,
+            entryDate TEXT NOT NULL,
+            altDate TEXT NOT NULL,
+            outDate TEXT,
+            lastAlter TEXT DEFAULT 'admin',
+            deviceType TEXT NOT NULL,
+            brand TEXT NOT NULL,
+            model TEXT,
+            color TEXT NOT NULL,
+            ns TEXT,
+            barCode TEXT,
+            imei1 TEXT,
+            imei2 TEXT,
+            acessories TEXT,
+            deviceStatus TEXT,
+            defect TEXT NOT NULL,
+            obs1 TEXT,
+            defectFound TEXT,
+            serviceDone TEXT,
+            partDesc TEXT,
+            partAmount INTEGER,
+            partValue REAL,
+            partSubTotal REAL,
+            partTotalValue REAL,
+            serviceValue REAL,
+            total REAL,
+            obs2 TEXT,
+            status TEXT DEFAULT 'Em análise',
+            FOREIGN KEY(idCli) REFERENCES clients(id) ON DELETE RESTRICT ON UPDATE CASCADE);
+            '''
+            )
+
+        self.cursor.execute(
+            '''
             INSERT INTO users (name, login, passwd)
-            VALUES ("Admininstrator", "admin", "admin")
+            VALUES ('Admininstrator', 'admin', 'admin')
             '''
         )
         self.conn.commit()

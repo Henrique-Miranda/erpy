@@ -41,9 +41,11 @@ class App(Ui_Login):
         except:
             pass
         banco = Database('database.db')
-        if local == 'Cliente': local = 'clients'
-        if local == 'Ordem de Serviço': local = 'service_order'
-        sql = f"SELECT * FROM '{local}' WHERE name LIKE '{data}%' OR cpfcnpj LIKE '{data}%'"
+        if local == 'Cliente':
+            sql = f"SELECT * FROM clients WHERE name LIKE '{data}%' OR cpfcnpj LIKE '{data}%'"
+        if local == 'Ordem de Serviço':
+            sql = f"SELECT * FROM service_order WHERE id LIKE '{data}%' OR brand LIKE '{data}%'"
+
         resultado = banco.queryDB(sql)
         print('sql: ', sql)
         print(resultado)
@@ -54,18 +56,18 @@ class App(Ui_Login):
 
         for column, item in enumerate(resultado):
             self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
-            self.home.tableWidget.setItem(column, 1, QTableWidgetItem(str(item[5])))
-            self.home.tableWidget.setItem(column, 2, QTableWidgetItem(str(item[6])))
-            self.home.tableWidget.setItem(column, 3, QTableWidgetItem(str(item[7])))
-            self.home.tableWidget.setItem(column, 4, QTableWidgetItem(str(item[8])))
-            self.home.tableWidget.setItem(column, 5, QTableWidgetItem(str(item[9])))
-            self.home.tableWidget.setItem(column, 6, QTableWidgetItem(str(item[10])))
-            self.home.tableWidget.setItem(column, 7, QTableWidgetItem(str(item[11])))
-            self.home.tableWidget.setItem(column, 8, QTableWidgetItem(str(item[12])))
-            self.home.tableWidget.setItem(column, 9, QTableWidgetItem(str(item[13])))
-            self.home.tableWidget.setItem(column, 10, QTableWidgetItem(str(item[14])))
-            self.home.tableWidget.setItem(column, 11, QTableWidgetItem(str(item[15])))
-            self.home.tableWidget.setItem(column, 12, QTableWidgetItem(str(item[16])))
+            self.home.tableWidget.setItem(column, 1, QTableWidgetItem(item[5]))
+            self.home.tableWidget.setItem(column, 2, QTableWidgetItem(item[6]))
+            self.home.tableWidget.setItem(column, 3, QTableWidgetItem(item[7]))
+            self.home.tableWidget.setItem(column, 4, QTableWidgetItem(item[8]))
+            self.home.tableWidget.setItem(column, 5, QTableWidgetItem(item[9]))
+            self.home.tableWidget.setItem(column, 6, QTableWidgetItem(item[10]))
+            self.home.tableWidget.setItem(column, 7, QTableWidgetItem(item[11]))
+            self.home.tableWidget.setItem(column, 8, QTableWidgetItem(item[12]))
+            self.home.tableWidget.setItem(column, 9, QTableWidgetItem(item[13]))
+            self.home.tableWidget.setItem(column, 10, QTableWidgetItem(item[14]))
+            self.home.tableWidget.setItem(column, 11, QTableWidgetItem(item[15]))
+            self.home.tableWidget.setItem(column, 12, QTableWidgetItem(item[16]))
         self.home.tableWidget.itemDoubleClicked.connect(lambda: self.openCliEdit(int(resultado[self.home.tableWidget.currentRow()][0])))
 
     def openHome(self):
@@ -74,7 +76,7 @@ class App(Ui_Login):
         self.home = Ui_Home()
         self.home.setupUi(self.Home)
         self.home.pbClient.clicked.connect(self.openCliEdit)
-        self.home.pbSo.clicked.connect(self.openSO)
+        self.home.pbSo.clicked.connect(lambda: self.openSO(1))
         self.home.leSearch.returnPressed.connect(lambda: self.loadSearch(self.home.leSearch.text(), self.home.cbSearch.currentText()))
         self.Home.show()
 
@@ -102,9 +104,9 @@ class App(Ui_Login):
             print('Resultado: ', resultado)
             self.cliedit.leCodCli.setText(str(resultado[0][0]))
             self.cliedit.dateTimeCad.setEnabled(True)
-            self.cliedit.dateTimeCad.setDateTime(QtCore.QDateTime.fromString(resultado[0][1], QtCore.Qt.ISODate))
+            self.cliedit.dateTimeCad.setDateTime(QtCore.QDateTime.fromString(resultado[0][1], ))
             self.cliedit.dateTimeAlt.setEnabled(True)
-            self.cliedit.dateTimeAlt.setDateTime(QtCore.QDateTime.fromString(resultado[0][2], QtCore.Qt.ISODate))
+            self.cliedit.dateTimeAlt.setDateTime(QtCore.QDateTime.fromString(resultado[0][2], ))
             if resultado[0][3] == 'PF':
                 self.cliedit.radioButton.setChecked(True)
                 self.cliedit.leCpfCnpj.setMaxLength(14)
@@ -122,7 +124,7 @@ class App(Ui_Login):
             elif not resultado[0][4] and self.cliedit.checkBox.checkState():
                 self.cliedit.checkBox.setChecked(False)
             self.cliedit.leName.setText(resultado[0][5])
-            self.cliedit.deBirthFun.setDate(QtCore.QDate.fromString(resultado[0][6], QtCore.Qt.ISODate))
+            self.cliedit.deBirthFun.setDate(QtCore.QDate.fromString(resultado[0][6], ))
             if resultado[0][7] == 'F':
                 self.cliedit.rbF.setChecked(True)
             else:
@@ -160,30 +162,33 @@ class App(Ui_Login):
         def saveCli():
             try:
                 banco = Database('database.db')
+                dic = {}
                 name = self.cliedit.leName.text().title()
                 assert name != '', 'Digite o nome do cliente!'
-                birth = self.cliedit.deBirthFun.date().toString(QtCore.Qt.ISODate)
-                idade = int(QtCore.QDate.currentDate().toString(QtCore.Qt.ISODate)[0:4]) - int(birth[0:4])
+                birth = self.cliedit.deBirthFun.date().toString('yyyy-MM-dd')
+                print(birth)
+                idade = int(QtCore.QDate.currentDate().toString('yyyy-MM-dd')[0:4]) - int(birth[0:4])
                 if self.cliedit.buttonGroup.checkedButton() == 'PF':
                     assert idade >= 18, 'Este cliente tem menos de 18 anos!'
                 cpfcnpj = self.cliedit.leCpfCnpj.text().strip()
                 assert cpfcnpjv.validate(cpfcnpj) == True, 'CPF/CNPJ inválido!'
                 rgie = self.cliedit.leRgIe.text().strip()
+                if rgie: dic['rgie'] = rgie
                 email = self.cliedit.leMail.text().strip()
                 if self.cliedit.leCodCli.text():
-                    sql = f"""UPDATE clients SET altdate = '{QtCore.QDateTime.currentDateTime().toString(QtCore.Qt.ISODate)}', regtype = '{self.cliedit.buttonGroup.checkedButton().text()}',
+                    sql = f"""UPDATE clients SET altdate = '{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}', regtype = '{self.cliedit.buttonGroup.checkedButton().text()}',
                     blocked = '{int(self.cliedit.checkBox.isChecked())}',
                     name = '{name}', birthFun = '{birth}', sex = '{self.cliedit.buttonGroup_2.checkedButton().text()}', rgie = '{rgie}',
                     cell1op = '{self.cliedit.cbCell1.currentText()}', cell1 = '{self.cliedit.leCell1.text()}', cell2op = '{self.cliedit.cbCell2.currentText()}',
-                    cell2 = '{self.cliedit.leCell2.text()}', tel3 = '{self.cliedit.leTel.text()}', email = '{email}', cep = '{self.cliedit.leCep.text()}',
+                    cell2 = '{self.cliedit.leCell2.text()}', tel = '{self.cliedit.leTel.text()}', email = '{email}', cep = '{self.cliedit.leCep.text()}',
                     adress = '{self.cliedit.leStreet.text()}', number = '{self.cliedit.leNumber.text()}', adress2 = '{self.cliedit.leComp.text()}',
                     district = '{self.cliedit.leDistrict.text()}', city = '{self.cliedit.leCity.text()}', state = '{self.cliedit.leState.text()}', contry = '{self.cliedit.leContry.text()}' WHERE id = '{self.cliedit.leCodCli.text()}'"""
                 else:
                     sql = f"""INSERT INTO clients (regdate, altdate, regtype, blocked,
-                    name, birthFun, sex, cpfcnpj, rgie, cell1op, cell1, cell2op, cell2, tel3, email, cep,
+                    name, birthFun, sex, cpfcnpj, rgie, cell1op, cell1, cell2op, cell2, tel, email, cep,
                     adress, number, adress2, district, city, state, contry)
-                    VALUES ('{QtCore.QDateTime.currentDateTime().toString(QtCore.Qt.ISODate)}',
-                    '{QtCore.QDateTime.currentDateTime().toString(QtCore.Qt.ISODate)}',
+                    VALUES ('{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}',
+                    '{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}',
                     '{self.cliedit.buttonGroup.checkedButton().text()}',
                     '{int(self.cliedit.checkBox.isChecked())}', '{name}', '{birth}',
                     '{self.cliedit.buttonGroup_2.checkedButton().text()}',
@@ -315,10 +320,41 @@ class App(Ui_Login):
         if data != 0:
             loadCli(data)
 
-    def openSO(self):
+    def openSO(self, id = 0):
         def saveOs():
             print('Salvando OS...')
-            pass
+            idCli = self.sorder.leCodCli.text()
+            dtEntry = QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')
+            type = self.sorder.cbType.currentText()
+            brand = self.sorder.cbBrand.currentText()
+            model = self.sorder.leModel.text()
+            color = self.sorder.leColor.text()
+            ns = self.sorder.leNs.text()
+            br = self.sorder.leBarCode.text()
+            imei1 = self.sorder.leImei1.text()
+            imei2 = self.sorder.leImei2.text()
+            acessories = self.sorder.leAcessories.text()
+            deviceStatus = self.sorder.leDeviceStatus.text()
+            defect = self.sorder.leDefect.text()
+            obs1 = self.sorder.teObs1.toPlainText()
+            defectFound = self.sorder.leDefectsFound.text()
+            serviceDone = self.sorder.leServiceDone.text()
+            partsValue = self.sorder.lePartsValue.text()
+            serviceValue = self.sorder.leServiceValue.text()
+            total = self.sorder.leTotalValue.text()
+            obs2 = self.sorder.leObs2.text()
+            status = self.sorder.lbStatus2.text()
+
+            sql = f"""INSERT INTO service_order (idCli, entryDate, deviceType, brand, model, color, ns, barCode, imei1, imei2,
+            acessories, deviceStatus, defect, obs1, defectFound, serviceDone,
+            partTotalValue, serviceValue, total, obs2, status) VALUES ({int(idCli)}, datetime('now',
+            'localtime'),  '{type}', '{brand}', '{model}', '{color}', '{ns}', '{br}', '{imei1}', '{imei2}',
+            '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}', '{serviceDone}', '{partsValue}', '{serviceValue}', '{total}', '{obs2}', '{status}')"""
+            print(sql)
+            banco = Database('database.db')
+            banco.queryDB(sql)
+
+
 
         def loadOs():
             pass
@@ -329,6 +365,13 @@ class App(Ui_Login):
         self.sorder.pbSave.clicked.connect(saveOs)
         self.sorder.pbSearch.clicked.connect(lambda: self.openCliEdit(1))
         self.sorder.pbSearch.clicked.connect(self.sorder.pbExit.click)
+        self.sorder.rbAnalysis.clicked.connect(lambda: self.sorder.lbStatus2.setText('Em análise'))
+        self.sorder.rbBudget.clicked.connect(lambda: self.sorder.lbStatus2.setText('Com orçamento'))
+        self.sorder.rbApproved.clicked.connect(lambda: self.sorder.lbStatus2.setText('Aprovado'))
+        self.sorder.rbRefused.clicked.connect(lambda: self.sorder.lbStatus2.setText('Recusado'))
+        self.sorder.rbFixed.clicked.connect(lambda: self.sorder.lbStatus2.setText('Cosertado'))
+        self.sorder.rbDelivery.clicked.connect(lambda: self.sorder.lbStatus2.setText('Devolver'))
+        self.sorder.leCodCli.setText(str(id))
         self.SOrder.show()
 
 

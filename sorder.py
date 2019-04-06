@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'sorder.ui',
 # licensing of 'sorder.ui' applies.
 #
-# Created: Sun Mar 17 15:47:40 2019
+# Created: Mon Mar 18 20:08:07 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -432,18 +432,18 @@ class Ui_SOrderEdit(object):
         self.lbModel.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.lbModel.setObjectName("lbModel")
         self.horizontalLayout_10.addWidget(self.lbModel)
-        self.cbModel = QtWidgets.QLineEdit(self.tab_2)
-        self.cbModel.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.cbModel.setObjectName("cbModel")
-        self.horizontalLayout_10.addWidget(self.cbModel)
+        self.leModel = QtWidgets.QLineEdit(self.tab_2)
+        self.leModel.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.leModel.setObjectName("leModel")
+        self.horizontalLayout_10.addWidget(self.leModel)
         self.lbColor = QtWidgets.QLabel(self.tab_2)
         self.lbColor.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.lbColor.setObjectName("lbColor")
         self.horizontalLayout_10.addWidget(self.lbColor)
-        self.cbColor = QtWidgets.QLineEdit(self.tab_2)
-        self.cbColor.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.cbColor.setObjectName("cbColor")
-        self.horizontalLayout_10.addWidget(self.cbColor)
+        self.leColor = QtWidgets.QLineEdit(self.tab_2)
+        self.leColor.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.leColor.setObjectName("leColor")
+        self.horizontalLayout_10.addWidget(self.leColor)
         self.verticalLayout_6.addLayout(self.horizontalLayout_10)
         self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
@@ -625,12 +625,12 @@ class Ui_SOrderEdit(object):
         self.rbBudget = QtWidgets.QRadioButton(SOrderEdit)
         self.rbBudget.setObjectName("rbBudget")
         self.horizontalLayout_22.addWidget(self.rbBudget)
-        self.radioButton_5 = QtWidgets.QRadioButton(SOrderEdit)
-        self.radioButton_5.setObjectName("radioButton_5")
-        self.horizontalLayout_22.addWidget(self.radioButton_5)
         self.rbApproved = QtWidgets.QRadioButton(SOrderEdit)
         self.rbApproved.setObjectName("rbApproved")
         self.horizontalLayout_22.addWidget(self.rbApproved)
+        self.rbRefused = QtWidgets.QRadioButton(SOrderEdit)
+        self.rbRefused.setObjectName("rbRefused")
+        self.horizontalLayout_22.addWidget(self.rbRefused)
         self.rbFixed = QtWidgets.QRadioButton(SOrderEdit)
         self.rbFixed.setObjectName("rbFixed")
         self.horizontalLayout_22.addWidget(self.rbFixed)
@@ -804,8 +804,8 @@ class Ui_SOrderEdit(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QtWidgets.QApplication.translate("SOrderEdit", "Histórico do cliente", None, -1))
         self.rbAnalysis.setText(QtWidgets.QApplication.translate("SOrderEdit", "Em análise", None, -1))
         self.rbBudget.setText(QtWidgets.QApplication.translate("SOrderEdit", "Com orçamento", None, -1))
-        self.radioButton_5.setText(QtWidgets.QApplication.translate("SOrderEdit", "Aprovado", None, -1))
-        self.rbApproved.setText(QtWidgets.QApplication.translate("SOrderEdit", "Rec&usado", None, -1))
+        self.rbApproved.setText(QtWidgets.QApplication.translate("SOrderEdit", "Aprovado", None, -1))
+        self.rbRefused.setText(QtWidgets.QApplication.translate("SOrderEdit", "Rec&usado", None, -1))
         self.rbFixed.setText(QtWidgets.QApplication.translate("SOrderEdit", "Consertado", None, -1))
         self.rbDelivery.setText(QtWidgets.QApplication.translate("SOrderEdit", "Devo&lver", None, -1))
         self.pbSave.setText(QtWidgets.QApplication.translate("SOrderEdit", "Salvar", None, -1))
