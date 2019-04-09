@@ -12,7 +12,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 
 class Ui_Home(object):
     def setupUi(self, Home):
-        Home.setObjectName("Homo")
+        Home.setObjectName("Home")
         Home.resize(635, 395)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("IMG/logoblack.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
