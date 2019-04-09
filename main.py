@@ -345,9 +345,10 @@ class App(Ui_Login):
             obs2 = self.sorder.leObs2.text()
             status = self.sorder.lbStatus2.text()
 
-            sql = f"""INSERT INTO service_order (idCli, entryDate, deviceType, brand, model, color, ns, barCode, imei1, imei2,
+            sql = f"""INSERT INTO service_order (idCli, entryDate, altDate, deviceType, brand, model, color, ns, barCode, imei1, imei2,
             acessories, deviceStatus, defect, obs1, defectFound, serviceDone,
             partTotalValue, serviceValue, total, obs2, status) VALUES ({int(idCli)}, datetime('now',
+            'localtime'), datetime('now',
             'localtime'),  '{type}', '{brand}', '{model}', '{color}', '{ns}', '{br}', '{imei1}', '{imei2}',
             '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}', '{serviceDone}', '{partsValue}', '{serviceValue}', '{total}', '{obs2}', '{status}')"""
             print(sql)
