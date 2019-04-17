@@ -110,4 +110,6 @@ class Database(object):
             return result
         else:
             self.conn.commit()
+            r = self.cursor.lastrowid
             self.conn.close()
+            return r

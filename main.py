@@ -35,6 +35,7 @@ class App(Ui_Login):
             print('Dados inválidos.')
 
     def loadSearch(self, data, local):
+
         try:
             if len(data) == 11 and data.isnumeric():
                 data = '{}.{}.{}-{}'.format(data[0:3], data[3:6], data[6:9], data[9:])
@@ -43,31 +44,60 @@ class App(Ui_Login):
         banco = Database('database.db')
         if local == 'Cliente':
             sql = f"SELECT * FROM clients WHERE name LIKE '{data}%' OR cpfcnpj LIKE '{data}%'"
-        if local == 'Ordem de Serviço':
-            sql = f"SELECT * FROM service_order WHERE id LIKE '{data}%' OR brand LIKE '{data}%'"
+            resultado = banco.queryDB(sql)
+            self.home.tableWidget.setRowCount(len(resultado))
+            self.home.tableWidget.setColumnCount(12)
+            self.home.tableWidget.setHorizontalHeaderLabels(['Código', 'Nome',
+            'Nascimento', 'Sexo', 'CPF/CNPJ', 'RG/IE', 'Operadora 1', 'Celular 1',
+            'Operadora 2', 'Celular 2', 'Telefone', 'E-Mail'])
 
-        resultado = banco.queryDB(sql)
+            for column, item in enumerate(resultado):
+                self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
+                self.home.tableWidget.setItem(column, 1, QTableWidgetItem(item[5]))
+                self.home.tableWidget.setItem(column, 2, QTableWidgetItem(item[6]))
+                self.home.tableWidget.setItem(column, 3, QTableWidgetItem(item[7]))
+                self.home.tableWidget.setItem(column, 4, QTableWidgetItem(item[8]))
+                self.home.tableWidget.setItem(column, 5, QTableWidgetItem(item[9]))
+                self.home.tableWidget.setItem(column, 6, QTableWidgetItem(item[10]))
+                self.home.tableWidget.setItem(column, 7, QTableWidgetItem(item[11]))
+                self.home.tableWidget.setItem(column, 8, QTableWidgetItem(item[12]))
+                self.home.tableWidget.setItem(column, 9, QTableWidgetItem(item[13]))
+                self.home.tableWidget.setItem(column, 10, QTableWidgetItem(item[14]))
+                self.home.tableWidget.setItem(column, 11, QTableWidgetItem(item[15]))
+                self.home.tableWidget.setItem(column, 12, QTableWidgetItem(item[16]))
+
+        if local == 'Ordem de Serviço':
+            sql = f"""SELECT service_order.id, clients.name, clients.cpfcnpj,
+            service_order.deviceType, service_order.brand, service_order.model,
+            service_order.color, clients.cell1op, clients.cell1, clients.cell2op,
+            clients.cell2, clients.tel FROM service_order INNER JOIN clients ON \
+            clients.id=service_order.idCli WHERE service_order.id LIKE '{data}%' \
+            OR service_order.brand LIKE '{data}%' OR service_order.model LIKE \
+            '{data}%' OR clients.name LIKE '{data}%' ORDER BY regdate DESC LIMIT 100"""
+
+            resultado = banco.queryDB(sql)
+            self.home.tableWidget.setRowCount(len(resultado))
+            self.home.tableWidget.setColumnCount(12)
+            self.home.tableWidget.setHorizontalHeaderLabels(['OS', 'Cliente',
+            'CPF/CNPJ', 'Aparelho', 'Marca', 'Modelo', 'Cor', 'Operadora 1',
+            'Celular 1', 'Operadora 2', 'Celular 2', 'Telefone'])
+
+            for column, item in enumerate(resultado):
+                self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
+                self.home.tableWidget.setItem(column, 1, QTableWidgetItem(item[1]))
+                self.home.tableWidget.setItem(column, 2, QTableWidgetItem(item[2]))
+                self.home.tableWidget.setItem(column, 3, QTableWidgetItem(item[3]))
+                self.home.tableWidget.setItem(column, 4, QTableWidgetItem(item[4]))
+                self.home.tableWidget.setItem(column, 5, QTableWidgetItem(item[5]))
+                self.home.tableWidget.setItem(column, 6, QTableWidgetItem(item[6]))
+                self.home.tableWidget.setItem(column, 7, QTableWidgetItem(item[7]))
+                self.home.tableWidget.setItem(column, 8, QTableWidgetItem(item[8]))
+                self.home.tableWidget.setItem(column, 9, QTableWidgetItem(item[9]))
+                self.home.tableWidget.setItem(column, 10, QTableWidgetItem(item[10]))
+                self.home.tableWidget.setItem(column, 11, QTableWidgetItem(item[11]))
+
         print('sql: ', sql)
         print(resultado)
-        self.home.tableWidget.setRowCount(len(resultado))
-        self.home.tableWidget.setColumnCount(12)
-        self.home.tableWidget.setHorizontalHeaderLabels(['Código', 'Nome', 'Nascimento', 'Sexo', 'CPF/CNPJ', 'RG/IE', 'Operadora 1', 'Celular 1',
-        'Operadora 2', 'Celular 2', 'Telefone 3', 'E-Mail'])
-
-        for column, item in enumerate(resultado):
-            self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
-            self.home.tableWidget.setItem(column, 1, QTableWidgetItem(item[5]))
-            self.home.tableWidget.setItem(column, 2, QTableWidgetItem(item[6]))
-            self.home.tableWidget.setItem(column, 3, QTableWidgetItem(item[7]))
-            self.home.tableWidget.setItem(column, 4, QTableWidgetItem(item[8]))
-            self.home.tableWidget.setItem(column, 5, QTableWidgetItem(item[9]))
-            self.home.tableWidget.setItem(column, 6, QTableWidgetItem(item[10]))
-            self.home.tableWidget.setItem(column, 7, QTableWidgetItem(item[11]))
-            self.home.tableWidget.setItem(column, 8, QTableWidgetItem(item[12]))
-            self.home.tableWidget.setItem(column, 9, QTableWidgetItem(item[13]))
-            self.home.tableWidget.setItem(column, 10, QTableWidgetItem(item[14]))
-            self.home.tableWidget.setItem(column, 11, QTableWidgetItem(item[15]))
-            self.home.tableWidget.setItem(column, 12, QTableWidgetItem(item[16]))
         self.home.tableWidget.itemDoubleClicked.connect(lambda: self.openCliEdit(int(resultado[self.home.tableWidget.currentRow()][0])))
 
     def openHome(self):
@@ -95,18 +125,18 @@ class App(Ui_Login):
             except:
                 pass
 
-        def loadCli(data, field = "id"):
+        def loadCli(data):
             banco = Database('database.db')
-            sql = f"""SELECT * FROM clients WHERE {field}='{data}'"""
+            sql = f"""SELECT * FROM clients WHERE id={data}"""
             print('SQL:', sql)
             banco.queryDB(sql)
             resultado = banco.queryDB(sql)
             print('Resultado: ', resultado)
             self.cliedit.leCodCli.setText(str(resultado[0][0]))
             self.cliedit.dateTimeCad.setEnabled(True)
-            self.cliedit.dateTimeCad.setDateTime(QtCore.QDateTime.fromString(resultado[0][1], ))
+            self.cliedit.dateTimeCad.setDateTime(QtCore.QDateTime.fromString(resultado[0][1], 'yyyy-MM-dd hh:mm:ss'))
             self.cliedit.dateTimeAlt.setEnabled(True)
-            self.cliedit.dateTimeAlt.setDateTime(QtCore.QDateTime.fromString(resultado[0][2], ))
+            self.cliedit.dateTimeAlt.setDateTime(QtCore.QDateTime.fromString(resultado[0][2], 'yyyy-MM-dd hh:mm:ss'))
             if resultado[0][3] == 'PF':
                 self.cliedit.radioButton.setChecked(True)
                 self.cliedit.leCpfCnpj.setMaxLength(14)
@@ -124,7 +154,7 @@ class App(Ui_Login):
             elif not resultado[0][4] and self.cliedit.checkBox.checkState():
                 self.cliedit.checkBox.setChecked(False)
             self.cliedit.leName.setText(resultado[0][5])
-            self.cliedit.deBirthFun.setDate(QtCore.QDate.fromString(resultado[0][6], ))
+            self.cliedit.deBirthFun.setDate(QtCore.QDate.fromString(resultado[0][6], 'yyyy-MM-dd'))
             if resultado[0][7] == 'F':
                 self.cliedit.rbF.setChecked(True)
             else:
@@ -162,7 +192,6 @@ class App(Ui_Login):
         def saveCli():
             try:
                 banco = Database('database.db')
-                dic = {}
                 name = self.cliedit.leName.text().title()
                 assert name != '', 'Digite o nome do cliente!'
                 birth = self.cliedit.deBirthFun.date().toString('yyyy-MM-dd')
@@ -173,7 +202,6 @@ class App(Ui_Login):
                 cpfcnpj = self.cliedit.leCpfCnpj.text().strip()
                 assert cpfcnpjv.validate(cpfcnpj) == True, 'CPF/CNPJ inválido!'
                 rgie = self.cliedit.leRgIe.text().strip()
-                if rgie: dic['rgie'] = rgie
                 email = self.cliedit.leMail.text().strip()
                 if self.cliedit.leCodCli.text():
                     sql = f"""UPDATE clients SET altdate = '{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}', regtype = '{self.cliedit.buttonGroup.checkedButton().text()}',
@@ -200,8 +228,9 @@ class App(Ui_Login):
                     '{self.cliedit.leDistrict.text()}', '{self.cliedit.leCity.text()}',
                     '{self.cliedit.leState.text()}', '{self.cliedit.leContry.text()}')"""
                 print('SQL: ', sql)
-                banco.queryDB(sql)
-                loadCli(self.cliedit.leCpfCnpj.text().strip(), "cpfcnpj")
+                lrid = banco.queryDB(sql)
+                print('Last row id: ', lrid)
+                loadCli(lrid)
 
             except sqlite3.IntegrityError as e:
                 msg = QMessageBox()
@@ -317,13 +346,15 @@ class App(Ui_Login):
         self.cliedit.leCep.textEdited.connect(lambda: mask(self.cliedit.leCep))
         self.cliedit.leCep.editingFinished.connect(lambda: mask(self.cliedit.leCep, '00000-000'))
         self.CliEdit.show()
+
         if data != 0:
             loadCli(data)
 
     def openSO(self, id = 0):
-        def saveOs():
-            print('Salvando OS...')
-            idCli = self.sorder.leCodCli.text()
+        def loadOs(id):
+            banco = Database('database.db')
+            sql = f"""SELECT * FROM clients WHERE id={id}"""
+            idCli = int(self.sorder.leCodCli.text())
             dtEntry = QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')
             type = self.sorder.cbType.currentText()
             brand = self.sorder.cbBrand.currentText()
@@ -345,20 +376,50 @@ class App(Ui_Login):
             obs2 = self.sorder.leObs2.text()
             status = self.sorder.lbStatus2.text()
 
-            sql = f"""INSERT INTO service_order (idCli, entryDate, altDate, deviceType, brand, model, color, ns, barCode, imei1, imei2,
-            acessories, deviceStatus, defect, obs1, defectFound, serviceDone,
-            partTotalValue, serviceValue, total, obs2, status) VALUES ({int(idCli)}, datetime('now',
-            'localtime'), datetime('now',
-            'localtime'),  '{type}', '{brand}', '{model}', '{color}', '{ns}', '{br}', '{imei1}', '{imei2}',
-            '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}', '{serviceDone}', '{partsValue}', '{serviceValue}', '{total}', '{obs2}', '{status}')"""
+        def saveOs():
+            print('Salvando OS...')
+            idCli = int(self.sorder.leCodCli.text())
+            dtEntry = QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')
+            type = self.sorder.cbType.currentText()
+            brand = self.sorder.cbBrand.currentText()
+            model = self.sorder.leModel.text()
+            color = self.sorder.leColor.text()
+            ns = self.sorder.leNs.text()
+            br = self.sorder.leBarCode.text()
+            imei1 = self.sorder.leImei1.text()
+            imei2 = self.sorder.leImei2.text()
+            acessories = self.sorder.leAcessories.text()
+            deviceStatus = self.sorder.leDeviceStatus.text()
+            defect = self.sorder.leDefect.text()
+            obs1 = self.sorder.teObs1.toPlainText()
+            defectFound = self.sorder.leDefectsFound.text()
+            serviceDone = self.sorder.leServiceDone.text()
+            partsValue = self.sorder.lePartsValue.text()
+            serviceValue = self.sorder.leServiceValue.text()
+            total = self.sorder.leTotalValue.text()
+            obs2 = self.sorder.leObs2.text()
+            status = self.sorder.lbStatus2.text()
+
+
+            if self.sorder.leOs.text():
+                id = int(self.sorder.leOs.text())
+                sql = f"""UPDATE service_order SET altDate='{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}',
+                deviceType='{type}', brand='{brand}', model='{model}', color='{color}', ns='{ns}', barCode='{br}', imei1='{imei1}', imei2='{imei2}',
+                acessories='{acessories}', deviceStatus='{deviceStatus}', defect='{defect}', obs1='{obs1}', defectFound='{defectFound}', serviceDone='{serviceDone}',
+                partTotalValue='{partsValue}', serviceValue='{serviceValue}', total='{total}', obs2='{obs2}', status='{status}' WHERE id={id}"""
+            else:
+                sql = f"""INSERT INTO service_order (idCli, entryDate, altDate,
+                deviceType, brand, model, color, ns, barCode, imei1, imei2,
+                acessories, deviceStatus, defect, obs1, defectFound, serviceDone,
+                partTotalValue, serviceValue, total, obs2, status) VALUES ({idCli},
+                datetime('now', 'localtime'), datetime('now', 'localtime'), '{type}',
+                '{brand}', '{model}', '{color}', '{ns}', '{br}', '{imei1}', '{imei2}',
+                '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}',
+                '{serviceDone}', '{partsValue}', '{serviceValue}', '{total}', '{obs2}', '{status}')"""
             print(sql)
             banco = Database('database.db')
             banco.queryDB(sql)
 
-
-
-        def loadOs():
-            pass
         print('Abrindo SO edit')
         self.SOrder = QDialog()
         self.sorder = Ui_SOrderEdit()
