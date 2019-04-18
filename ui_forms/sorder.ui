@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>752</width>
-    <height>646</height>
+    <width>758</width>
+    <height>686</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -53,6 +53,53 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_23">
      <item>
+      <widget class="QLabel" name="lbOs">
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string>OS:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="leOs">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="lbStatus1">
        <property name="maximumSize">
         <size>
@@ -88,40 +135,22 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="lbOs">
-       <property name="maximumSize">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
         <size>
-         <width>30</width>
-         <height>16777215</height>
+         <width>40</width>
+         <height>20</height>
         </size>
        </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(255, 0, 0);</string>
-       </property>
-       <property name="text">
-        <string>OS:</string>
-       </property>
-      </widget>
+      </spacer>
      </item>
-     <item>
-      <widget class="QLineEdit" name="leOs">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_25">
      <item>
       <widget class="QLabel" name="lbEntryDate">
        <property name="text">
@@ -131,6 +160,26 @@
      </item>
      <item>
       <widget class="QDateTimeEdit" name="dtEntryDate">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Data de alteração</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateTimeEdit" name="dtAltDate">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -165,6 +214,19 @@
        </property>
       </widget>
      </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
    </item>
    <item>
@@ -182,7 +244,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="elideMode">
       <enum>Qt::ElideNone</enum>
@@ -1274,7 +1336,7 @@
          <item>
           <widget class="QLabel" name="lbDefectsFound">
            <property name="text">
-            <string>Defeitos encontrados:</string>
+            <string>Defeito encontrado:</string>
            </property>
           </widget>
          </item>
@@ -1356,12 +1418,12 @@
            </column>
            <column>
             <property name="text">
-             <string>Quantidade</string>
+             <string>Valor unitário</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Valor un</string>
+             <string>Quantidade</string>
             </property>
            </column>
            <column>
