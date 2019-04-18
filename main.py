@@ -62,9 +62,6 @@ class App(Ui_Login):
                 self.home.tableWidget.setItem(column, 10, QTableWidgetItem(item[14]))
                 self.home.tableWidget.setItem(column, 11, QTableWidgetItem(item[15]))
                 self.home.tableWidget.setItem(column, 12, QTableWidgetItem(item[16]))
-            self.home.tableWidget.itemDoubleClicked.connect(lambda: self.openCliEdit(int(result[self.home.tableWidget.currentRow()][0])))
-            print('SQL search: ', sql)
-            print('Search Cli: ', result)
 
         if local == 'Ordem de Serviço':
             try:
@@ -80,8 +77,8 @@ class App(Ui_Login):
                     service_order.color, clients.cell1op, clients.cell1, clients.cell2op, \
                     clients.cell2, clients.tel FROM service_order INNER JOIN clients ON \
                     clients.id=service_order.idCli WHERE clients.cpfcnpj LIKE '{data}%' OR \
-                    service_order.brand LIKE '{data}%' OR service_order.model LIKE '{data}%' \
-                    OR clients.name LIKE '{data}%' ORDER BY regdate DESC LIMIT 100"""
+                    clients.name LIKE '{data}%' OR service_order.brand LIKE '{data}%' OR \
+                    service_order.model LIKE '{data}%' ORDER BY regdate DESC LIMIT 100"""
 
             result = banco.queryDB(sql)
             self.home.tableWidget.setRowCount(len(result))
@@ -103,9 +100,12 @@ class App(Ui_Login):
                 self.home.tableWidget.setItem(column, 9, QTableWidgetItem(item[9]))
                 self.home.tableWidget.setItem(column, 10, QTableWidgetItem(item[10]))
                 self.home.tableWidget.setItem(column, 11, QTableWidgetItem(item[11]))
+        if local == 'Ordem de Serviço':
             self.home.tableWidget.itemDoubleClicked.connect(lambda: self.openSO(int(result[self.home.tableWidget.currentRow()][0])))
-            print('SQL Search: ', sql)
-            print('Result OS: ', result)
+        if local == 'Cliente':
+            self.home.tableWidget.itemDoubleClicked.connect(lambda: self.openCliEdit(int(result[self.home.tableWidget.currentRow()][0])))
+        print('SQL Search: ', sql)
+        print('Result OS: ', result)
 
     def openHome(self):
         print('Abrindo Home')
