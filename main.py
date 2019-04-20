@@ -191,12 +191,15 @@ class App(Ui_Login):
         def delCli(id):
             banco = Database('database.db')
             sql = f"DELETE FROM clients WHERE id = '{id}'"
-            banco.queryDB(sql)
-            msg = QMessageBox()
-            msg.setWindowTitle('Cliente foi excluído.')
-            msg.setText('Este cliente foi deletado com sucesso!')
-            msg.exec_()
-            self.cliedit.pbExit.click()
+            try:
+                banco.queryDB(sql)
+                msg = QMessageBox()
+                msg.setWindowTitle('Cliente foi excluído.')
+                msg.setText('Este cliente foi deletado com sucesso!')
+                msg.exec_()
+                self.cliedit.pbExit.click()
+            except:
+                pass
 
         def saveCli():
             try:
