@@ -4,14 +4,14 @@
 <h3>For small eletronics and smartphone repair companies</h3>
 
 <b>Requirements:</b><br>
-Python 3+<br>
+Python 3.7+<br>
 PySide2<br>
 PySqlCipher3<br>
 SqlCipher https://www.zetetic.net/sqlcipher/open-source/<br>
 
 <b>Features:</b><br>
 
-Encrypted sqlite3 database using SqlCipher.<br>
+Optional encrypted sqlite3 database using SqlCipher. (Config database.py)<br>
 Modern QT GUI<br>
 Multiplataform.<br>
 

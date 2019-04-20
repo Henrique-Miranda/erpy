@@ -1,4 +1,5 @@
-from pysqlcipher3 import dbapi2 as sqlite3
+#from pysqlcipher3 import dbapi2 as sqlite3
+import sqlite3
 
 
 class Database(object):
@@ -8,7 +9,7 @@ class Database(object):
     def connDB(self):
         self.conn = sqlite3.connect(self.dbname)
         self.cursor = self.conn.cursor()
-        self.cursor.execute("PRAGMA key='mypassword'")
+        #self.cursor.execute("PRAGMA key='mypassword'")
         self.cursor.execute("PRAGMA foreign_keys = ON")
 
 
