@@ -19,7 +19,7 @@ SqlCipher https://www.zetetic.net/sqlcipher/open-source/<br>
 <code>git clone https://github.com/Henrique-Miranda/InfoCad.git</code><br>
 <code>cd InfoCad</code><br>
 <code>pip3 install -r requirements.txt</code><br>
-<code>python main.py</code><br>
+<code>python3 main.py</code><br>
 
 <b>Login:</b><br>
 User: admin<br>
