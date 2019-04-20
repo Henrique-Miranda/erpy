@@ -200,7 +200,7 @@ class Ui_Home(object):
         QtCore.QMetaObject.connectSlotsByName(Home)
 
     def retranslateUi(self, Home):
-        Home.setWindowTitle(QtWidgets.QApplication.translate("Home", "HL INFORMÁTICA", None, -1))
+        Home.setWindowTitle(QtWidgets.QApplication.translate("Home", "InfoCad - Assistência Técnica", None, -1))
         self.pbClient.setText(QtWidgets.QApplication.translate("Home", "Clientes", None, -1))
         self.pbSo.setText(QtWidgets.QApplication.translate("Home", "Ordem de Serviço", None, -1))
         self.pbStock.setText(QtWidgets.QApplication.translate("Home", "Estoque", None, -1))
@@ -231,4 +231,3 @@ class Ui_Home(object):
         self.actionSo_2.setText(QtWidgets.QApplication.translate("Home", "&Ordem Serviço", None, -1))
         self.actionProduct_2.setText(QtWidgets.QApplication.translate("Home", "&Produto", None, -1))
         self.actionProvider_2.setText(QtWidgets.QApplication.translate("Home", "&Fornecedor", None, -1))
-

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'clients.ui',
 # licensing of 'clients.ui' applies.
 #
-# Created: Sat Mar 16 19:10:53 2019
+# Created: Sat Apr 20 16:33:07 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -187,6 +187,14 @@ class Ui_ClientEdit(object):
         self.lbCell2 = QtWidgets.QLabel(self.gb2)
         self.lbCell2.setObjectName("lbCell2")
         self.hl4.addWidget(self.lbCell2)
+        self.leCell2 = QtWidgets.QLineEdit(self.gb2)
+        self.leCell2.setInputMethodHints(QtCore.Qt.ImhDigitsOnly)
+        self.leCell2.setInputMask("")
+        self.leCell2.setText("")
+        self.leCell2.setMaxLength(14)
+        self.leCell2.setPlaceholderText("")
+        self.leCell2.setObjectName("leCell2")
+        self.hl4.addWidget(self.leCell2)
         self.cbCell2 = QtWidgets.QComboBox(self.gb2)
         self.cbCell2.setMaximumSize(QtCore.QSize(70, 16777215))
         self.cbCell2.setObjectName("cbCell2")
@@ -198,14 +206,6 @@ class Ui_ClientEdit(object):
         self.cbCell2.addItem("")
         self.cbCell2.addItem("")
         self.hl4.addWidget(self.cbCell2)
-        self.leCell2 = QtWidgets.QLineEdit(self.gb2)
-        self.leCell2.setInputMethodHints(QtCore.Qt.ImhDigitsOnly)
-        self.leCell2.setInputMask("")
-        self.leCell2.setText("")
-        self.leCell2.setMaxLength(14)
-        self.leCell2.setPlaceholderText("")
-        self.leCell2.setObjectName("leCell2")
-        self.hl4.addWidget(self.leCell2)
         self.verticalLayout_3.addLayout(self.hl4)
         self.hl5 = QtWidgets.QHBoxLayout()
         self.hl5.setObjectName("hl5")
@@ -340,8 +340,7 @@ class Ui_ClientEdit(object):
         ClientEdit.setTabOrder(self.leCpfCnpj, self.leRgIe)
         ClientEdit.setTabOrder(self.leRgIe, self.leCell1)
         ClientEdit.setTabOrder(self.leCell1, self.cbCell1)
-        ClientEdit.setTabOrder(self.cbCell1, self.cbCell2)
-        ClientEdit.setTabOrder(self.cbCell2, self.leCell2)
+        ClientEdit.setTabOrder(self.cbCell1, self.leCell2)
         ClientEdit.setTabOrder(self.leCell2, self.leTel)
         ClientEdit.setTabOrder(self.leTel, self.leMail)
         ClientEdit.setTabOrder(self.leMail, self.leCep)
@@ -403,3 +402,4 @@ class Ui_ClientEdit(object):
         self.pbNew.setText(QtWidgets.QApplication.translate("ClientEdit", "Nova OS", None, -1))
         self.pbDelete.setText(QtWidgets.QApplication.translate("ClientEdit", "Excluir", None, -1))
         self.pbExit.setText(QtWidgets.QApplication.translate("ClientEdit", "Sair", None, -1))
+

@@ -411,6 +411,25 @@
          </widget>
         </item>
         <item>
+         <widget class="QLineEdit" name="leCell2">
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly</set>
+          </property>
+          <property name="inputMask">
+           <string/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>14</number>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QComboBox" name="cbCell2">
           <property name="maximumSize">
            <size>
@@ -448,25 +467,6 @@
             <string>Oi</string>
            </property>
           </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leCell2">
-          <property name="inputMethodHints">
-           <set>Qt::ImhDigitsOnly</set>
-          </property>
-          <property name="inputMask">
-           <string/>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="maxLength">
-           <number>14</number>
-          </property>
-          <property name="placeholderText">
-           <string/>
-          </property>
          </widget>
         </item>
        </layout>
@@ -736,7 +736,6 @@
   <tabstop>leRgIe</tabstop>
   <tabstop>leCell1</tabstop>
   <tabstop>cbCell1</tabstop>
-  <tabstop>cbCell2</tabstop>
   <tabstop>leCell2</tabstop>
   <tabstop>leTel</tabstop>
   <tabstop>leMail</tabstop>
