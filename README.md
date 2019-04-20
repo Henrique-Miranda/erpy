@@ -1,5 +1,5 @@
 # InfoCad
-# ERP, Clients and Service Order manager.
+# Clients and Service Order manager.
 
 <h3>For small eletronics and smartphone repair companies</h3>
 
