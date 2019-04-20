@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'sorder.ui',
 # licensing of 'sorder.ui' applies.
 #
-# Created: Wed Apr 17 11:20:51 2019
+# Created: Sat Apr 20 14:54:24 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_SOrderEdit(object):
     def setupUi(self, SOrderEdit):
         SOrderEdit.setObjectName("SOrderEdit")
-        SOrderEdit.resize(758, 686)
+        SOrderEdit.resize(776, 686)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("IMG/logoblack.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         SOrderEdit.setWindowIcon(icon)
@@ -200,10 +200,10 @@ class Ui_SOrderEdit(object):
         self.lbCell1 = QtWidgets.QLabel(self.groupBox_2)
         self.lbCell1.setObjectName("lbCell1")
         self.horizontalLayout_2.addWidget(self.lbCell1)
-        self.leCel1 = QtWidgets.QLineEdit(self.groupBox_2)
-        self.leCel1.setReadOnly(True)
-        self.leCel1.setObjectName("leCel1")
-        self.horizontalLayout_2.addWidget(self.leCel1)
+        self.leCell1 = QtWidgets.QLineEdit(self.groupBox_2)
+        self.leCell1.setReadOnly(True)
+        self.leCell1.setObjectName("leCell1")
+        self.horizontalLayout_2.addWidget(self.leCell1)
         self.cbCell1 = QtWidgets.QComboBox(self.groupBox_2)
         self.cbCell1.setMaximumSize(QtCore.QSize(70, 16777215))
         self.cbCell1.setEditable(False)
@@ -836,3 +836,4 @@ class Ui_SOrderEdit(object):
         self.pbNewOs.setText(QtWidgets.QApplication.translate("SOrderEdit", "Nova OS", None, -1))
         self.pbDelivery.setText(QtWidgets.QApplication.translate("SOrderEdit", "Entregar", None, -1))
         self.pbExit.setText(QtWidgets.QApplication.translate("SOrderEdit", "Sair", None, -1))
+

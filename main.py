@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, sqlite3
 from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem
 from PySide2 import QtCore, Qt
 from database import Database
@@ -110,7 +110,6 @@ class App(Ui_Login):
                 self.home.tableWidget.setItem(column, 12, QTableWidgetItem(item[12]))
         try:
             self.home.tableWidget.itemDoubleClicked.disconnect()
-            print('DIR: ', dir(self.home.tableWidget.itemDoubleClicked))
         except:
             pass
         if local == 'Ordem de Serviço':
@@ -218,7 +217,9 @@ class App(Ui_Login):
                     cell1op = '{self.cliedit.cbCell1.currentText()}', cell1 = '{self.cliedit.leCell1.text()}', cell2op = '{self.cliedit.cbCell2.currentText()}',
                     cell2 = '{self.cliedit.leCell2.text()}', tel = '{self.cliedit.leTel.text()}', email = '{email}', cep = '{self.cliedit.leCep.text()}',
                     adress = '{self.cliedit.leStreet.text()}', number = '{self.cliedit.leNumber.text()}', adress2 = '{self.cliedit.leComp.text()}',
-                    district = '{self.cliedit.leDistrict.text()}', city = '{self.cliedit.leCity.text()}', state = '{self.cliedit.leState.text()}', contry = '{self.cliedit.leContry.text()}' WHERE id = '{self.cliedit.leCodCli.text()}'"""
+                    district = '{self.cliedit.leDistrict.text()}', city = '{self.cliedit.leCity.text()}', state = '{self.cliedit.leState.text()}', contry = '{self.cliedit.leContry.text()}' WHERE id={int(self.cliedit.leCodCli.text())}"""
+                    banco.queryDB(sql)
+                    loadCli(int(self.cliedit.leCodCli.text()))
                 else:
                     sql = f"""INSERT INTO clients (regdate, altdate, regtype, blocked,
                     name, birthFun, sex, cpfcnpj, rgie, cell1op, cell1, cell2op, cell2, tel, email, cep,
@@ -235,10 +236,10 @@ class App(Ui_Login):
                     '{self.cliedit.leNumber.text()}', '{self.cliedit.leComp.text()}',
                     '{self.cliedit.leDistrict.text()}', '{self.cliedit.leCity.text()}',
                     '{self.cliedit.leState.text()}', '{self.cliedit.leContry.text()}')"""
-                print('SQL SaveCli: ', sql)
-                lrid = banco.queryDB(sql)
-                print('Last row id: ', lrid)
-                loadCli(lrid)
+                    print('SQL SaveCli: ', sql)
+                    lrid = banco.queryDB(sql)
+                    print('Last row id: ', lrid)
+                    loadCli(lrid)
 
             except sqlite3.IntegrityError as e:
                 msg = QMessageBox()
@@ -340,6 +341,8 @@ class App(Ui_Login):
         self.cliedit.radioButton.clicked.connect(cpf)
         self.cliedit.leCep.editingFinished.connect(lambda: setAdress(self.cliedit.leCep.text()))
         self.cliedit.pbSave.clicked.connect(saveCli)
+        self.cliedit.pbNew.clicked.connect(lambda: self.openSO(idC = int(self.cliedit.leCodCli.text())))
+        self.cliedit.pbNew.clicked.connect(self.cliedit.pbExit.click)
         self.cliedit.pbDelete.clicked.connect(lambda: delCli(int(self.cliedit.leCodCli.text())))
         self.cliedit.leCpfCnpj.textEdited.connect(lambda: mask(self.cliedit.leCpfCnpj))
         self.cliedit.leCpfCnpj.editingFinished.connect(lambda: mask(self.cliedit.leCpfCnpj, '000.000.000-00'))
@@ -359,66 +362,102 @@ class App(Ui_Login):
             loadCli(data)
     # End openCliEdit
     # Start openSO
-    def openSO(self, id = 0):
+    def openSO(self, id = 0, idC = 0):
         def loadOs(id):
             banco = Database('database.db')
-            sql = f"""SELECT service_order.id,  service_order.status, service_order.entryDate, service_order.altDate, service_order.outDate, clients.id, clients.name, clients.birthFun, clients.sex, clients.cpfcnpj, clients.rgie, clients.cell1op, clients.cell1, clients.cell2op, clients.cell2, clients.tel, clients.email, clients.adress, clients.number, clients.adress2, clients.cep, clients.district, clients.city, clients.state, clients.contry FROM service_order INNER JOIN clients ON clients.id=service_order.idCli WHERE service_order.id={id}"""
-            print('SQL loadOS: ', sql)
-            result = banco.queryDB(sql)
-            print('Resultado: ', result)
-            self.sorder.leOs.setEnabled(True)
-            self.sorder.leOs.setText(str(id))
-            self.sorder.lbStatus2.setText(result[0][1])
-            self.sorder.dtEntryDate.setEnabled(True)
-            self.sorder.dtEntryDate.setDateTime(QtCore.QDateTime.fromString(result[0][2], 'yyyy-MM-dd hh:mm:ss'))
-            self.sorder.dtAltDate.setEnabled(True)
-            self.sorder.dtAltDate.setDateTime(QtCore.QDateTime.fromString(result[0][3], 'yyyy-MM-dd hh:mm:ss'))
-            self.sorder.leCodCli.setEnabled(True)
-            self.sorder.leCodCli.setText(str(result[0][5]))
-            self.sorder.leName.setText(result[0][6])
-            self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][7], 'yyyy-MM-dd'))
-            if result[0][8] == 'M':
-                self.sorder.rbM.setChecked(True)
-            else:
-                self.sorder.rbF.setChecked(True)
-            self.sorder.leCpfCnpj.setText(result[0][9])
-            self.sorder.leRgIe.setText(result[0][10])
-            self.sorder.cbCell1.setCurrentText(result[0][11])
-            self.sorder.leCel1.setText(result[0][12])
-            self.sorder.cbCell2.setCurrentText(result[0][13])
-            self.sorder.leCell2.setText(result[0][14])
-            self.sorder.leTel.setText(result[0][15])
-            self.sorder.leEmail.setText(result[0][16])
-            self.sorder.leAdress.setText(result[0][17])
-            self.sorder.leNumber.setText(result[0][18])
-            self.sorder.leAdress2.setText(result[0][19])
-            self.sorder.leCep.setText(result[0][20])
-            self.sorder.leDistrict.setText(result[0][21])
-            self.sorder.leCity.setText(result[0][22])
-            self.sorder.leState.setText(result[0][23])
-            self.sorder.leContry.setText(result[0][24])
-            '''
-            self.sorder.cbType.setCurrentText()
-            self.sorder.cbBrand.setcurrentText()
-            self.sorder.leModel.setText()
-            self.sorder.leColor.setText()
-            self.sorder.leNs.setText()
-            self.sorder.leBarCode.setText()
-            self.sorder.leImei1.setText()
-            self.sorder.leImei2.setText()
-            self.sorder.leAcessories.setText()
-            self.sorder.leDeviceStatus.setText()
-            self.sorder.leDefect.setText()
-            self.sorder.teObs1.setText()
-            self.sorder.leDefectsFound.setText()
-            self.sorder.leServiceDone.setText()
-            self.sorder.lePartsValue.setText()
-            self.sorder.leServiceValue.setText()
-            self.sorder.leTotalValue.setText()
-            self.sorder.leObs2.setText()
+            if not idC:
+                sql = f"""SELECT clients.name, clients.birthFun, clients.sex, clients.cpfcnpj, clients.rgie, clients.cell1op, clients.cell1, clients.cell2op, clients.cell2, clients.tel, clients.email, clients.adress, clients.number, clients.adress2, clients.cep, clients.district, clients.city, clients.state, clients.contry, service_order.* FROM service_order INNER JOIN clients ON clients.id=service_order.idCli WHERE service_order.id={id}"""
+                print('SQL loadOS: ', sql)
+                result = banco.queryDB(sql)
+                print('Resultado: ', result)
+                self.sorder.leName.setText(result[0][0])
+                self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'yyyy-MM-dd'))
+                if result[0][2] == 'M':
+                    self.sorder.rbM.setChecked(True)
+                else:
+                    self.sorder.rbF.setChecked(True)
+                self.sorder.leCpfCnpj.setText(result[0][3])
+                self.sorder.leRgIe.setText(result[0][4])
+                self.sorder.cbCell1.setCurrentText(result[0][5])
+                self.sorder.leCell1.setText(result[0][6])
+                self.sorder.cbCell2.setCurrentText(result[0][7])
+                self.sorder.leCell2.setText(result[0][8])
+                self.sorder.leTel.setText(result[0][9])
+                self.sorder.leEmail.setText(result[0][10])
+                self.sorder.leAdress.setText(result[0][11])
+                self.sorder.leNumber.setText(result[0][12])
+                self.sorder.leAdress2.setText(result[0][13])
+                self.sorder.leCep.setText(result[0][14])
+                self.sorder.leDistrict.setText(result[0][15])
+                self.sorder.leCity.setText(result[0][16])
+                self.sorder.leState.setText(result[0][17])
+                self.sorder.leContry.setText(result[0][18])
 
-            '''
+                self.sorder.leOs.setEnabled(True)
+                self.sorder.leOs.setText(str(result[0][19]))
+                self.sorder.leCodCli.setEnabled(True)
+                self.sorder.leCodCli.setText(str(result[0][20]))
+                self.sorder.dtEntryDate.setEnabled(True)
+                self.sorder.dtEntryDate.setDateTime(QtCore.QDateTime.fromString(result[0][21], 'yyyy-MM-dd hh:mm:ss'))
+                self.sorder.dtAltDate.setEnabled(True)
+                self.sorder.dtAltDate.setDateTime(QtCore.QDateTime.fromString(result[0][22], 'yyyy-MM-dd hh:mm:ss'))
+                if result[0][23]:
+                    self.sorder.dtOutDate.setEnabled(True)
+                    self.sorder.dtOutDate.setDateTime(QtCore.QDateTime.fromString(result[0][23], 'yyyy-MM-dd hh:mm:ss'))
+                self.sorder.cbType.setCurrentText(result[0][25])
+                self.sorder.cbBrand.setCurrentText(result[0][26])
+                self.sorder.leModel.setText(result[0][27])
+                self.sorder.leColor.setText(result[0][28])
+                self.sorder.leNs.setText(result[0][29])
+                self.sorder.leBarCode.setText(result[0][30])
+                self.sorder.leImei1.setText(result[0][31])
+                self.sorder.leImei2.setText(result[0][32])
+                self.sorder.leAcessories.setText(result[0][33])
+                self.sorder.leDeviceStatus.setText(result[0][34])
+                self.sorder.leDefect.setText(result[0][35])
+                self.sorder.teObs1.setText(result[0][36])
+                self.sorder.leDefectsFound.setText(result[0][37])
+                self.sorder.leServiceDone.setText(result[0][38])
+                tpartDescription = result[0][39]
+                tpartAmount = result[0][40]
+                tpartValue = result[0][41]
+                tpartSubTotal = result[0][42]
+                self.sorder.lePartsValue.setText(result[0][43])
+                self.sorder.leServiceValue.setText(result[0][44])
+                self.sorder.leTotalValue.setText(result[0][45])
+                self.sorder.leObs2.setText(result[0][46])
+                self.sorder.lbStatus2.setText(result[0][47])
+            else:
+                sql = f"""SELECT name, birthFun, sex, cpfcnpj, rgie, cell1op, cell1, cell2op, cell2, tel, email, adress, number, adress2, cep, district, city, state, contry FROM clients WHERE id={idC}"""
+                print('SQL loadOS: ', sql)
+                result = banco.queryDB(sql)
+                print('Resultado: ', result)
+                self.sorder.leCodCli.setText(str(idC))
+                self.sorder.leName.setText(result[0][0])
+                self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'yyyy-MM-dd'))
+                if result[0][2] == 'M':
+                    self.sorder.rbM.setChecked(True)
+                else:
+                    self.sorder.rbF.setChecked(True)
+                self.sorder.leCpfCnpj.setText(result[0][3])
+                self.sorder.leRgIe.setText(result[0][4])
+                self.sorder.cbCell1.setCurrentText(result[0][5])
+                self.sorder.leCell1.setText(result[0][6])
+                self.sorder.cbCell2.setCurrentText(result[0][7])
+                self.sorder.leCell2.setText(result[0][8])
+                self.sorder.leTel.setText(result[0][9])
+                self.sorder.leEmail.setText(result[0][10])
+                self.sorder.leAdress.setText(result[0][11])
+                self.sorder.leNumber.setText(result[0][12])
+                self.sorder.leAdress2.setText(result[0][13])
+                self.sorder.leCep.setText(result[0][14])
+                self.sorder.leDistrict.setText(result[0][15])
+                self.sorder.leCity.setText(result[0][16])
+                self.sorder.leState.setText(result[0][17])
+                self.sorder.leContry.setText(result[0][18])
+
         def saveOs():
+            banco = Database('database.db')
             try:
                 print('Salvando OS...')
                 idCli = int(self.sorder.leCodCli.text())
@@ -445,13 +484,6 @@ class App(Ui_Login):
                 total = self.sorder.leTotalValue.text()
                 obs2 = self.sorder.leObs2.text()
                 status = self.sorder.lbStatus2.text()
-            except sqlite3.IntegrityError as e:
-                msg = QMessageBox()
-                msg.setWindowTitle('Falha ao salvar.')
-                print(e.args)
-                if 'clients.email' in e.args[0]:
-                    msg.setText(f'Este E-mail já está sendo utilizado.')
-                msg.exec_()
             except AssertionError as e:
                 msg = QMessageBox()
                 msg.setWindowTitle('Falha ao salvar.')
@@ -465,25 +497,27 @@ class App(Ui_Login):
                 deviceType='{type}', brand='{brand}', model='{model}', color='{color}', ns='{ns}', barCode='{br}', imei1='{imei1}', imei2='{imei2}',
                 acessories='{acessories}', deviceStatus='{deviceStatus}', defect='{defect}', obs1='{obs1}', defectFound='{defectFound}', serviceDone='{serviceDone}',
                 partTotalValue='{partsValue}', serviceValue='{serviceValue}', total='{total}', obs2='{obs2}', status='{status}' WHERE id={id}"""
+                banco.queryDB(sql)
+                loadOs(id)
             else:
                 sql = f"""INSERT INTO service_order (idCli, entryDate, altDate,
                 deviceType, brand, model, color, ns, barCode, imei1, imei2,
                 acessories, deviceStatus, defect, obs1, defectFound, serviceDone,
-                partTotalValue, serviceValue, total, obs2, status) VAL-UES ({idCli},
+                partTotalValue, serviceValue, total, obs2, status) VALUES ({idCli},
                 datetime('now', 'localtime'), datetime('now', 'localtime'), '{type}',
                 '{brand}', '{model}', '{color}', '{ns}', '{br}', '{imei1}', '{imei2}',
                 '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}',
                 '{serviceDone}', '{partsValue}', '{serviceValue}', '{total}', '{obs2}', '{status}')"""
-            print('SQL saveCli: ', sql)
-            banco = Database('database.db')
-            banco.queryDB(sql)
+                print('SQL saveCli: ', sql)
+                lrid = banco.queryDB(sql)
+                self.openSO(lrid)
 
         print('Abrindo SO edit')
         self.SOrder = QDialog()
         self.sorder = Ui_SOrderEdit()
         self.sorder.setupUi(self.SOrder)
         self.sorder.pbSave.clicked.connect(saveOs)
-        self.sorder.pbSearch.clicked.connect(lambda: self.openCliEdit(int(self.sorder.leOs.text())))
+        self.sorder.pbSearch.clicked.connect(lambda: self.openCliEdit(int(self.sorder.leCodCli.text())))
         self.sorder.pbSearch.clicked.connect(self.sorder.pbExit.click)
         self.sorder.rbAnalysis.clicked.connect(lambda: self.sorder.lbStatus2.setText('Em análise'))
         self.sorder.rbBudget.clicked.connect(lambda: self.sorder.lbStatus2.setText('Com orçamento'))

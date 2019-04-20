@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>758</width>
+    <width>776</width>
     <height>686</height>
    </rect>
   </property>
@@ -335,7 +335,7 @@
               </property>
               <property name="icon">
                <iconset>
-                <normaloff>../IMG/magnifying-glass.png</normaloff>../IMG/magnifying-glass.png</iconset>
+                <normaloff>IMG/magnifying-glass.png</normaloff>IMG/magnifying-glass.png</iconset>
               </property>
              </widget>
             </item>
@@ -439,7 +439,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="leCel1">
+             <widget class="QLineEdit" name="leCell1">
               <property name="readOnly">
                <bool>true</bool>
               </property>
