@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'home.ui',
 # licensing of 'home.ui' applies.
 #
-# Created: Mon Mar 11 12:05:13 2019
+# Created: Fri Apr 19 15:43:57 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 
 class Ui_Home(object):
     def setupUi(self, Home):
-        Home.setObjectName("Homo")
+        Home.setObjectName("Home")
         Home.resize(635, 395)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("IMG/logoblack.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -95,13 +95,13 @@ class Ui_Home(object):
         self.leSearch.setText("")
         self.leSearch.setObjectName("leSearch")
         self.horizontalLayout_3.addWidget(self.leSearch)
-        self.lbSearch = QtWidgets.QLabel(self.centralwidget)
-        self.lbSearch.setMaximumSize(QtCore.QSize(29, 29))
-        self.lbSearch.setText("")
-        self.lbSearch.setPixmap(QtGui.QPixmap("IMG/magnifying-glass.png"))
-        self.lbSearch.setScaledContents(True)
-        self.lbSearch.setObjectName("lbSearch")
-        self.horizontalLayout_3.addWidget(self.lbSearch)
+        self.pbSearch = QtWidgets.QPushButton(self.centralwidget)
+        self.pbSearch.setText("")
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap("IMG/magnifying-glass.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pbSearch.setIcon(icon9)
+        self.pbSearch.setObjectName("pbSearch")
+        self.horizontalLayout_3.addWidget(self.pbSearch)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
@@ -231,3 +231,4 @@ class Ui_Home(object):
         self.actionSo_2.setText(QtWidgets.QApplication.translate("Home", "&Ordem Serviço", None, -1))
         self.actionProduct_2.setText(QtWidgets.QApplication.translate("Home", "&Produto", None, -1))
         self.actionProvider_2.setText(QtWidgets.QApplication.translate("Home", "&Fornecedor", None, -1))
+
