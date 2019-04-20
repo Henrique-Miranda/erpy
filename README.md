@@ -9,6 +9,10 @@ PySide2<br>
 PySqlCipher3<br>
 SqlCipher https://www.zetetic.net/sqlcipher/open-source/<br>
 
+<b>Installation:</b><br>
+<code>git clone https://github.com/Henrique-Miranda/InfoCad.git</code><br>
+<code>pip3 install -r requirements.txt</code><br>
+<code>python main.py</code><br>
 <b>Features:</b><br>
 
 Optional encrypted sqlite3 database using SqlCipher. (Config database.py)<br>
