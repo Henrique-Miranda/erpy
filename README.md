@@ -3,6 +3,12 @@
 
 <h3>For small eletronics and smartphone repair companies</h3>
 
+<b>Features:</b><br>
+
+Optional encrypted sqlite3 database using SqlCipher. (Config database.py)<br>
+Modern QT GUI<br>
+Multiplataform.<br>
+
 <b>Requirements:</b><br>
 Python 3.7+<br>
 PySide2<br>
@@ -13,11 +19,6 @@ SqlCipher https://www.zetetic.net/sqlcipher/open-source/<br>
 <code>git clone https://github.com/Henrique-Miranda/InfoCad.git</code><br>
 <code>pip3 install -r requirements.txt</code><br>
 <code>python main.py</code><br>
-<b>Features:</b><br>
-
-Optional encrypted sqlite3 database using SqlCipher. (Config database.py)<br>
-Modern QT GUI<br>
-Multiplataform.<br>
 
 <b>Login:</b><br>
 User: admin<br>
