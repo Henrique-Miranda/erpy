@@ -16,6 +16,8 @@ PySqlCipher3<br>
 SqlCipher https://www.zetetic.net/sqlcipher/open-source/<br>
 
 <b>Installation:</b><br>
+Windows users download at: https://github.com/Henrique-Miranda/InfoCad/releases<br>
+Linux users:
 <code>git clone https://github.com/Henrique-Miranda/InfoCad.git</code><br>
 <code>cd InfoCad</code><br>
 <code>pip3 install -r requirements.txt</code><br>
