@@ -1,6 +1,6 @@
 import sys, os, sqlite3
 from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem
-from PySide2 import QtCore, Qt
+from PySide2 import QtCore
 from database import Database
 from login import Ui_Login
 from home import Ui_Home
