@@ -33,3 +33,23 @@ Password: admin<br>
 
  ![Home](https://raw.githubusercontent.com/Henrique-Miranda/InfoCad/master/Screenshots/home.png
  "Home")
+
+  <br>
+
+  ![Clients](https://raw.githubusercontent.com/Henrique-Miranda/InfoCad/master/Screenshots/clients.png
+  "Clients")
+
+  <br>
+
+  ![ServiceOrder](https://raw.githubusercontent.com/Henrique-Miranda/InfoCad/master/Screenshots/os.png
+  "ServiceOrder")
+
+  <br>
+
+  ![ServiceOrder](https://raw.githubusercontent.com/Henrique-Miranda/InfoCad/master/Screenshots/os2.png
+  "ServiceOrder")
+
+  <br>
+
+  ![ServiceOrder](https://raw.githubusercontent.com/Henrique-Miranda/InfoCad/master/Screenshots/os3.png
+  "ServiceOrder")
