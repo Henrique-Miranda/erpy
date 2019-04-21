@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'home.ui',
 # licensing of 'home.ui' applies.
 #
-# Created: Sun Apr 21 01:16:44 2019
+# Created: Sun Apr 21 01:45:59 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -147,8 +147,6 @@ class Ui_Home(object):
         self.menuNew.setObjectName("menuNew")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
-        self.menuExit = QtWidgets.QMenu(self.menubar)
-        self.menuExit.setObjectName("menuExit")
         Home.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(Home)
         self.statusbar.setObjectName("statusbar")
@@ -177,17 +175,19 @@ class Ui_Home(object):
         self.actionProvider_2.setObjectName("actionProvider_2")
         self.actionFuncionario = QtWidgets.QAction(Home)
         self.actionFuncionario.setObjectName("actionFuncionario")
+        self.actionSair = QtWidgets.QAction(Home)
+        self.actionSair.setObjectName("actionSair")
         self.menuNew.addAction(self.actionClient)
         self.menuNew.addAction(self.actionProduct)
         self.menuNew.addAction(self.actionProvider)
         self.menuNew.addAction(self.actionFuncionario)
         self.menuFile.addAction(self.menuNew.menuAction())
+        self.menuFile.addAction(self.actionSair)
         self.menuHelp.addAction(self.actionManual)
         self.menuHelp.addAction(self.actionSupport)
         self.menuHelp.addAction(self.actionAbout)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
-        self.menubar.addAction(self.menuExit.menuAction())
 
         self.retranslateUi(Home)
         QtCore.QMetaObject.connectSlotsByName(Home)
@@ -209,7 +209,6 @@ class Ui_Home(object):
         self.menuFile.setTitle(QtWidgets.QApplication.translate("Home", "Ar&quivo", None, -1))
         self.menuNew.setTitle(QtWidgets.QApplication.translate("Home", "&Novo", None, -1))
         self.menuHelp.setTitle(QtWidgets.QApplication.translate("Home", "A&juda", None, -1))
-        self.menuExit.setTitle(QtWidgets.QApplication.translate("Home", "Sair", None, -1))
         self.actionManual.setText(QtWidgets.QApplication.translate("Home", "&Manual", None, -1))
         self.actionSupport.setText(QtWidgets.QApplication.translate("Home", "&Suporte", None, -1))
         self.actionAbout.setText(QtWidgets.QApplication.translate("Home", "S&obre", None, -1))
@@ -222,4 +221,5 @@ class Ui_Home(object):
         self.actionProduct_2.setText(QtWidgets.QApplication.translate("Home", "&Produto", None, -1))
         self.actionProvider_2.setText(QtWidgets.QApplication.translate("Home", "&Fornecedor", None, -1))
         self.actionFuncionario.setText(QtWidgets.QApplication.translate("Home", "Funcionario", None, -1))
+        self.actionSair.setText(QtWidgets.QApplication.translate("Home", "Sair", None, -1))
 

@@ -336,6 +336,7 @@
      <addaction name="actionFuncionario"/>
     </widget>
     <addaction name="menuNew"/>
+    <addaction name="actionSair"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -345,14 +346,8 @@
     <addaction name="actionSupport"/>
     <addaction name="actionAbout"/>
    </widget>
-   <widget class="QMenu" name="menuExit">
-    <property name="title">
-     <string>Sair</string>
-    </property>
-   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
-   <addaction name="menuExit"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionManual">
@@ -413,6 +408,11 @@
   <action name="actionFuncionario">
    <property name="text">
     <string>Funcionario</string>
+   </property>
+  </action>
+  <action name="actionSair">
+   <property name="text">
+    <string>Sair</string>
    </property>
   </action>
  </widget>

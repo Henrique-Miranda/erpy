@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'sorder.ui',
 # licensing of 'sorder.ui' applies.
 #
-# Created: Sun Apr 21 01:09:47 2019
+# Created: Sun Apr 21 02:02:32 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -171,9 +171,13 @@ class Ui_SOrderEdit(object):
         self.rbM.setCheckable(True)
         self.rbM.setChecked(False)
         self.rbM.setObjectName("rbM")
+        self.buttonGroup = QtWidgets.QButtonGroup(SOrderEdit)
+        self.buttonGroup.setObjectName("buttonGroup")
+        self.buttonGroup.addButton(self.rbM)
         self.horizontalLayout.addWidget(self.rbM)
         self.rbF = QtWidgets.QRadioButton(self.groupBox)
         self.rbF.setObjectName("rbF")
+        self.buttonGroup.addButton(self.rbF)
         self.horizontalLayout.addWidget(self.rbF)
         self.lbCpfCnpj = QtWidgets.QLabel(self.groupBox)
         self.lbCpfCnpj.setObjectName("lbCpfCnpj")
@@ -643,21 +647,29 @@ class Ui_SOrderEdit(object):
         self.rbAnalysis = QtWidgets.QRadioButton(SOrderEdit)
         self.rbAnalysis.setChecked(True)
         self.rbAnalysis.setObjectName("rbAnalysis")
+        self.buttonGroup_2 = QtWidgets.QButtonGroup(SOrderEdit)
+        self.buttonGroup_2.setObjectName("buttonGroup_2")
+        self.buttonGroup_2.addButton(self.rbAnalysis)
         self.horizontalLayout_22.addWidget(self.rbAnalysis)
         self.rbBudget = QtWidgets.QRadioButton(SOrderEdit)
         self.rbBudget.setObjectName("rbBudget")
+        self.buttonGroup_2.addButton(self.rbBudget)
         self.horizontalLayout_22.addWidget(self.rbBudget)
         self.rbApproved = QtWidgets.QRadioButton(SOrderEdit)
         self.rbApproved.setObjectName("rbApproved")
+        self.buttonGroup_2.addButton(self.rbApproved)
         self.horizontalLayout_22.addWidget(self.rbApproved)
         self.rbRefused = QtWidgets.QRadioButton(SOrderEdit)
         self.rbRefused.setObjectName("rbRefused")
+        self.buttonGroup_2.addButton(self.rbRefused)
         self.horizontalLayout_22.addWidget(self.rbRefused)
         self.rbFixed = QtWidgets.QRadioButton(SOrderEdit)
         self.rbFixed.setObjectName("rbFixed")
+        self.buttonGroup_2.addButton(self.rbFixed)
         self.horizontalLayout_22.addWidget(self.rbFixed)
         self.rbDelivery = QtWidgets.QRadioButton(SOrderEdit)
         self.rbDelivery.setObjectName("rbDelivery")
+        self.buttonGroup_2.addButton(self.rbDelivery)
         self.horizontalLayout_22.addWidget(self.rbDelivery)
         self.verticalLayout.addLayout(self.horizontalLayout_22)
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
@@ -683,7 +695,7 @@ class Ui_SOrderEdit(object):
         self.verticalLayout.addLayout(self.horizontalLayout_9)
 
         self.retranslateUi(SOrderEdit)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QObject.connect(self.pbExit, QtCore.SIGNAL("clicked()"), SOrderEdit.reject)
         QtCore.QMetaObject.connectSlotsByName(SOrderEdit)
 

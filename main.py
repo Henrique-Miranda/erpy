@@ -47,6 +47,7 @@ class App(Ui_Login):
         self.home = Ui_Home()
         self.home.setupUi(self.Home)
         self.home.pbClient.clicked.connect(self.openCliEdit)
+        self.home.actionSair.triggered.connect(app.exit)
         self.home.actionClient.triggered.connect(self.openCliEdit)
         self.home.leSearch.returnPressed.connect(lambda: self.loadSearch(self.home.leSearch.text(), self.home.cbSearch.currentText()))
         self.home.pbSearch.clicked.connect(lambda: self.loadSearch(self.home.leSearch.text(), self.home.cbSearch.currentText()))
@@ -163,7 +164,8 @@ class App(Ui_Login):
             self.cliedit.dateTimeCad.setDateTime(QtCore.QDateTime.fromString(result[0][1], 'yyyy-MM-dd hh:mm:ss'))
             self.cliedit.dateTimeAlt.setEnabled(True)
             self.cliedit.dateTimeAlt.setDateTime(QtCore.QDateTime.fromString(result[0][2], 'yyyy-MM-dd hh:mm:ss'))
-            if result[0][4] == 'PF':
+            self.cliedit.buttonGroup.button(result[0][4]).setChecked(True)
+            if self.cliedit.buttonGroup.button(result[0][4]).text() == 'PF':
                 self.cliedit.radioButton.setChecked(True)
                 self.cliedit.leCpfCnpj.setMaxLength(14)
             else:
@@ -175,16 +177,9 @@ class App(Ui_Login):
                 self.cliedit.lbSex.hide()
                 self.cliedit.radioButton_2.setChecked(True)
                 self.cliedit.leCpfCnpj.setMaxLength(18)
-            if result[0][5] and not self.cliedit.checkBox.checkState():
-                self.cliedit.checkBox.setChecked(True)
-            elif not result[0][5] and self.cliedit.checkBox.checkState():
-                self.cliedit.checkBox.setChecked(False)
             self.cliedit.leName.setText(result[0][6])
             self.cliedit.deBirthFun.setDate(QtCore.QDate.fromString(result[0][7], 'yyyy-MM-dd'))
-            if result[0][8] == 'F':
-                self.cliedit.rbF.setChecked(True)
-            else:
-                self.cliedit.rbM.setChecked(True)
+            self.cliedit.buttonGroup_2.button(result[0][8]).setChecked(True)
             self.cliedit.leCpfCnpj.setText(result[0][9])
             self.cliedit.leRgIe.setText(result[0][10])
             self.cliedit.cbCell1.setCurrentText(result[0][11])
@@ -233,7 +228,7 @@ class App(Ui_Login):
                 email = self.cliedit.leMail.text().strip()
                 if self.cliedit.leCodCli.text():
                     sql = f"""UPDATE clients SET altdate = '{QtCore.QDateTime.currentDateTime().toString("yyyy-MM-dd hh:mm:ss")}', lastAlter={self.userId}, blocked = '{int(self.cliedit.checkBox.isChecked())}',
-                    name = '{name}', birthFun = '{birth}', sex = '{self.cliedit.buttonGroup_2.checkedButton().text()}', cpfcnpj='{cpfcnpj}', rgie = '{rgie}',
+                    name = '{name}', birthFun = '{birth}', sex = {self.cliedit.buttonGroup_2.checkedId()}, cpfcnpj='{cpfcnpj}', rgie = '{rgie}',
                     cell1op = '{self.cliedit.cbCell1.currentText()}', cell1 = '{self.cliedit.leCell1.text()}', cell2op = '{self.cliedit.cbCell2.currentText()}',
                     cell2 = '{self.cliedit.leCell2.text()}', tel = '{self.cliedit.leTel.text()}', email = '{email}', cep = '{self.cliedit.leCep.text()}',
                     adress = '{self.cliedit.leStreet.text()}', number = '{self.cliedit.leNumber.text()}', adress2 = '{self.cliedit.leComp.text()}',
@@ -246,9 +241,9 @@ class App(Ui_Login):
                     adress, number, adress2, district, city, state, contry)
                     VALUES ('{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}',
                     '{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}',
-                    {self.userId}, '{self.cliedit.buttonGroup.checkedButton().text()}',
+                    {self.userId}, {self.cliedit.buttonGroup.checkedId()},
                     '{int(self.cliedit.checkBox.isChecked())}', '{name}', '{birth}',
-                    '{self.cliedit.buttonGroup_2.checkedButton().text()}',
+                    {self.cliedit.buttonGroup_2.checkedId()},
                     '{cpfcnpj}', '{rgie}', '{self.cliedit.cbCell1.currentText()}',
                     '{self.cliedit.leCell1.text()}', '{self.cliedit.cbCell2.currentText() }', '{self.cliedit.leCell2.text()}',
                     '{self.cliedit.leTel.text()}', '{email}',
@@ -393,10 +388,7 @@ class App(Ui_Login):
                 print('Resultado: ', result)
                 self.sorder.leName.setText(result[0][0])
                 self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'yyyy-MM-dd'))
-                if result[0][2] == 'M':
-                    self.sorder.rbM.setChecked(True)
-                else:
-                    self.sorder.rbF.setChecked(True)
+                self.sorder.buttonGroup.button(result[0][2]).setChecked(True)
                 self.sorder.leCpfCnpj.setText(result[0][3])
                 self.sorder.leRgIe.setText(result[0][4])
                 self.sorder.cbCell1.setCurrentText(result[0][5])
@@ -447,7 +439,13 @@ class App(Ui_Login):
                 self.sorder.leServiceValue.setText(result[0][44])
                 self.sorder.leTotalValue.setText(result[0][45])
                 self.sorder.leObs2.setText(result[0][46])
-                self.sorder.lbStatus2.setText(result[0][47])
+                lbt = self.sorder.buttonGroup_2.button(result[0][47]).text()
+                if '&' in lbt:
+                    lbt = lbt.replace('&', '')
+                self.sorder.lbStatus2.setText(lbt)
+                self.sorder.buttonGroup_2.button(result[0][47]).setChecked(True)
+
+
             else:
                 sql = f"""SELECT name, birthFun, sex, cpfcnpj, rgie, cell1op, cell1, cell2op, cell2, tel, email, adress, number, adress2, cep, district, city, state, contry FROM clients WHERE id={idC}"""
                 print('SQL loadOS: ', sql)
@@ -456,10 +454,7 @@ class App(Ui_Login):
                 self.sorder.leCodCli.setText(str(idC))
                 self.sorder.leName.setText(result[0][0])
                 self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'yyyy-MM-dd'))
-                if result[0][2] == 'M':
-                    self.sorder.rbM.setChecked(True)
-                else:
-                    self.sorder.rbF.setChecked(True)
+                self.sorder.buttonGroup.button(result[0][2]).setChecked(True)
                 self.sorder.leCpfCnpj.setText(result[0][3])
                 self.sorder.leRgIe.setText(result[0][4])
                 self.sorder.cbCell1.setCurrentText(result[0][5])
@@ -504,7 +499,7 @@ class App(Ui_Login):
                 serviceValue = self.sorder.leServiceValue.text()
                 total = self.sorder.leTotalValue.text()
                 obs2 = self.sorder.leObs2.text()
-                status = self.sorder.lbStatus2.text()
+                status = self.sorder.buttonGroup_2.checkedId()
             except AssertionError as e:
                 msg = QMessageBox()
                 msg.setWindowTitle('Falha ao salvar.')
@@ -517,7 +512,7 @@ class App(Ui_Login):
                 sql = f"""UPDATE service_order SET altDate='{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}', lastAlter={self.userId},
                 deviceType='{type}', brand='{brand}', model='{model}', color='{color}', ns='{ns}', barCode='{br}', imei1='{imei1}', imei2='{imei2}',
                 acessories='{acessories}', deviceStatus='{deviceStatus}', defect='{defect}', obs1='{obs1}', defectFound='{defectFound}', serviceDone='{serviceDone}',
-                partTotalValue='{partsValue}', serviceValue='{serviceValue}', total='{total}', obs2='{obs2}', status='{status}' WHERE id={id}"""
+                partTotalValue='{partsValue}', serviceValue='{serviceValue}', total='{total}', obs2='{obs2}', status={status} WHERE id={id}"""
                 banco.queryDB(sql)
                 loadOs(id)
             else:
@@ -528,7 +523,7 @@ class App(Ui_Login):
                 datetime('now', 'localtime'), datetime('now', 'localtime'), {self.userId}, '{type}',
                 '{brand}', '{model}', '{color}', '{ns}', '{br}', '{imei1}', '{imei2}',
                 '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}',
-                '{serviceDone}', '{partsValue}', '{serviceValue}', '{total}', '{obs2}', '{status}')"""
+                '{serviceDone}', '{partsValue}', '{serviceValue}', '{total}', '{obs2}', {status})"""
                 print('SQL saveCli: ', sql)
                 lrid = banco.queryDB(sql)
                 self.openSO(lrid)
@@ -544,7 +539,7 @@ class App(Ui_Login):
         self.sorder.rbBudget.clicked.connect(lambda: self.sorder.lbStatus2.setText('Com orçamento'))
         self.sorder.rbApproved.clicked.connect(lambda: self.sorder.lbStatus2.setText('Aprovado'))
         self.sorder.rbRefused.clicked.connect(lambda: self.sorder.lbStatus2.setText('Recusado'))
-        self.sorder.rbFixed.clicked.connect(lambda: self.sorder.lbStatus2.setText('Cosertado'))
+        self.sorder.rbFixed.clicked.connect(lambda: self.sorder.lbStatus2.setText('Consertado'))
         self.sorder.rbDelivery.clicked.connect(lambda: self.sorder.lbStatus2.setText('Devolver'))
         self.SOrder.setModal(True)
         self.SOrder.show()

@@ -33,11 +33,11 @@ class Database(object):
             regdate TEXT NOT NULL,
             altdate TEXT NOT NULL,
             lastAlter INTEGER NOT NULL,
-            regType TEXT NOT NULL,
+            regType INTEGER NOT NULL,
             blocked INTEGER DEFAULT 0,
             name TEXT NOT NULL,
             birthFun TEXT NOT NULL,
-            sex TEXT NOT NULL,
+            sex INTEGER NOT NULL,
             cpfcnpj TEXT NOT NULL UNIQUE,
             rgie TEXT,
             cell1op TEXT,
@@ -89,7 +89,7 @@ class Database(object):
             serviceValue REAL,
             total REAL,
             obs2 TEXT,
-            status TEXT DEFAULT 'Em análise',
+            status INTEGER NOT NULL,
             FOREIGN KEY(idCli) REFERENCES clients(id) ON DELETE RESTRICT ON UPDATE CASCADE,
             FOREIGN KEY(lastAlter) REFERENCES users(id) ON DELETE RESTRICT ON UPDATE CASCADE);
             '''
