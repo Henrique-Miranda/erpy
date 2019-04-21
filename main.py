@@ -1,4 +1,4 @@
-import sys, os, sqlite3
+import sys, os, sqlite3, socket
 from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem
 from PySide2 import QtCore
 from database import Database
@@ -11,7 +11,12 @@ from pycpfcnpj import cpfcnpj as cpfcnpjv
 
 class App(Ui_Login):
     def __ini__(self):
-        pass
+        self.userId = None
+        self.userName = None
+        self.fullName = None
+        self.hostName = None
+        self.userIP = None
+        self.logged = False
     # Start login
     def loginCheck(self):
         banco = Database('database.db')
@@ -22,6 +27,12 @@ class App(Ui_Login):
         sql = f"SELECT * FROM users WHERE login='{user}' AND passwd='{passwd}'"
         result = banco.queryDB(sql)
         if result:
+            self.userId = result[0][0]
+            self.fullName = result[0][1]
+            self.user = result[0][2]
+            self.hostName = socket.gethostname()
+            self.userIP = socket.gethostbyname(self.hostName)
+            self.logged = True
             self.openHome()
             Login.hide()
         else:
@@ -38,6 +49,7 @@ class App(Ui_Login):
         self.home.pbClient.clicked.connect(self.openCliEdit)
         self.home.leSearch.returnPressed.connect(lambda: self.loadSearch(self.home.leSearch.text(), self.home.cbSearch.currentText()))
         self.home.pbSearch.clicked.connect(lambda: self.loadSearch(self.home.leSearch.text(), self.home.cbSearch.currentText()))
+        self.home.statusbar.showMessage(f'Usuário: {self.fullName}          IP: {self.userIP}          Hostname: {self.hostName}')
         self.Home.show()
     # End openHome
     # Start loadSearch
