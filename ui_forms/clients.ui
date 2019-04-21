@@ -737,6 +737,7 @@
   <tabstop>leCell1</tabstop>
   <tabstop>cbCell1</tabstop>
   <tabstop>leCell2</tabstop>
+  <tabstop>cbCell2</tabstop>
   <tabstop>leTel</tabstop>
   <tabstop>leMail</tabstop>
   <tabstop>leCep</tabstop>
@@ -748,6 +749,7 @@
   <tabstop>leState</tabstop>
   <tabstop>leContry</tabstop>
   <tabstop>pbSave</tabstop>
+  <tabstop>pbNew</tabstop>
   <tabstop>pbDelete</tabstop>
   <tabstop>pbExit</tabstop>
  </tabstops>

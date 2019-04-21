@@ -47,6 +47,7 @@ class App(Ui_Login):
         self.home = Ui_Home()
         self.home.setupUi(self.Home)
         self.home.pbClient.clicked.connect(self.openCliEdit)
+        self.home.actionClient.triggered.connect(self.openCliEdit)
         self.home.leSearch.returnPressed.connect(lambda: self.loadSearch(self.home.leSearch.text(), self.home.cbSearch.currentText()))
         self.home.pbSearch.clicked.connect(lambda: self.loadSearch(self.home.leSearch.text(), self.home.cbSearch.currentText()))
         self.home.tableWidget.setColumnCount(12)

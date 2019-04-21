@@ -27,37 +27,17 @@
       <item>
        <widget class="QPushButton" name="pbClient">
         <property name="text">
-         <string>Clientes</string>
+         <string>Novo Cliente</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../IMG/team.png</normaloff>../IMG/team.png</iconset>
+          <normaloff>IMG/team.png</normaloff>IMG/team.png</iconset>
         </property>
         <property name="iconSize">
          <size>
           <width>32</width>
           <height>32</height>
          </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pbSo">
-        <property name="text">
-         <string>Ordem de Serviço</string>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../IMG/documentation.png</normaloff>../IMG/documentation.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
-        </property>
-        <property name="checkable">
-         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -68,7 +48,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../IMG/store.png</normaloff>../IMG/store.png</iconset>
+          <normaloff>IMG/store.png</normaloff>IMG/store.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -79,13 +59,30 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pbFinancial">
+       <widget class="QPushButton" name="pbProvider">
         <property name="text">
-         <string>Financeiro</string>
+         <string>Fornecedores</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../IMG/diagram-1.png</normaloff>../IMG/diagram-1.png</iconset>
+          <normaloff>IMG/truck-1.png</normaloff>IMG/truck-1.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbTeam">
+        <property name="text">
+         <string>Equipe</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>IMG/employees.png</normaloff>IMG/employees.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -106,7 +103,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../IMG/website.png</normaloff>../IMG/website.png</iconset>
+          <normaloff>IMG/website.png</normaloff>IMG/website.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -117,13 +114,13 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pbTeam">
+       <widget class="QPushButton" name="pbFinancial">
         <property name="text">
-         <string>Equipe</string>
+         <string>Financeiro</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../IMG/employees.png</normaloff>../IMG/employees.png</iconset>
+          <normaloff>IMG/diagram-1.png</normaloff>IMG/diagram-1.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -134,19 +131,22 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pbProvider">
+       <widget class="QPushButton" name="pbSo">
         <property name="text">
-         <string>Fornecedores</string>
+         <string>Ordem de Serviço</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../IMG/truck-1.png</normaloff>../IMG/truck-1.png</iconset>
+          <normaloff>IMG/documentation.png</normaloff>IMG/documentation.png</iconset>
         </property>
         <property name="iconSize">
          <size>
           <width>32</width>
           <height>32</height>
          </size>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -157,7 +157,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../IMG/cogwheel.png</normaloff>../IMG/cogwheel.png</iconset>
+          <normaloff>IMG/cogwheel.png</normaloff>IMG/cogwheel.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -197,21 +197,13 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="lbSearch">
-          <property name="maximumSize">
-           <size>
-            <width>29</width>
-            <height>29</height>
-           </size>
-          </property>
+         <widget class="QPushButton" name="pbSearch">
           <property name="text">
            <string/>
           </property>
-          <property name="pixmap">
-           <pixmap>../IMG/magnifying-glass.png</pixmap>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
+          <property name="icon">
+           <iconset>
+            <normaloff>IMG/magnifying-glass.png</normaloff>IMG/magnifying-glass.png</iconset>
           </property>
          </widget>
         </item>
@@ -260,16 +252,6 @@
           <item>
            <property name="text">
             <string>Produto</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Fornecedor</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Funcionário</string>
            </property>
           </item>
          </widget>
@@ -349,21 +331,11 @@
       <string>&amp;Novo</string>
      </property>
      <addaction name="actionClient"/>
-     <addaction name="actionSo"/>
      <addaction name="actionProduct"/>
      <addaction name="actionProvider"/>
-    </widget>
-    <widget class="QMenu" name="menuPesquisar">
-     <property name="title">
-      <string>&amp;Pesquisar</string>
-     </property>
-     <addaction name="actionClient_2"/>
-     <addaction name="actionSo_2"/>
-     <addaction name="actionProduct_2"/>
-     <addaction name="actionProvider_2"/>
+     <addaction name="actionFuncionario"/>
     </widget>
     <addaction name="menuNew"/>
-    <addaction name="menuPesquisar"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -436,6 +408,11 @@
   <action name="actionProvider_2">
    <property name="text">
     <string>&amp;Fornecedor</string>
+   </property>
+  </action>
+  <action name="actionFuncionario">
+   <property name="text">
+    <string>Funcionario</string>
    </property>
   </action>
  </widget>

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'sorder.ui',
 # licensing of 'sorder.ui' applies.
 #
-# Created: Sat Apr 20 14:54:24 2019
+# Created: Sun Apr 21 01:09:47 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!

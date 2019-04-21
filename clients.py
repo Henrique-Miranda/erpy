@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'clients.ui',
 # licensing of 'clients.ui' applies.
 #
-# Created: Sat Apr 20 16:33:07 2019
+# Created: Sun Apr 21 01:09:41 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -341,7 +341,8 @@ class Ui_ClientEdit(object):
         ClientEdit.setTabOrder(self.leRgIe, self.leCell1)
         ClientEdit.setTabOrder(self.leCell1, self.cbCell1)
         ClientEdit.setTabOrder(self.cbCell1, self.leCell2)
-        ClientEdit.setTabOrder(self.leCell2, self.leTel)
+        ClientEdit.setTabOrder(self.leCell2, self.cbCell2)
+        ClientEdit.setTabOrder(self.cbCell2, self.leTel)
         ClientEdit.setTabOrder(self.leTel, self.leMail)
         ClientEdit.setTabOrder(self.leMail, self.leCep)
         ClientEdit.setTabOrder(self.leCep, self.leStreet)
@@ -352,7 +353,8 @@ class Ui_ClientEdit(object):
         ClientEdit.setTabOrder(self.leCity, self.leState)
         ClientEdit.setTabOrder(self.leState, self.leContry)
         ClientEdit.setTabOrder(self.leContry, self.pbSave)
-        ClientEdit.setTabOrder(self.pbSave, self.pbDelete)
+        ClientEdit.setTabOrder(self.pbSave, self.pbNew)
+        ClientEdit.setTabOrder(self.pbNew, self.pbDelete)
         ClientEdit.setTabOrder(self.pbDelete, self.pbExit)
 
     def retranslateUi(self, ClientEdit):
