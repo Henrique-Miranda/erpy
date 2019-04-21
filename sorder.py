@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'sorder.ui',
 # licensing of 'sorder.ui' applies.
 #
-# Created: Sun Apr 21 02:02:32 2019
+# Created: Sun Apr 21 05:05:18 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -168,14 +168,16 @@ class Ui_SOrderEdit(object):
         self.lbSex.setObjectName("lbSex")
         self.horizontalLayout.addWidget(self.lbSex)
         self.rbM = QtWidgets.QRadioButton(self.groupBox)
+        self.rbM.setEnabled(True)
         self.rbM.setCheckable(True)
-        self.rbM.setChecked(False)
+        self.rbM.setChecked(True)
         self.rbM.setObjectName("rbM")
         self.buttonGroup = QtWidgets.QButtonGroup(SOrderEdit)
         self.buttonGroup.setObjectName("buttonGroup")
         self.buttonGroup.addButton(self.rbM)
         self.horizontalLayout.addWidget(self.rbM)
         self.rbF = QtWidgets.QRadioButton(self.groupBox)
+        self.rbF.setCheckable(True)
         self.rbF.setObjectName("rbF")
         self.buttonGroup.addButton(self.rbF)
         self.horizontalLayout.addWidget(self.rbF)
@@ -695,7 +697,7 @@ class Ui_SOrderEdit(object):
         self.verticalLayout.addLayout(self.horizontalLayout_9)
 
         self.retranslateUi(SOrderEdit)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QObject.connect(self.pbExit, QtCore.SIGNAL("clicked()"), SOrderEdit.reject)
         QtCore.QMetaObject.connectSlotsByName(SOrderEdit)
 
