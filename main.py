@@ -376,6 +376,7 @@ class App(Ui_Login):
         self.cliedit.leTel.editingFinished.connect(lambda: mask(self.cliedit.leTel, '(00)0000-0000'))
         self.cliedit.leCep.textEdited.connect(lambda: mask(self.cliedit.leCep))
         self.cliedit.leCep.editingFinished.connect(lambda: mask(self.cliedit.leCep, '00000-000'))
+        self.CliEdit.setModal(True)
         self.CliEdit.show()
 
         if data:
@@ -545,6 +546,7 @@ class App(Ui_Login):
         self.sorder.rbRefused.clicked.connect(lambda: self.sorder.lbStatus2.setText('Recusado'))
         self.sorder.rbFixed.clicked.connect(lambda: self.sorder.lbStatus2.setText('Cosertado'))
         self.sorder.rbDelivery.clicked.connect(lambda: self.sorder.lbStatus2.setText('Devolver'))
+        self.SOrder.setModal(True)
         self.SOrder.show()
         loadOs(id)
     # End openSO
