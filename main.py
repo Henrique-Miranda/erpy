@@ -49,6 +49,10 @@ class App(Ui_Login):
         self.home.pbClient.clicked.connect(self.openCliEdit)
         self.home.leSearch.returnPressed.connect(lambda: self.loadSearch(self.home.leSearch.text(), self.home.cbSearch.currentText()))
         self.home.pbSearch.clicked.connect(lambda: self.loadSearch(self.home.leSearch.text(), self.home.cbSearch.currentText()))
+        self.home.tableWidget.setColumnCount(12)
+        self.home.tableWidget.setHorizontalHeaderLabels(['Código', 'Nome',
+        'Nascimento', 'Sexo', 'CPF/CNPJ', 'RG/IE', 'Operadora 1', 'Celular 1',
+        'Operadora 2', 'Celular 2', 'Telefone', 'E-Mail'])
         self.home.statusbar.showMessage(f'Usuário: {self.fullName}          IP: {self.userIP}          Hostname: {self.hostName}')
         self.Home.show()
     # End openHome
