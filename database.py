@@ -32,11 +32,12 @@ class Database(object):
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             regdate TEXT NOT NULL,
             altdate TEXT NOT NULL,
-            regType TEXT DEFAULT 'PF',
+            lastAlter INTEGER NOT NULL,
+            regType TEXT NOT NULL,
             blocked INTEGER DEFAULT 0,
             name TEXT NOT NULL,
             birthFun TEXT NOT NULL,
-            sex TEXT,
+            sex TEXT NOT NULL,
             cpfcnpj TEXT NOT NULL UNIQUE,
             rgie TEXT,
             cell1op TEXT,
@@ -51,8 +52,9 @@ class Database(object):
             adress2 TEXT,
             district TEXT,
             city TEXT,
-            state TEXT DEFAULT 'RJ',
-            contry TEXT DEFAULT 'Brasil');
+            state TEXT,
+            contry TEXT DEFAULT 'Brasil',
+            FOREIGN KEY(lastAlter) REFERENCES users(id) ON DELETE RESTRICT ON UPDATE CASCADE);
             '''
             )
 
@@ -64,7 +66,7 @@ class Database(object):
             entryDate TEXT NOT NULL,
             altDate TEXT NOT NULL,
             outDate TEXT,
-            lastAlter TEXT DEFAULT 'admin',
+            lastAlter INTEGER,
             deviceType TEXT NOT NULL,
             brand TEXT NOT NULL,
             model TEXT,
@@ -88,7 +90,8 @@ class Database(object):
             total REAL,
             obs2 TEXT,
             status TEXT DEFAULT 'Em análise',
-            FOREIGN KEY(idCli) REFERENCES clients(id) ON DELETE RESTRICT ON UPDATE CASCADE);
+            FOREIGN KEY(idCli) REFERENCES clients(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+            FOREIGN KEY(lastAlter) REFERENCES users(id) ON DELETE RESTRICT ON UPDATE CASCADE);
             '''
             )
 

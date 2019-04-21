@@ -69,18 +69,18 @@ class App(Ui_Login):
 
             for column, item in enumerate(result):
                 self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
-                self.home.tableWidget.setItem(column, 1, QTableWidgetItem(item[5]))
-                self.home.tableWidget.setItem(column, 2, QTableWidgetItem(f'{item[6][8:10]}/{item[6][5:7]}/{item[6][0:4]}'))
-                self.home.tableWidget.setItem(column, 3, QTableWidgetItem(item[7]))
-                self.home.tableWidget.setItem(column, 4, QTableWidgetItem(item[8]))
-                self.home.tableWidget.setItem(column, 5, QTableWidgetItem(item[9]))
-                self.home.tableWidget.setItem(column, 6, QTableWidgetItem(item[10]))
-                self.home.tableWidget.setItem(column, 7, QTableWidgetItem(item[11]))
-                self.home.tableWidget.setItem(column, 8, QTableWidgetItem(item[12]))
-                self.home.tableWidget.setItem(column, 9, QTableWidgetItem(item[13]))
-                self.home.tableWidget.setItem(column, 10, QTableWidgetItem(item[14]))
-                self.home.tableWidget.setItem(column, 11, QTableWidgetItem(item[15]))
-                self.home.tableWidget.setItem(column, 12, QTableWidgetItem(item[16]))
+                self.home.tableWidget.setItem(column, 1, QTableWidgetItem(item[6]))
+                self.home.tableWidget.setItem(column, 2, QTableWidgetItem(f'{item[7][8:10]}/{item[7][5:7]}/{item[7][0:4]}'))
+                self.home.tableWidget.setItem(column, 3, QTableWidgetItem(item[8]))
+                self.home.tableWidget.setItem(column, 4, QTableWidgetItem(item[9]))
+                self.home.tableWidget.setItem(column, 5, QTableWidgetItem(item[10]))
+                self.home.tableWidget.setItem(column, 6, QTableWidgetItem(item[11]))
+                self.home.tableWidget.setItem(column, 7, QTableWidgetItem(item[12]))
+                self.home.tableWidget.setItem(column, 8, QTableWidgetItem(item[13]))
+                self.home.tableWidget.setItem(column, 9, QTableWidgetItem(item[14]))
+                self.home.tableWidget.setItem(column, 10, QTableWidgetItem(item[15]))
+                self.home.tableWidget.setItem(column, 11, QTableWidgetItem(item[16]))
+                self.home.tableWidget.setItem(column, 12, QTableWidgetItem(item[17]))
 
         if local == 'Ordem de Serviço':
             try:
@@ -158,7 +158,7 @@ class App(Ui_Login):
             self.cliedit.dateTimeCad.setDateTime(QtCore.QDateTime.fromString(result[0][1], 'yyyy-MM-dd hh:mm:ss'))
             self.cliedit.dateTimeAlt.setEnabled(True)
             self.cliedit.dateTimeAlt.setDateTime(QtCore.QDateTime.fromString(result[0][2], 'yyyy-MM-dd hh:mm:ss'))
-            if result[0][3] == 'PF':
+            if result[0][4] == 'PF':
                 self.cliedit.radioButton.setChecked(True)
                 self.cliedit.leCpfCnpj.setMaxLength(14)
             else:
@@ -170,32 +170,32 @@ class App(Ui_Login):
                 self.cliedit.lbSex.hide()
                 self.cliedit.radioButton_2.setChecked(True)
                 self.cliedit.leCpfCnpj.setMaxLength(18)
-            if result[0][4] and not self.cliedit.checkBox.checkState():
+            if result[0][5] and not self.cliedit.checkBox.checkState():
                 self.cliedit.checkBox.setChecked(True)
-            elif not result[0][4] and self.cliedit.checkBox.checkState():
+            elif not result[0][5] and self.cliedit.checkBox.checkState():
                 self.cliedit.checkBox.setChecked(False)
-            self.cliedit.leName.setText(result[0][5])
-            self.cliedit.deBirthFun.setDate(QtCore.QDate.fromString(result[0][6], 'yyyy-MM-dd'))
-            if result[0][7] == 'F':
+            self.cliedit.leName.setText(result[0][6])
+            self.cliedit.deBirthFun.setDate(QtCore.QDate.fromString(result[0][7], 'yyyy-MM-dd'))
+            if result[0][8] == 'F':
                 self.cliedit.rbF.setChecked(True)
             else:
                 self.cliedit.rbM.setChecked(True)
-            self.cliedit.leCpfCnpj.setText(result[0][8])
-            self.cliedit.leRgIe.setText(result[0][9])
-            self.cliedit.cbCell1.setCurrentText(result[0][10])
-            self.cliedit.leCell1.setText(result[0][11])
-            self.cliedit.cbCell2.setCurrentText(result[0][12])
-            self.cliedit.leCell2.setText(result[0][13])
-            self.cliedit.leTel.setText(result[0][14])
-            self.cliedit.leMail.setText(result[0][15])
-            self.cliedit.leCep.setText(result[0][16])
-            self.cliedit.leStreet.setText(result[0][17])
-            self.cliedit.leNumber.setText(result[0][18])
-            self.cliedit.leComp.setText(result[0][19])
-            self.cliedit.leDistrict.setText(result[0][20])
-            self.cliedit.leCity.setText(result[0][21])
-            self.cliedit.leState.setText(result[0][22])
-            self.cliedit.leContry.setText(result[0][23])
+            self.cliedit.leCpfCnpj.setText(result[0][9])
+            self.cliedit.leRgIe.setText(result[0][10])
+            self.cliedit.cbCell1.setCurrentText(result[0][11])
+            self.cliedit.leCell1.setText(result[0][12])
+            self.cliedit.cbCell2.setCurrentText(result[0][13])
+            self.cliedit.leCell2.setText(result[0][14])
+            self.cliedit.leTel.setText(result[0][15])
+            self.cliedit.leMail.setText(result[0][16])
+            self.cliedit.leCep.setText(result[0][17])
+            self.cliedit.leStreet.setText(result[0][18])
+            self.cliedit.leNumber.setText(result[0][19])
+            self.cliedit.leComp.setText(result[0][20])
+            self.cliedit.leDistrict.setText(result[0][21])
+            self.cliedit.leCity.setText(result[0][22])
+            self.cliedit.leState.setText(result[0][23])
+            self.cliedit.leContry.setText(result[0][24])
             self.cliedit.leCodCli.setEnabled(True)
             self.cliedit.pbDelete.setEnabled(True)
             self.cliedit.pbNew.setEnabled(True)
@@ -227,7 +227,7 @@ class App(Ui_Login):
                 rgie = self.cliedit.leRgIe.text().strip()
                 email = self.cliedit.leMail.text().strip()
                 if self.cliedit.leCodCli.text():
-                    sql = f"""UPDATE clients SET altdate = '{QtCore.QDateTime.currentDateTime().toString("yyyy-MM-dd hh:mm:ss")}', blocked = '{int(self.cliedit.checkBox.isChecked())}',
+                    sql = f"""UPDATE clients SET altdate = '{QtCore.QDateTime.currentDateTime().toString("yyyy-MM-dd hh:mm:ss")}', lastAlter={self.userId}, blocked = '{int(self.cliedit.checkBox.isChecked())}',
                     name = '{name}', birthFun = '{birth}', sex = '{self.cliedit.buttonGroup_2.checkedButton().text()}', cpfcnpj='{cpfcnpj}', rgie = '{rgie}',
                     cell1op = '{self.cliedit.cbCell1.currentText()}', cell1 = '{self.cliedit.leCell1.text()}', cell2op = '{self.cliedit.cbCell2.currentText()}',
                     cell2 = '{self.cliedit.leCell2.text()}', tel = '{self.cliedit.leTel.text()}', email = '{email}', cep = '{self.cliedit.leCep.text()}',
@@ -236,12 +236,12 @@ class App(Ui_Login):
                     banco.queryDB(sql)
                     loadCli(int(self.cliedit.leCodCli.text()))
                 else:
-                    sql = f"""INSERT INTO clients (regdate, altdate, regtype, blocked,
+                    sql = f"""INSERT INTO clients (regdate, altdate, lastAlter, regtype, blocked,
                     name, birthFun, sex, cpfcnpj, rgie, cell1op, cell1, cell2op, cell2, tel, email, cep,
                     adress, number, adress2, district, city, state, contry)
                     VALUES ('{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}',
                     '{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}',
-                    '{self.cliedit.buttonGroup.checkedButton().text()}',
+                    {self.userId}, '{self.cliedit.buttonGroup.checkedButton().text()}',
                     '{int(self.cliedit.checkBox.isChecked())}', '{name}', '{birth}',
                     '{self.cliedit.buttonGroup_2.checkedButton().text()}',
                     '{cpfcnpj}', '{rgie}', '{self.cliedit.cbCell1.currentText()}',
@@ -508,18 +508,18 @@ class App(Ui_Login):
 
             if self.sorder.leOs.text():
                 id = int(self.sorder.leOs.text())
-                sql = f"""UPDATE service_order SET altDate='{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}',
+                sql = f"""UPDATE service_order SET altDate='{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}', lastAlter={self.userId},
                 deviceType='{type}', brand='{brand}', model='{model}', color='{color}', ns='{ns}', barCode='{br}', imei1='{imei1}', imei2='{imei2}',
                 acessories='{acessories}', deviceStatus='{deviceStatus}', defect='{defect}', obs1='{obs1}', defectFound='{defectFound}', serviceDone='{serviceDone}',
                 partTotalValue='{partsValue}', serviceValue='{serviceValue}', total='{total}', obs2='{obs2}', status='{status}' WHERE id={id}"""
                 banco.queryDB(sql)
                 loadOs(id)
             else:
-                sql = f"""INSERT INTO service_order (idCli, entryDate, altDate,
+                sql = f"""INSERT INTO service_order (idCli, entryDate, altDate, lastAlter,
                 deviceType, brand, model, color, ns, barCode, imei1, imei2,
                 acessories, deviceStatus, defect, obs1, defectFound, serviceDone,
                 partTotalValue, serviceValue, total, obs2, status) VALUES ({idCli},
-                datetime('now', 'localtime'), datetime('now', 'localtime'), '{type}',
+                datetime('now', 'localtime'), datetime('now', 'localtime'), {self.userId}, '{type}',
                 '{brand}', '{model}', '{color}', '{ns}', '{br}', '{imei1}', '{imei2}',
                 '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}',
                 '{serviceDone}', '{partsValue}', '{serviceValue}', '{total}', '{obs2}', '{status}')"""
