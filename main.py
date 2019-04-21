@@ -431,13 +431,20 @@ class App(Ui_Login):
                 self.sorder.teObs1.setText(result[0][36])
                 self.sorder.leDefectsFound.setText(result[0][37])
                 self.sorder.leServiceDone.setText(result[0][38])
+                self.sorder.twBudget.setRowCount(len(result))
+                self.sorder.twBudget.setColumnCount(4)
+                self.sorder.twBudget.setHorizontalHeaderLabels(['Descrição', 'Quantidade', 'Valor Un.', 'Subtotal'])
                 tpartDescription = result[0][39]
                 tpartAmount = result[0][40]
                 tpartValue = result[0][41]
-                tpartSubTotal = result[0][42]
-                self.sorder.lePartsValue.setText(result[0][43])
-                self.sorder.leServiceValue.setText(result[0][44])
-                self.sorder.leTotalValue.setText(result[0][45])
+                tpartSubTotal = tpartAmount * tpartValue if result[0][40] and result[0][41] else None
+                self.sorder.twBudget.setItem(0, 0, QTableWidgetItem(tpartDescription))
+                self.sorder.twBudget.setItem(1, 1, QTableWidgetItem(str(tpartAmount if tpartAmount else '')))
+                self.sorder.twBudget.setItem(2, 2, QTableWidgetItem(str(tpartValue if tpartValue else '')))
+                self.sorder.twBudget.setItem(3, 3, QTableWidgetItem(str(tpartSubTotal if tpartSubTotal else '')))
+                self.sorder.lePartsValue.setText(str(result[0][43]))
+                self.sorder.leServiceValue.setText(str(result[0][44]))
+                self.sorder.leTotalValue.setText(str(result[0][43] + result[0][44] if result[0][43] and result[0][44] else ''))
                 self.sorder.leObs2.setText(result[0][46])
                 lbt = self.sorder.buttonGroup_2.button(result[0][47]).text()
                 if '&' in lbt:
@@ -495,11 +502,27 @@ class App(Ui_Login):
                 obs1 = self.sorder.teObs1.toPlainText()
                 defectFound = self.sorder.leDefectsFound.text()
                 serviceDone = self.sorder.leServiceDone.text()
-                partsValue = self.sorder.lePartsValue.text()
                 serviceValue = self.sorder.leServiceValue.text()
                 total = self.sorder.leTotalValue.text()
                 obs2 = self.sorder.leObs2.text()
                 status = self.sorder.buttonGroup_2.checkedId()
+                cnumber = self.sorder.twBudget.columnCount()
+                rnumber = self.sorder.twBudget.rowCount()
+                tpartDescription = None
+                tpartAmount = None
+                tpartValue = None
+                tpartSubTotal = []
+                partsValue = 0
+                for r in range(rnumber):
+                    tpartDescription = self.sorder.twBudget.item(r, 0).text()
+                    tpartAmount = int(self.sorder.twBudget.item(r, 1).text())
+                    tpartValue = int(self.sorder.twBudget.item(r, 2).text())
+                    tpartSubTotal.append(tpartAmount * tpartValue)
+                    self.sorder.twBudget.item(r, 3).setText(str(tpartAmount * tpartValue))
+                for t in tpartSubTotal:
+                    partsValue = partsValue + t
+                self.sorder.lePartsValue.setText(str(partsValue))
+                #self.sorder.twBudget.setItem(1, 1, QTableWidgetItem(str(tpartAmount if tpartAmount else '')))
             except AssertionError as e:
                 msg = QMessageBox()
                 msg.setWindowTitle('Falha ao salvar.')
@@ -512,7 +535,7 @@ class App(Ui_Login):
                 sql = f"""UPDATE service_order SET altDate='{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}', lastAlter={self.userId},
                 deviceType='{type}', brand='{brand}', model='{model}', color='{color}', ns='{ns}', barCode='{br}', imei1='{imei1}', imei2='{imei2}',
                 acessories='{acessories}', deviceStatus='{deviceStatus}', defect='{defect}', obs1='{obs1}', defectFound='{defectFound}', serviceDone='{serviceDone}',
-                partTotalValue='{partsValue}', serviceValue='{serviceValue}', total='{total}', obs2='{obs2}', status={status} WHERE id={id}"""
+                partTotalValue={partsValue}, serviceValue={serviceValue}, total={total}, obs2='{obs2}', status={status} WHERE id={id}"""
                 banco.queryDB(sql)
                 loadOs(id)
             else:
@@ -523,7 +546,7 @@ class App(Ui_Login):
                 datetime('now', 'localtime'), datetime('now', 'localtime'), {self.userId}, '{type}',
                 '{brand}', '{model}', '{color}', '{ns}', '{br}', '{imei1}', '{imei2}',
                 '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}',
-                '{serviceDone}', '{partsValue}', '{serviceValue}', '{total}', '{obs2}', {status})"""
+                '{serviceDone}', {partsValue}, {serviceValue}, {total}, '{obs2}', {status})"""
                 print('SQL saveCli: ', sql)
                 lrid = banco.queryDB(sql)
                 self.openSO(lrid)
