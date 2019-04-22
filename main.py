@@ -434,10 +434,13 @@ class App(Ui_Login):
                 self.sorder.teObs1.setText(result[0][36])
                 self.sorder.leDefectsFound.setText(result[0][37])
                 self.sorder.leServiceDone.setText(result[0][38])
+                '''
+                # TODO: Set this data to work with table budget and stock
                 tpartDescription = result[0][39] if result[0][39] else None
                 tpartAmount = result[0][40] if result[0][40] else None
                 tpartValue = result[0][41] if result[0][41] else None
                 tpartSubTotal = tpartAmount * tpartValue if tpartAmount and tpartValue else None
+                '''
                 self.sorder.twBudget.setItem(0, 0, QTableWidgetItem(tpartDescription if tpartDescription else ''))
                 self.sorder.twBudget.setItem(1, 1, QTableWidgetItem(str(tpartAmount) if tpartAmount else ''))
                 self.sorder.twBudget.setItem(2, 2, QTableWidgetItem(str(tpartValue) if tpartValue else ''))
@@ -453,7 +456,7 @@ class App(Ui_Login):
                 self.sorder.buttonGroup_2.button(result[0][47]).setChecked(True)
                 self.sorder.pbPrint.setEnabled(True)
                 self.sorder.pbNewOs.setEnabled(True)
-                if lbt == 'Consertado':
+                if lbt in ('Consertado', 'Recusado', 'Devolver'):
                     self.sorder.pbDelivery.setEnabled(True)
                 else:
                     self.sorder.pbDelivery.setEnabled(False)
