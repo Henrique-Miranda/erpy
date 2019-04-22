@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'sorder.ui',
 # licensing of 'sorder.ui' applies.
 #
-# Created: Sun Apr 21 05:05:18 2019
+# Created: Mon Apr 22 02:12:18 2019
 #      by: pyside2-uic  running on PySide2 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_SOrderEdit(object):
     def setupUi(self, SOrderEdit):
         SOrderEdit.setObjectName("SOrderEdit")
-        SOrderEdit.resize(776, 686)
+        SOrderEdit.resize(811, 686)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("IMG/logoblack.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         SOrderEdit.setWindowIcon(icon)
@@ -591,6 +591,7 @@ class Ui_SOrderEdit(object):
         item = QtWidgets.QTableWidgetItem()
         self.twBudget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
+        item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsDragEnabled|QtCore.Qt.ItemIsDropEnabled|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
         self.twBudget.setItem(0, 3, item)
         self.twBudget.horizontalHeader().setStretchLastSection(True)
         self.twBudget.verticalHeader().setCascadingSectionResizes(False)
@@ -603,21 +604,29 @@ class Ui_SOrderEdit(object):
         self.lbPartsValue = QtWidgets.QLabel(self.tab_4)
         self.lbPartsValue.setObjectName("lbPartsValue")
         self.horizontalLayout_21.addWidget(self.lbPartsValue)
-        self.lePartsValue = QtWidgets.QLineEdit(self.tab_4)
-        self.lePartsValue.setObjectName("lePartsValue")
-        self.horizontalLayout_21.addWidget(self.lePartsValue)
+        self.spPartsValue = QtWidgets.QDoubleSpinBox(self.tab_4)
+        self.spPartsValue.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
+        self.spPartsValue.setSuffix("")
+        self.spPartsValue.setMaximum(1e+85)
+        self.spPartsValue.setObjectName("spPartsValue")
+        self.horizontalLayout_21.addWidget(self.spPartsValue)
         self.lbServiceValue = QtWidgets.QLabel(self.tab_4)
         self.lbServiceValue.setObjectName("lbServiceValue")
         self.horizontalLayout_21.addWidget(self.lbServiceValue)
-        self.leServiceValue = QtWidgets.QLineEdit(self.tab_4)
-        self.leServiceValue.setObjectName("leServiceValue")
-        self.horizontalLayout_21.addWidget(self.leServiceValue)
+        self.spServiceValue = QtWidgets.QDoubleSpinBox(self.tab_4)
+        self.spServiceValue.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
+        self.spServiceValue.setMaximum(1e+86)
+        self.spServiceValue.setObjectName("spServiceValue")
+        self.horizontalLayout_21.addWidget(self.spServiceValue)
         self.lbTotalValue = QtWidgets.QLabel(self.tab_4)
         self.lbTotalValue.setObjectName("lbTotalValue")
         self.horizontalLayout_21.addWidget(self.lbTotalValue)
-        self.leTotalValue = QtWidgets.QLineEdit(self.tab_4)
-        self.leTotalValue.setObjectName("leTotalValue")
-        self.horizontalLayout_21.addWidget(self.leTotalValue)
+        self.spTotalValue = QtWidgets.QDoubleSpinBox(self.tab_4)
+        self.spTotalValue.setReadOnly(True)
+        self.spTotalValue.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
+        self.spTotalValue.setMaximum(1e+114)
+        self.spTotalValue.setObjectName("spTotalValue")
+        self.horizontalLayout_21.addWidget(self.spTotalValue)
         self.verticalLayout_8.addLayout(self.horizontalLayout_21)
         self.horizontalLayout_20 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_20.setObjectName("horizontalLayout_20")
@@ -833,8 +842,11 @@ class Ui_SOrderEdit(object):
         self.twBudget.setSortingEnabled(False)
         self.twBudget.setSortingEnabled(__sortingEnabled)
         self.lbPartsValue.setText(QtWidgets.QApplication.translate("SOrderEdit", "Valor peças:", None, -1))
+        self.spPartsValue.setPrefix(QtWidgets.QApplication.translate("SOrderEdit", "R$", None, -1))
         self.lbServiceValue.setText(QtWidgets.QApplication.translate("SOrderEdit", "Valor serviço:", None, -1))
+        self.spServiceValue.setPrefix(QtWidgets.QApplication.translate("SOrderEdit", "R$", None, -1))
         self.lbTotalValue.setText(QtWidgets.QApplication.translate("SOrderEdit", "Total:", None, -1))
+        self.spTotalValue.setPrefix(QtWidgets.QApplication.translate("SOrderEdit", "R$", None, -1))
         self.lbObs2.setText(QtWidgets.QApplication.translate("SOrderEdit", "Observações:", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QtWidgets.QApplication.translate("SOrderEdit", "Orçamento", None, -1))
         self.lbTotalSpent.setText(QtWidgets.QApplication.translate("SOrderEdit", "Total gasto:", None, -1))

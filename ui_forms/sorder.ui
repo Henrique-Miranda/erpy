@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>776</width>
+    <width>811</width>
     <height>686</height>
    </rect>
   </property>
@@ -1447,6 +1447,9 @@
             <property name="text">
              <string/>
             </property>
+            <property name="flags">
+             <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+            </property>
            </item>
           </widget>
          </item>
@@ -1462,7 +1465,20 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lePartsValue"/>
+          <widget class="QDoubleSpinBox" name="spPartsValue">
+           <property name="buttonSymbols">
+            <enum>QAbstractSpinBox::NoButtons</enum>
+           </property>
+           <property name="prefix">
+            <string>R$</string>
+           </property>
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <double>10000000000000000146306952306748730309700429878646550592786107871697963642511482159104.000000000000000</double>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="lbServiceValue">
@@ -1472,7 +1488,17 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="leServiceValue"/>
+          <widget class="QDoubleSpinBox" name="spServiceValue">
+           <property name="buttonSymbols">
+            <enum>QAbstractSpinBox::NoButtons</enum>
+           </property>
+           <property name="prefix">
+            <string>R$</string>
+           </property>
+           <property name="maximum">
+            <double>100000000000000001463069523067487303097004298786465505927861078716979636425114821591040.000000000000000</double>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="lbTotalValue">
@@ -1482,7 +1508,20 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="leTotalValue"/>
+          <widget class="QDoubleSpinBox" name="spTotalValue">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="buttonSymbols">
+            <enum>QAbstractSpinBox::NoButtons</enum>
+           </property>
+           <property name="prefix">
+            <string>R$</string>
+           </property>
+           <property name="maximum">
+            <double>1000000000000000015559416129466843024268201396921061433369770580430833781164755703264985389915047447676206280867840.000000000000000</double>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -1679,7 +1718,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

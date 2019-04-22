@@ -1,4 +1,4 @@
-import sys, os, sqlite3, socket
+import sys, os, sqlite3, socket, locale
 from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem
 from PySide2 import QtCore
 from database import Database
@@ -389,11 +389,15 @@ class App(Ui_Login):
                 self.sorder.leName.setText(result[0][0])
                 self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'yyyy-MM-dd'))
                 self.sorder.buttonGroup.button(result[0][2]).setChecked(True)
+                self.sorder.rbM.setEnabled(False)
+                self.sorder.rbF.setEnabled(False)
                 self.sorder.leCpfCnpj.setText(result[0][3])
                 self.sorder.leRgIe.setText(result[0][4])
                 self.sorder.cbCell1.setCurrentText(result[0][5])
+                self.sorder.cbCell1.setDisabled(True)
                 self.sorder.leCell1.setText(result[0][6])
                 self.sorder.cbCell2.setCurrentText(result[0][7])
+                self.sorder.cbCell2.setDisabled(True)
                 self.sorder.leCell2.setText(result[0][8])
                 self.sorder.leTel.setText(result[0][9])
                 self.sorder.leEmail.setText(result[0][10])
@@ -405,7 +409,6 @@ class App(Ui_Login):
                 self.sorder.leCity.setText(result[0][16])
                 self.sorder.leState.setText(result[0][17])
                 self.sorder.leContry.setText(result[0][18])
-
                 self.sorder.leOs.setEnabled(True)
                 self.sorder.leOs.setText(str(result[0][19]))
                 self.sorder.leCodCli.setEnabled(True)
@@ -431,26 +434,29 @@ class App(Ui_Login):
                 self.sorder.teObs1.setText(result[0][36])
                 self.sorder.leDefectsFound.setText(result[0][37])
                 self.sorder.leServiceDone.setText(result[0][38])
-                self.sorder.twBudget.setRowCount(len(result))
-                self.sorder.twBudget.setColumnCount(4)
-                self.sorder.twBudget.setHorizontalHeaderLabels(['Descrição', 'Quantidade', 'Valor Un.', 'Subtotal'])
-                tpartDescription = result[0][39]
-                tpartAmount = result[0][40]
-                tpartValue = result[0][41]
-                tpartSubTotal = tpartAmount * tpartValue if result[0][40] and result[0][41] else None
-                self.sorder.twBudget.setItem(0, 0, QTableWidgetItem(tpartDescription))
-                self.sorder.twBudget.setItem(1, 1, QTableWidgetItem(str(tpartAmount if tpartAmount else '')))
-                self.sorder.twBudget.setItem(2, 2, QTableWidgetItem(str(tpartValue if tpartValue else '')))
-                self.sorder.twBudget.setItem(3, 3, QTableWidgetItem(str(tpartSubTotal if tpartSubTotal else '')))
-                self.sorder.lePartsValue.setText(str(result[0][43]))
-                self.sorder.leServiceValue.setText(str(result[0][44]))
-                self.sorder.leTotalValue.setText(str(result[0][43] + result[0][44] if result[0][43] and result[0][44] else ''))
+                tpartDescription = result[0][39] if result[0][39] else None
+                tpartAmount = result[0][40] if result[0][40] else None
+                tpartValue = result[0][41] if result[0][41] else None
+                tpartSubTotal = tpartAmount * tpartValue if tpartAmount and tpartValue else None
+                self.sorder.twBudget.setItem(0, 0, QTableWidgetItem(tpartDescription if tpartDescription else ''))
+                self.sorder.twBudget.setItem(1, 1, QTableWidgetItem(str(tpartAmount) if tpartAmount else ''))
+                self.sorder.twBudget.setItem(2, 2, QTableWidgetItem(str(tpartValue) if tpartValue else ''))
+                self.sorder.twBudget.setItem(3, 3, QTableWidgetItem(str(tpartSubTotal) if tpartSubTotal else ''))
+                self.sorder.spPartsValue.setValue(result[0][43])
+                self.sorder.spServiceValue.setValue(result[0][44])
+                self.sorder.spTotalValue.setValue(result[0][45])
                 self.sorder.leObs2.setText(result[0][46])
                 lbt = self.sorder.buttonGroup_2.button(result[0][47]).text()
                 if '&' in lbt:
                     lbt = lbt.replace('&', '')
                 self.sorder.lbStatus2.setText(lbt)
                 self.sorder.buttonGroup_2.button(result[0][47]).setChecked(True)
+                self.sorder.pbPrint.setEnabled(True)
+                self.sorder.pbNewOs.setEnabled(True)
+                if lbt == 'Consertado':
+                    self.sorder.pbDelivery.setEnabled(True)
+                else:
+                    self.sorder.pbDelivery.setEnabled(False)
 
 
             else:
@@ -502,27 +508,23 @@ class App(Ui_Login):
                 obs1 = self.sorder.teObs1.toPlainText()
                 defectFound = self.sorder.leDefectsFound.text()
                 serviceDone = self.sorder.leServiceDone.text()
-                serviceValue = self.sorder.leServiceValue.text()
-                total = self.sorder.leTotalValue.text()
                 obs2 = self.sorder.leObs2.text()
                 status = self.sorder.buttonGroup_2.checkedId()
                 cnumber = self.sorder.twBudget.columnCount()
                 rnumber = self.sorder.twBudget.rowCount()
+                try:
+                    partsValue = self.sorder.spPartsValue.value()
+                    serviceValue = self.sorder.spServiceValue.value()
+                    total = partsValue + serviceValue
+                except:
+                    partsValue = 0
+                    serviceValue = 0
+                    total = 0
                 tpartDescription = None
                 tpartAmount = None
                 tpartValue = None
-                tpartSubTotal = []
-                partsValue = 0
-                for r in range(rnumber):
-                    tpartDescription = self.sorder.twBudget.item(r, 0).text()
-                    tpartAmount = int(self.sorder.twBudget.item(r, 1).text())
-                    tpartValue = int(self.sorder.twBudget.item(r, 2).text())
-                    tpartSubTotal.append(tpartAmount * tpartValue)
-                    self.sorder.twBudget.item(r, 3).setText(str(tpartAmount * tpartValue))
-                for t in tpartSubTotal:
-                    partsValue = partsValue + t
-                self.sorder.lePartsValue.setText(str(partsValue))
-                #self.sorder.twBudget.setItem(1, 1, QTableWidgetItem(str(tpartAmount if tpartAmount else '')))
+                tpartSubTotal = None
+
             except AssertionError as e:
                 msg = QMessageBox()
                 msg.setWindowTitle('Falha ao salvar.')
@@ -570,6 +572,7 @@ class App(Ui_Login):
     # End openSO
 
 if __name__ == '__main__':
+    locale.setlocale(locale.LC_ALL, "")
     app = QApplication(sys.argv)
     Login = QDialog()
     w = App()

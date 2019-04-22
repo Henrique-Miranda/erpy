@@ -54,7 +54,7 @@ class Database(object):
             city TEXT,
             state TEXT,
             contry TEXT DEFAULT 'Brasil',
-            FOREIGN KEY(lastAlter) REFERENCES users(id) ON DELETE RESTRICT ON UPDATE CASCADE);
+            FOREIGN KEY(lastAlter) REFERENCES users(id) ON UPDATE CASCADE);
             '''
             )
 
@@ -90,8 +90,8 @@ class Database(object):
             total REAL,
             obs2 TEXT,
             status INTEGER NOT NULL,
-            FOREIGN KEY(idCli) REFERENCES clients(id) ON DELETE RESTRICT ON UPDATE CASCADE,
-            FOREIGN KEY(lastAlter) REFERENCES users(id) ON DELETE RESTRICT ON UPDATE CASCADE);
+            FOREIGN KEY(idCli) REFERENCES clients(id) ON UPDATE CASCADE,
+            FOREIGN KEY(lastAlter) REFERENCES users(id) ON UPDATE CASCADE);
             '''
             )
 
