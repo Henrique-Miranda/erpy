@@ -1,6 +1,7 @@
 import sys, os, sqlite3, socket, locale
-from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem
-from PySide2 import QtCore
+from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem, QFileDialog
+from PySide2 import QtCore, QtGui
+from PySide2.QtPrintSupport import QPrintDialog, QPrinter
 from database import Database
 from login import Ui_Login
 from home import Ui_Home
@@ -440,11 +441,11 @@ class App(Ui_Login):
                 tpartAmount = result[0][40] if result[0][40] else None
                 tpartValue = result[0][41] if result[0][41] else None
                 tpartSubTotal = tpartAmount * tpartValue if tpartAmount and tpartValue else None
-                '''
                 self.sorder.twBudget.setItem(0, 0, QTableWidgetItem(tpartDescription if tpartDescription else ''))
                 self.sorder.twBudget.setItem(1, 1, QTableWidgetItem(str(tpartAmount) if tpartAmount else ''))
                 self.sorder.twBudget.setItem(2, 2, QTableWidgetItem(str(tpartValue) if tpartValue else ''))
                 self.sorder.twBudget.setItem(3, 3, QTableWidgetItem(str(tpartSubTotal) if tpartSubTotal else ''))
+                '''
                 self.sorder.spPartsValue.setValue(result[0][43])
                 self.sorder.spServiceValue.setValue(result[0][44])
                 self.sorder.spTotalValue.setValue(result[0][45])
@@ -471,12 +472,16 @@ class App(Ui_Login):
                 self.sorder.leName.setText(result[0][0])
                 self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'yyyy-MM-dd'))
                 self.sorder.buttonGroup.button(result[0][2]).setChecked(True)
+                self.sorder.rbM.setEnabled(False)
+                self.sorder.rbF.setEnabled(False)
                 self.sorder.leCpfCnpj.setText(result[0][3])
                 self.sorder.leRgIe.setText(result[0][4])
                 self.sorder.cbCell1.setCurrentText(result[0][5])
                 self.sorder.leCell1.setText(result[0][6])
+                self.sorder.cbCell1.setDisabled(True)
                 self.sorder.cbCell2.setCurrentText(result[0][7])
                 self.sorder.leCell2.setText(result[0][8])
+                self.sorder.cbCell2.setDisabled(True)
                 self.sorder.leTel.setText(result[0][9])
                 self.sorder.leEmail.setText(result[0][10])
                 self.sorder.leAdress.setText(result[0][11])
@@ -556,6 +561,20 @@ class App(Ui_Login):
                 lrid = banco.queryDB(sql)
                 self.openSO(lrid)
 
+        def printSo():
+            PDF_PATH = '/OS_DIR/00001.pdf'
+            import platform
+            if platform.system() == 'Windows':
+                os.startfile(os.getcwd() + PDF_PATH, "print")
+            elif platform.system() == 'Linux':
+                '''
+                print(os.getcwd() + PDF_PATH)
+                os.system(f'lp -d {PDF_PATH}')
+                '''
+                import popplerqt5
+                d = popplerqt5.Poppler.Document.load('file.pdf')
+
+
         print('Abrindo SO edit')
         self.SOrder = QDialog()
         self.sorder = Ui_SOrderEdit()
@@ -569,6 +588,7 @@ class App(Ui_Login):
         self.sorder.rbRefused.clicked.connect(lambda: self.sorder.lbStatus2.setText('Recusado'))
         self.sorder.rbFixed.clicked.connect(lambda: self.sorder.lbStatus2.setText('Consertado'))
         self.sorder.rbDelivery.clicked.connect(lambda: self.sorder.lbStatus2.setText('Devolver'))
+        self.sorder.pbPrint.clicked.connect(printSo)
         self.SOrder.setModal(True)
         self.SOrder.show()
         loadOs(id)
