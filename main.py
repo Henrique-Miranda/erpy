@@ -77,7 +77,7 @@ class App(Ui_Login):
             for column, item in enumerate(result):
                 self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
                 self.home.tableWidget.setItem(column, 1, QTableWidgetItem(item[6]))
-                self.home.tableWidget.setItem(column, 2, QTableWidgetItem(f'{item[7][8:10]}/{item[7][5:7]}/{item[7][0:4]}'))
+                self.home.tableWidget.setItem(column, 2, QTableWidgetItem(item[7]))
                 self.home.tableWidget.setItem(column, 3, QTableWidgetItem(item[8]))
                 self.home.tableWidget.setItem(column, 4, QTableWidgetItem(item[9]))
                 self.home.tableWidget.setItem(column, 5, QTableWidgetItem(item[10]))
@@ -116,7 +116,7 @@ class App(Ui_Login):
             for column, item in enumerate(result):
                 self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
                 self.home.tableWidget.setItem(column, 1, QTableWidgetItem(item[1]))
-                self.home.tableWidget.setItem(column, 2, QTableWidgetItem(f'{item[2][8:10]}/{item[2][5:7]}/{item[2][0:4]} {item[2].split()[1]}'))
+                self.home.tableWidget.setItem(column, 2, QTableWidgetItem(item[2]))
                 self.home.tableWidget.setItem(column, 3, QTableWidgetItem(item[3]))
                 self.home.tableWidget.setItem(column, 4, QTableWidgetItem(item[4]))
                 self.home.tableWidget.setItem(column, 5, QTableWidgetItem(item[5]))
@@ -162,9 +162,9 @@ class App(Ui_Login):
             print('Resultado loadcli: ', result)
             self.cliedit.leCodCli.setText(str(result[0][0]))
             self.cliedit.dateTimeCad.setEnabled(True)
-            self.cliedit.dateTimeCad.setDateTime(QtCore.QDateTime.fromString(result[0][1], 'yyyy-MM-dd hh:mm:ss'))
+            self.cliedit.dateTimeCad.setDateTime(QtCore.QDateTime.fromString(result[0][1], 'dd/MM/yyyy hh:mm:ss'))
             self.cliedit.dateTimeAlt.setEnabled(True)
-            self.cliedit.dateTimeAlt.setDateTime(QtCore.QDateTime.fromString(result[0][2], 'yyyy-MM-dd hh:mm:ss'))
+            self.cliedit.dateTimeAlt.setDateTime(QtCore.QDateTime.fromString(result[0][2], 'dd/MM/yyyy hh:mm:ss'))
             self.cliedit.buttonGroup.button(result[0][4]).setChecked(True)
             if self.cliedit.buttonGroup.button(result[0][4]).text() == 'PF':
                 self.cliedit.radioButton.setChecked(True)
@@ -179,7 +179,7 @@ class App(Ui_Login):
                 self.cliedit.radioButton_2.setChecked(True)
                 self.cliedit.leCpfCnpj.setMaxLength(18)
             self.cliedit.leName.setText(result[0][6])
-            self.cliedit.deBirthFun.setDate(QtCore.QDate.fromString(result[0][7], 'yyyy-MM-dd'))
+            self.cliedit.deBirthFun.setDate(QtCore.QDate.fromString(result[0][7], 'dd/MM/yyyy'))
             self.cliedit.buttonGroup_2.button(result[0][8]).setChecked(True)
             self.cliedit.leCpfCnpj.setText(result[0][9])
             self.cliedit.leRgIe.setText(result[0][10])
@@ -219,8 +219,8 @@ class App(Ui_Login):
                 banco = Database('database.db')
                 name = self.cliedit.leName.text().title()
                 assert name, 'Digite o nome do cliente!'
-                birth = self.cliedit.deBirthFun.date().toString('yyyy-MM-dd')
-                idade = int(QtCore.QDate.currentDate().toString('yyyy-MM-dd')[0:4]) - int(birth[0:4])
+                birth = self.cliedit.deBirthFun.date().toString('dd/MM/yyyy')
+                idade = int(QtCore.QDate.currentDate().toString('dd/MM/yyyy')[6:10]) - int(birth[6:10])
                 if self.cliedit.buttonGroup.checkedButton() == 'PF':
                     assert idade >= 18, 'Este cliente tem menos de 18 anos!'
                 cpfcnpj = self.cliedit.leCpfCnpj.text().strip()
@@ -228,7 +228,7 @@ class App(Ui_Login):
                 rgie = self.cliedit.leRgIe.text().strip()
                 email = self.cliedit.leMail.text().strip()
                 if self.cliedit.leCodCli.text():
-                    sql = f"""UPDATE clients SET altdate = '{QtCore.QDateTime.currentDateTime().toString("yyyy-MM-dd hh:mm:ss")}', lastAlter={self.userId}, blocked = '{int(self.cliedit.checkBox.isChecked())}',
+                    sql = f"""UPDATE clients SET altdate = '{QtCore.QDateTime.currentDateTime().toString("dd/MM/yyyy hh:mm:ss")}', lastAlter={self.userId}, blocked = '{int(self.cliedit.checkBox.isChecked())}',
                     name = '{name}', birthFun = '{birth}', sex = {self.cliedit.buttonGroup_2.checkedId()}, cpfcnpj='{cpfcnpj}', rgie = '{rgie}',
                     cell1op = '{self.cliedit.cbCell1.currentText()}', cell1 = '{self.cliedit.leCell1.text()}', cell2op = '{self.cliedit.cbCell2.currentText()}',
                     cell2 = '{self.cliedit.leCell2.text()}', tel = '{self.cliedit.leTel.text()}', email = '{email}', cep = '{self.cliedit.leCep.text()}',
@@ -240,8 +240,8 @@ class App(Ui_Login):
                     sql = f"""INSERT INTO clients (regdate, altdate, lastAlter, regtype, blocked,
                     name, birthFun, sex, cpfcnpj, rgie, cell1op, cell1, cell2op, cell2, tel, email, cep,
                     adress, number, adress2, district, city, state, contry)
-                    VALUES ('{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}',
-                    '{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}',
+                    VALUES ('{QtCore.QDateTime.currentDateTime().toString('dd/MM/yyyy hh:mm:ss')}',
+                    '{QtCore.QDateTime.currentDateTime().toString('dd/MM/yyyy hh:mm:ss')}',
                     {self.userId}, {self.cliedit.buttonGroup.checkedId()},
                     '{int(self.cliedit.checkBox.isChecked())}', '{name}', '{birth}',
                     {self.cliedit.buttonGroup_2.checkedId()},
@@ -388,7 +388,7 @@ class App(Ui_Login):
                 result = banco.queryDB(sql)
                 print('Resultado: ', result)
                 self.sorder.leName.setText(result[0][0])
-                self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'yyyy-MM-dd'))
+                self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'dd/MM/yyyy'))
                 self.sorder.buttonGroup.button(result[0][2]).setChecked(True)
                 self.sorder.rbM.setEnabled(False)
                 self.sorder.rbF.setEnabled(False)
@@ -415,12 +415,12 @@ class App(Ui_Login):
                 self.sorder.leCodCli.setEnabled(True)
                 self.sorder.leCodCli.setText(str(result[0][20]))
                 self.sorder.dtEntryDate.setEnabled(True)
-                self.sorder.dtEntryDate.setDateTime(QtCore.QDateTime.fromString(result[0][21], 'yyyy-MM-dd hh:mm:ss'))
+                self.sorder.dtEntryDate.setDateTime(QtCore.QDateTime.fromString(result[0][21], 'dd/MM/yyyy hh:mm:ss'))
                 self.sorder.dtAltDate.setEnabled(True)
-                self.sorder.dtAltDate.setDateTime(QtCore.QDateTime.fromString(result[0][22], 'yyyy-MM-dd hh:mm:ss'))
+                self.sorder.dtAltDate.setDateTime(QtCore.QDateTime.fromString(result[0][22], 'dd/MM/yyyy hh:mm:ss'))
                 if result[0][23]:
                     self.sorder.dtOutDate.setEnabled(True)
-                    self.sorder.dtOutDate.setDateTime(QtCore.QDateTime.fromString(result[0][23], 'yyyy-MM-dd hh:mm:ss'))
+                    self.sorder.dtOutDate.setDateTime(QtCore.QDateTime.fromString(result[0][23], 'dd/MM/yyyy hh:mm:ss'))
                 self.sorder.cbType.setCurrentText(result[0][25])
                 self.sorder.cbBrand.setCurrentText(result[0][26])
                 self.sorder.leModel.setText(result[0][27])
@@ -470,7 +470,7 @@ class App(Ui_Login):
                 print('Resultado: ', result)
                 self.sorder.leCodCli.setText(str(idC))
                 self.sorder.leName.setText(result[0][0])
-                self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'yyyy-MM-dd'))
+                self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'dd/MM/yyyy'))
                 self.sorder.buttonGroup.button(result[0][2]).setChecked(True)
                 self.sorder.rbM.setEnabled(False)
                 self.sorder.rbF.setEnabled(False)
@@ -542,7 +542,7 @@ class App(Ui_Login):
 
             if self.sorder.leOs.text():
                 id = int(self.sorder.leOs.text())
-                sql = f"""UPDATE service_order SET altDate='{QtCore.QDateTime.currentDateTime().toString('yyyy-MM-dd hh:mm:ss')}', lastAlter={self.userId},
+                sql = f"""UPDATE service_order SET altDate='{QtCore.QDateTime.currentDateTime().toString('dd/MM/yyyy hh:mm:ss')}', lastAlter={self.userId},
                 deviceType='{type}', brand='{brand}', model='{model}', color='{color}', ns='{ns}', barCode='{br}', imei1='{imei1}', imei2='{imei2}',
                 acessories='{acessories}', deviceStatus='{deviceStatus}', defect='{defect}', obs1='{obs1}', defectFound='{defectFound}', serviceDone='{serviceDone}',
                 partTotalValue={partsValue}, serviceValue={serviceValue}, total={total}, obs2='{obs2}', status={status} WHERE id={id}"""
@@ -553,7 +553,7 @@ class App(Ui_Login):
                 deviceType, brand, model, color, ns, barCode, imei1, imei2,
                 acessories, deviceStatus, defect, obs1, defectFound, serviceDone,
                 partTotalValue, serviceValue, total, obs2, status) VALUES ({idCli},
-                datetime('now', 'localtime'), datetime('now', 'localtime'), {self.userId}, '{type}',
+                '{QtCore.QDateTime.currentDateTime().toString('dd/MM/yyyy hh:mm:ss')}', '{QtCore.QDateTime.currentDateTime().toString('dd/MM/yyyy hh:mm:ss')}', {self.userId}, '{type}',
                 '{brand}', '{model}', '{color}', '{ns}', '{br}', '{imei1}', '{imei2}',
                 '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}',
                 '{serviceDone}', {partsValue}, {serviceValue}, {total}, '{obs2}', {status})"""
@@ -561,18 +561,21 @@ class App(Ui_Login):
                 lrid = banco.queryDB(sql)
                 self.openSO(lrid)
 
-        def printSo():
-            PDF_PATH = '/OS_DIR/00001.pdf'
-            import platform
-            if platform.system() == 'Windows':
-                os.startfile(os.getcwd() + PDF_PATH, "print")
-            elif platform.system() == 'Linux':
-                '''
-                print(os.getcwd() + PDF_PATH)
-                os.system(f'lp -d {PDF_PATH}')
-                '''
-                import popplerqt5
-                d = popplerqt5.Poppler.Document.load('file.pdf')
+        def printSo(id):
+            from exportPDF import makePDF
+            makePDF(1, id, '58mm')
+            PDF_PATH = f'{os.getcwd()}/OS_DIR/os{id}.pdf'
+            try:
+                import platform
+                if platform.system() == 'Windows':
+                    os.system(f'start {PDF_PATH}')
+                elif platform.system() == 'Linux':
+                    os.system(f'xdg-open {PDF_PATH}')
+                else:
+                    raise Exception('Seu sistema operacional não é suportado.')
+            except:
+                import webbrowser
+                webbrowser.open(PDF_PATH)
 
 
         print('Abrindo SO edit')
@@ -588,7 +591,7 @@ class App(Ui_Login):
         self.sorder.rbRefused.clicked.connect(lambda: self.sorder.lbStatus2.setText('Recusado'))
         self.sorder.rbFixed.clicked.connect(lambda: self.sorder.lbStatus2.setText('Consertado'))
         self.sorder.rbDelivery.clicked.connect(lambda: self.sorder.lbStatus2.setText('Devolver'))
-        self.sorder.pbPrint.clicked.connect(printSo)
+        self.sorder.pbPrint.clicked.connect(lambda: printSo(id))
         self.SOrder.setModal(True)
         self.SOrder.show()
         loadOs(id)
