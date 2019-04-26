@@ -130,7 +130,7 @@ class Database(object):
         self.cursor.execute(
             '''
             INSERT INTO company (logo, name, slogan, tel, cell1, cell2, email, site, cep, adress, number, adress2, district, city, state)
-            VALUES ('/home/alset/Infocad/IMG/logoblack.png', 'HL INFORMÁTICA', 'Assistência Técnica', '(21) 2617-4353', '(21) 98584-5457', '(21) 98584-5417', 'contato@hlinformatica.com', 'www.hlinformatica.com', '24753-660', 'Rua Manuel Gonçalves do Monte', '39', 'Loja 2', 'Rio do Ouro', 'São Gonçalo', 'Rio de Janeiro')
+            VALUES ('/home/alset/Hotep/IMG/logoblack.png', 'HL INFORMÁTICA', 'Assistência Técnica', '(21) 2617-4353', '(21) 98584-5457', '(21) 98584-5417', 'contato@hlinformatica.com', 'www.hlinformatica.com', '24753-660', 'Rua Manuel Gonçalves do Monte', '39', 'Loja 2', 'Rio do Ouro', 'São Gonçalo', 'Rio de Janeiro')
             '''
         )
         self.conn.commit()
