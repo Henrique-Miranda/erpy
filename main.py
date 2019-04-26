@@ -1,7 +1,6 @@
-import sys, os, sqlite3, socket, locale
-from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem, QFileDialog
-from PySide2 import QtCore, QtGui
-from PySide2.QtPrintSupport import QPrintDialog, QPrinter
+import sys, os, sqlite3, socket
+from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem
+from PySide2 import QtCore
 from database import Database
 from login import Ui_Login
 from home import Ui_Home
@@ -598,7 +597,6 @@ class App(Ui_Login):
     # End openSO
 
 if __name__ == '__main__':
-    locale.setlocale(locale.LC_ALL, "")
     app = QApplication(sys.argv)
     Login = QDialog()
     w = App()
