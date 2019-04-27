@@ -1,8 +1,6 @@
 # ERPY - Open Source ERP
 # Clients and Service Order manager.
 
-<h3>For small eletronics and smartphone repair companies</h3>
-
 <b>Features:</b><br>
 
 Optional encrypted sqlite3 database using SqlCipher. (Config database.py)<br>
