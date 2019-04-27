@@ -1,4 +1,4 @@
-import time
+import time, os
 from database import Database
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib.pagesizes import A4
@@ -21,7 +21,7 @@ def makePDF(compId, osId, paper):
     # END Company info
 
     # OS info
-    result = banco.queryDB(f'SELECT clients.name, entryDate, clients.adress, clients.number,clients.adress2, clients.district, clients.city, clients.state, clients.tel, clients.cell1, clients.cell2, deviceType, brand, model, color, acessories, deviceStatus, defect, obs1 FROM service_order INNER JOIN clients ON clients.id=service_order.idCli WHERE service_order.id={osId}')
+    result = banco.queryDB(f'SELECT clients.name, entryDate, clients.adress, clients.number,clients.adress2, clients.district, clients.city, clients.state, clients.tel, clients.cell1, clients.cell2, deviceType, brand, model, color, acessories, deviceStatus, defect, obs1, status FROM service_order INNER JOIN clients ON clients.id=service_order.idCli WHERE service_order.id={osId}')
     print('RES: ', result)
     osNumber = osId
     cliName = result[0][0]
@@ -36,6 +36,7 @@ def makePDF(compId, osId, paper):
     deviceStatus = result[0][16]
     defect = result[0][17]
     obs = result[0][18]
+    status = result[0][19]
     printDate = time.strftime("%d/%m/%Y %H:%M:%S")
     warrantyTerms = [
     'Ao deixar seu equipamento retire o chip e cartão de memória, não nos responsabilizamos por estes itens.',
@@ -44,7 +45,6 @@ def makePDF(compId, osId, paper):
     # END OS info
 
     def docA4():
-        import os
         fileName = f'{os.getcwd()}/OS_DIR/os{osNumber}.pdf'
         doc = SimpleDocTemplate(fileName ,pagesize=A4, rightMargin=72, leftMargin=72, topMargin=30, bottomMargin=18)
         Story=[]
@@ -71,27 +71,20 @@ def makePDF(compId, osId, paper):
         Story.append(Paragraph(ptext, style["center"]))
         Story.append(Spacer(1, 12))
         # END HEAD
-
-        ptext = f"-------------------------------------------------------------"
-        Story.append(Paragraph(ptext, style["center"]))
-        Story.append(Spacer(1, 12))
-
         # OS DATA
+        trace = f"{'-'*109}"
+        Story.append(Paragraph(trace, style["center"]))
+        Story.append(Spacer(1, 12))
         style.add(ParagraphStyle(name='left', fontSize=12, spaceAfter=3, alignment=TA_LEFT))
         ptext = f"<b>COMPROVANTE DE ENTRADA OS Nº</b>{osNumber}"
         Story.append(Paragraph(ptext, style["center"]))
         Story.append(Spacer(1, 12))
-        ptext = f"-------------------------------------------------------------"
-        Story.append(Paragraph(ptext, style["center"]))
+        Story.append(Paragraph(trace, style["center"]))
         Story.append(Spacer(1, 12))
         ptext = f"<b>Nome:</b> {cliName}"
         Story.append(Paragraph(ptext, style["left"]))
         ptext = f"<b>Endereço:</b> {adress}"
         Story.append(Paragraph(ptext, style["left"]))
-        '''
-        ptext = f"<b>Complemento:</b> {adress2}"
-        Story.append(Paragraph(ptext, style["left"]))
-        '''
         ptext = f"<b>Tel.:</b> { tel}"
         Story.append(Paragraph(ptext, style["left"]))
         ptext = f"<b>Equipamento:</b> {device}"
@@ -111,6 +104,8 @@ def makePDF(compId, osId, paper):
         ptext = f"<b>Observações:</b> {obs}"
         Story.append(Paragraph(ptext, style["left"]))
         ptext = f"<b>Data de Entrada:</b> {entryDate}"
+        Story.append(Paragraph(ptext, style["left"]))
+        ptext = f"<b>Status atual:</b> {status}"
         Story.append(Paragraph(ptext, style["left"]))
         Story.append(Spacer(1, 12))
         # END OS DATA
@@ -147,7 +142,6 @@ def makePDF(compId, osId, paper):
         doc.build(Story)
 
     def doc58mm():
-        import os
         fileName = f'{os.getcwd()}/OS_DIR/os{osNumber}.pdf'
         pagesize=(57.86*mm, 209.9*mm)
         doc = SimpleDocTemplate(fileName ,pagesize=pagesize, rightMargin=5, leftMargin=10, topMargin=5, bottomMargin=5)
@@ -252,6 +246,9 @@ def makePDF(compId, osId, paper):
 
     def doc80mm():
         pass
+
+    if not 'OS_DIR' in os.listdir():
+        os.mkdir('OS_DIR')
 
     if paper == 'A4':
         docA4()

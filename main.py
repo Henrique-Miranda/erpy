@@ -1,5 +1,5 @@
 import sys, os, sqlite3, socket
-from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem
+from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow, QDialog, QTableWidgetItem, QHeaderView
 from PySide2 import QtCore
 from database import Database
 from login import Ui_Login
@@ -72,6 +72,8 @@ class App(Ui_Login):
             self.home.tableWidget.setHorizontalHeaderLabels(['Código', 'Nome',
             'Nascimento', 'Sexo', 'CPF/CNPJ', 'RG/IE', 'Operadora 1', 'Celular 1',
             'Operadora 2', 'Celular 2', 'Telefone', 'E-Mail'])
+            header = self.home.tableWidget.horizontalHeader()
+            header.setSectionResizeMode(QHeaderView.ResizeToContents)
 
             for column, item in enumerate(result):
                 self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
@@ -111,6 +113,8 @@ class App(Ui_Login):
             self.home.tableWidget.setHorizontalHeaderLabels(['OS', 'Cliente',
             'Data de entrada', 'CPF/CNPJ', 'Aparelho', 'Marca', 'Modelo', 'Cor',
             'Operadora 1', 'Celular 1', 'Operadora 2', 'Celular 2', 'Telefone'])
+            header = self.home.tableWidget.horizontalHeader()
+            header.setSectionResizeMode(QHeaderView.ResizeToContents)
 
             for column, item in enumerate(result):
                 self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
@@ -431,32 +435,18 @@ class App(Ui_Login):
                 self.sorder.leAcessories.setText(result[0][33])
                 self.sorder.leDeviceStatus.setText(result[0][34])
                 self.sorder.leDefect.setText(result[0][35])
-                self.sorder.teObs1.setText(result[0][36])
+                self.sorder.leObs1.setText(result[0][36])
                 self.sorder.leDefectsFound.setText(result[0][37])
                 self.sorder.leServiceDone.setText(result[0][38])
-                '''
-                # TODO: Set this data to work with table budget and stock
-                tpartDescription = result[0][39] if result[0][39] else None
-                tpartAmount = result[0][40] if result[0][40] else None
-                tpartValue = result[0][41] if result[0][41] else None
-                tpartSubTotal = tpartAmount * tpartValue if tpartAmount and tpartValue else None
-                self.sorder.twBudget.setItem(0, 0, QTableWidgetItem(tpartDescription if tpartDescription else ''))
-                self.sorder.twBudget.setItem(1, 1, QTableWidgetItem(str(tpartAmount) if tpartAmount else ''))
-                self.sorder.twBudget.setItem(2, 2, QTableWidgetItem(str(tpartValue) if tpartValue else ''))
-                self.sorder.twBudget.setItem(3, 3, QTableWidgetItem(str(tpartSubTotal) if tpartSubTotal else ''))
-                '''
-                self.sorder.spPartsValue.setValue(result[0][43])
-                self.sorder.spServiceValue.setValue(result[0][44])
-                self.sorder.spTotalValue.setValue(result[0][45])
-                self.sorder.leObs2.setText(result[0][46])
-                lbt = self.sorder.buttonGroup_2.button(result[0][47]).text()
-                if '&' in lbt:
-                    lbt = lbt.replace('&', '')
-                self.sorder.lbStatus2.setText(lbt)
-                self.sorder.buttonGroup_2.button(result[0][47]).setChecked(True)
+                self.sorder.spPartsValue.setValue(result[0][39])
+                self.sorder.spServiceValue.setValue(result[0][40])
+                self.sorder.spTotalValue.setValue(result[0][41])
+                self.sorder.leObs2.setText(result[0][42])
+                self.sorder.lbStatus2.setText(result[0][43])
+                self.sorder.cbStatus.setCurrentText(result[0][43])
                 self.sorder.pbPrint.setEnabled(True)
                 self.sorder.pbNewOs.setEnabled(True)
-                if lbt in ('Consertado', 'Recusado', 'Devolver'):
+                if self.sorder.cbStatus.currentText() in ('Consertado', 'Orçamento reprovado', 'Sem peça de reposição', 'Defeito não encontrado'):
                     self.sorder.pbDelivery.setEnabled(True)
                 else:
                     self.sorder.pbDelivery.setEnabled(False)
@@ -512,11 +502,11 @@ class App(Ui_Login):
                 deviceStatus = self.sorder.leDeviceStatus.text()
                 defect = self.sorder.leDefect.text()
                 assert defect != '', 'Descreva o defeito do aparelho!'
-                obs1 = self.sorder.teObs1.toPlainText()
+                obs1 = self.sorder.leObs1.text()
                 defectFound = self.sorder.leDefectsFound.text()
                 serviceDone = self.sorder.leServiceDone.text()
                 obs2 = self.sorder.leObs2.text()
-                status = self.sorder.buttonGroup_2.checkedId()
+                status = self.sorder.cbStatus.currentText()
                 cnumber = self.sorder.twBudget.columnCount()
                 rnumber = self.sorder.twBudget.rowCount()
                 try:
@@ -527,10 +517,6 @@ class App(Ui_Login):
                     partsValue = 0
                     serviceValue = 0
                     total = 0
-                tpartDescription = None
-                tpartAmount = None
-                tpartValue = None
-                tpartSubTotal = None
 
             except AssertionError as e:
                 msg = QMessageBox()
@@ -544,7 +530,7 @@ class App(Ui_Login):
                 sql = f"""UPDATE service_order SET altDate='{QtCore.QDateTime.currentDateTime().toString('dd/MM/yyyy hh:mm:ss')}', lastAlter={self.userId},
                 deviceType='{type}', brand='{brand}', model='{model}', color='{color}', ns='{ns}', barCode='{br}', imei1='{imei1}', imei2='{imei2}',
                 acessories='{acessories}', deviceStatus='{deviceStatus}', defect='{defect}', obs1='{obs1}', defectFound='{defectFound}', serviceDone='{serviceDone}',
-                partTotalValue={partsValue}, serviceValue={serviceValue}, total={total}, obs2='{obs2}', status={status} WHERE id={id}"""
+                partTotalValue={partsValue}, serviceValue={serviceValue}, total={total}, obs2='{obs2}', status='{status}' WHERE id={id}"""
                 banco.queryDB(sql)
                 loadOs(id)
             else:
@@ -555,14 +541,14 @@ class App(Ui_Login):
                 '{QtCore.QDateTime.currentDateTime().toString('dd/MM/yyyy hh:mm:ss')}', '{QtCore.QDateTime.currentDateTime().toString('dd/MM/yyyy hh:mm:ss')}', {self.userId}, '{type}',
                 '{brand}', '{model}', '{color}', '{ns}', '{br}', '{imei1}', '{imei2}',
                 '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}',
-                '{serviceDone}', {partsValue}, {serviceValue}, {total}, '{obs2}', {status})"""
+                '{serviceDone}', {partsValue}, {serviceValue}, {total}, '{obs2}', '{status}')"""
                 print('SQL saveCli: ', sql)
                 lrid = banco.queryDB(sql)
                 self.openSO(lrid)
 
         def printSo(id):
             from exportPDF import makePDF
-            makePDF(1, id, '58mm')
+            makePDF(1, id, 'A4')
             PDF_PATH = f'{os.getcwd()}/OS_DIR/os{id}.pdf'
             try:
                 import platform
@@ -584,12 +570,7 @@ class App(Ui_Login):
         self.sorder.pbSave.clicked.connect(saveOs)
         self.sorder.pbSearch.clicked.connect(self.sorder.pbExit.click)
         self.sorder.pbSearch.clicked.connect(lambda: self.openCliEdit(int(self.sorder.leCodCli.text())))
-        self.sorder.rbAnalysis.clicked.connect(lambda: self.sorder.lbStatus2.setText('Em análise'))
-        self.sorder.rbBudget.clicked.connect(lambda: self.sorder.lbStatus2.setText('Com orçamento'))
-        self.sorder.rbApproved.clicked.connect(lambda: self.sorder.lbStatus2.setText('Aprovado'))
-        self.sorder.rbRefused.clicked.connect(lambda: self.sorder.lbStatus2.setText('Recusado'))
-        self.sorder.rbFixed.clicked.connect(lambda: self.sorder.lbStatus2.setText('Consertado'))
-        self.sorder.rbDelivery.clicked.connect(lambda: self.sorder.lbStatus2.setText('Devolver'))
+        self.sorder.cbStatus.currentTextChanged.connect(lambda: self.sorder.lbStatus2.setText(self.sorder.cbStatus.currentText()))
         self.sorder.pbPrint.clicked.connect(lambda: printSo(id))
         self.SOrder.setModal(True)
         self.SOrder.show()

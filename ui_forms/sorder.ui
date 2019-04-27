@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>811</width>
-    <height>686</height>
+    <width>915</width>
+    <height>696</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -130,7 +130,7 @@
         </size>
        </property>
        <property name="text">
-        <string>Em análise</string>
+        <string>Aguardando orçamento</string>
        </property>
       </widget>
      </item>
@@ -233,6 +233,12 @@
     <widget class="QTabWidget" name="tabWidget">
      <property name="enabled">
       <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
      <property name="focusPolicy">
       <enum>Qt::TabFocus</enum>
@@ -793,7 +799,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Tipo</string>
+            <string>Equipamento:</string>
            </property>
           </widget>
          </item>
@@ -865,46 +871,6 @@
            <item>
             <property name="text">
              <string>Monitor</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>TV</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Video Game</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Brinquedo</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>DVD Player</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Roteador</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Controle</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Não Especificado</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string/>
             </property>
            </item>
           </widget>
@@ -1233,7 +1199,7 @@
          <item>
           <widget class="QLabel" name="lbNs">
            <property name="text">
-            <string>N/S:</string>
+            <string>SN:</string>
            </property>
           </widget>
          </item>
@@ -1327,12 +1293,12 @@
          <item>
           <widget class="QLabel" name="lbObs1">
            <property name="text">
-            <string>Observação:</string>
+            <string>Observações:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QTextEdit" name="teObs1"/>
+          <widget class="QLineEdit" name="leObs1"/>
          </item>
         </layout>
        </item>
@@ -1372,88 +1338,163 @@
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_9">
+        <widget class="QLabel" name="lbBudgetTable">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Peças utilizadas no conserto:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_26">
          <item>
-          <widget class="QLabel" name="lbBudgetTable">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
+          <widget class="QLabel" name="lbAddDesc">
            <property name="text">
-            <string>Peças utilizadas no conserto:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
+            <string>Descrição:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QTableWidget" name="twBudget">
-           <property name="maximumSize">
+          <widget class="QComboBox" name="cbAddDesc">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
             <size>
-             <width>16777215</width>
-             <height>100</height>
+             <width>300</width>
+             <height>0</height>
             </size>
            </property>
-           <property name="alternatingRowColors">
-            <bool>false</bool>
+           <property name="maximumSize">
+            <size>
+             <width>400</width>
+             <height>16777215</height>
+            </size>
            </property>
-           <attribute name="horizontalHeaderStretchLastSection">
+           <property name="editable">
             <bool>true</bool>
-           </attribute>
-           <attribute name="verticalHeaderCascadingSectionResizes">
-            <bool>false</bool>
-           </attribute>
-           <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-            <bool>false</bool>
-           </attribute>
-           <attribute name="verticalHeaderStretchLastSection">
-            <bool>true</bool>
-           </attribute>
-           <row>
-            <property name="text">
-             <string>1</string>
-            </property>
-           </row>
-           <column>
-            <property name="text">
-             <string>Descrição</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Valor unitário</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Quantidade</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Sub Total</string>
-            </property>
-           </column>
-           <item row="0" column="3">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="flags">
-             <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-            </property>
-           </item>
+           </property>
+           <property name="currentText">
+            <string/>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lbAddValue">
+           <property name="text">
+            <string>Valor:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="spAddValue">
+           <property name="minimumSize">
+            <size>
+             <width>80</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="buttonSymbols">
+            <enum>QAbstractSpinBox::NoButtons</enum>
+           </property>
+           <property name="prefix">
+            <string>R$</string>
+           </property>
+           <property name="maximum">
+            <double>999999999999999.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lbAddAmount">
+           <property name="text">
+            <string>Quantidade:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="spAddAmount">
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <number>999999999</number>
+           </property>
+           <property name="value">
+            <number>1</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pbAddPart">
+           <property name="text">
+            <string>Adicionar</string>
+           </property>
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="twBudget">
+         <property name="sizeAdjustPolicy">
+          <enum>QAbstractScrollArea::AdjustIgnored</enum>
+         </property>
+         <property name="sortingEnabled">
+          <bool>false</bool>
+         </property>
+         <property name="rowCount">
+          <number>0</number>
+         </property>
+         <attribute name="horizontalHeaderCascadingSectionResizes">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderCascadingSectionResizes">
+          <bool>false</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>Descrição</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Quantidade</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Valor un</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Subtotal</string>
+          </property>
+         </column>
+        </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_21">
@@ -1503,7 +1544,7 @@
          <item>
           <widget class="QLabel" name="lbTotalValue">
            <property name="text">
-            <string>Total:</string>
+            <string>Valor Total:</string>
            </property>
           </widget>
          </item>
@@ -1545,29 +1586,6 @@
       <attribute name="title">
        <string>Histórico do cliente</string>
       </attribute>
-      <widget class="QLabel" name="lbTotalSpent">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>390</y>
-         <width>71</width>
-         <height>78</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Total gasto:</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="leTotalSpent">
-       <property name="geometry">
-        <rect>
-         <x>290</x>
-         <y>410</y>
-         <width>179</width>
-         <height>32</height>
-        </rect>
-       </property>
-      </widget>
       <widget class="QTableWidget" name="twCliHistory">
        <property name="geometry">
         <rect>
@@ -1577,6 +1595,41 @@
          <height>371</height>
         </rect>
        </property>
+       <column>
+        <property name="text">
+         <string>Data entrada</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>OS</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Equipamento</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Marca</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Modelo</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Cor</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Valor</string>
+        </property>
+       </column>
       </widget>
      </widget>
     </widget>
@@ -1584,67 +1637,89 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_22">
      <item>
-      <widget class="QRadioButton" name="rbAnalysis">
+      <widget class="QLabel" name="lbStatus">
        <property name="text">
-        <string>Em análise</string>
+        <string>Status da O.S:</string>
        </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">buttonGroup_2</string>
-       </attribute>
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="rbBudget">
-       <property name="text">
-        <string>Com orçamento</string>
+      <widget class="QComboBox" name="cbStatus">
+       <property name="sizeAdjustPolicy">
+        <enum>QComboBox::AdjustToContents</enum>
        </property>
-       <attribute name="buttonGroup">
-        <string notr="true">buttonGroup_2</string>
-       </attribute>
+       <property name="minimumContentsLength">
+        <number>0</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Aguardando orçamento</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Em análise</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Orçamento concluído</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Orçamento aprovado</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Aguardando peça de reposição</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Em execução do serviço</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Orçamento reprovado</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sem peça de reposição</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Defeito não encontrado</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Consertado</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Equipamento devolvido</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="rbApproved">
-       <property name="text">
-        <string>Aprovado</string>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-       <attribute name="buttonGroup">
-        <string notr="true">buttonGroup_2</string>
-       </attribute>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="rbRefused">
-       <property name="text">
-        <string>Rec&amp;usado</string>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
        </property>
-       <attribute name="buttonGroup">
-        <string notr="true">buttonGroup_2</string>
-       </attribute>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="rbFixed">
-       <property name="text">
-        <string>Consertado</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">buttonGroup_2</string>
-       </attribute>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="rbDelivery">
-       <property name="text">
-        <string>Devo&amp;lver</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">buttonGroup_2</string>
-       </attribute>
-      </widget>
+      </spacer>
      </item>
     </layout>
    </item>
@@ -1718,7 +1793,6 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

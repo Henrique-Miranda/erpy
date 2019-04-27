@@ -81,15 +81,11 @@ class Database(object):
             obs1 TEXT,
             defectFound TEXT,
             serviceDone TEXT,
-            partDesc TEXT,
-            partAmount INTEGER,
-            partValue REAL,
-            partSubTotal REAL,
             partTotalValue REAL,
             serviceValue REAL,
             total REAL,
             obs2 TEXT,
-            status INTEGER NOT NULL,
+            status TEXT NOT NULL,
             FOREIGN KEY(idCli) REFERENCES clients(id) ON UPDATE CASCADE,
             FOREIGN KEY(lastAlter) REFERENCES users(id) ON UPDATE CASCADE);
             '''
@@ -118,6 +114,16 @@ class Database(object):
             cnpj TEXT,
             im TEXT,
             ie TEXT);
+            '''
+        )
+        self.cursor.execute(
+            '''
+            CREATE TABLE IF NOT EXISTS os_itens (
+            osId INTEGER NOT NULL PRIMARY KEY,
+            description TEXT NOT NULL,
+            amount REAL NOT NULL,
+            value REAL NOT NULL,
+            subTotal REAL NOT NULL);
             '''
         )
 
