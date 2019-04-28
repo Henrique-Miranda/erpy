@@ -10,22 +10,25 @@ from viacep import ViaCEP
 from pycpfcnpj import cpfcnpj as cpfcnpjv
 
 class App(Ui_Login):
-    def __ini__(self):
+    def __init__(self):
         self.userId = None
         self.userName = None
         self.fullName = None
         self.hostName = None
         self.userIP = None
         self.logged = False
+        self.dbConn = Database('database.db')
+        if 'database.db' not in os.listdir():
+            self.dbConn.createDB()
+            print('Criado')
+
     # Start login
     def loginCheck(self):
-        banco = Database('database.db')
-        if 'database.db' not in os.listdir():
-            banco.createDB()
         user = self.leuser.text()
         passwd = self.lepass.text()
+        #dbConn = Database('database.db')
         sql = f"SELECT * FROM users WHERE login='{user}' AND passwd='{passwd}'"
-        result = banco.queryDB(sql)
+        result = self.dbConn.queryDB(sql)
         if result:
             self.userId = result[0][0]
             self.fullName = result[0][1]
@@ -63,10 +66,10 @@ class App(Ui_Login):
         if len(data) == 11 and cpfcnpjv.validate(data):
             data = f'{data[0:3]}.{data[3:6]}.{data[6:9]}-{data[9:]}'
 
-        banco = Database('database.db')
         if local == 'Cliente':
+            #dbConn = Database('database.db')
             sql = f"SELECT * FROM clients WHERE name LIKE '{data}%' OR cpfcnpj LIKE '{data}%' ORDER BY id DESC LIMIT 100"
-            result = banco.queryDB(sql)
+            result = self.dbConn.queryDB(sql)
             self.home.tableWidget.setRowCount(len(result))
             self.home.tableWidget.setColumnCount(12)
             self.home.tableWidget.setHorizontalHeaderLabels(['Código', 'Nome',
@@ -106,8 +109,8 @@ class App(Ui_Login):
                     clients.id=service_order.idCli WHERE clients.cpfcnpj LIKE '{data}%' OR \
                     clients.name LIKE '{data}%' OR service_order.brand LIKE '{data}%' OR \
                     service_order.model LIKE '{data}%' ORDER BY regdate DESC LIMIT 100"""
-
-            result = banco.queryDB(sql)
+            #dbConn = Database('database.db')
+            result = self.dbConn.queryDB(sql)
             self.home.tableWidget.setRowCount(len(result))
             self.home.tableWidget.setColumnCount(13)
             self.home.tableWidget.setHorizontalHeaderLabels(['OS', 'Cliente',
@@ -158,10 +161,10 @@ class App(Ui_Login):
                 pass
 
         def loadCli(data):
-            banco = Database('database.db')
+            #dbConn = Database('database.db')
             sql = f'SELECT * FROM clients WHERE id={data}'
             print('SQL loadcli:', sql)
-            result = banco.queryDB(sql)
+            result = self.dbConn.queryDB(sql)
             print('Resultado loadcli: ', result)
             self.cliedit.leCodCli.setText(str(result[0][0]))
             self.cliedit.dateTimeCad.setEnabled(True)
@@ -205,10 +208,10 @@ class App(Ui_Login):
             self.cliedit.pbNew.setEnabled(True)
 
         def delCli(id):
-            banco = Database('database.db')
+            #dbConn = Database('database.db')
             sql = f"DELETE FROM clients WHERE id = '{id}'"
             try:
-                banco.queryDB(sql)
+                self.dbConn.queryDB(sql)
                 msg = QMessageBox()
                 msg.setWindowTitle('Cliente foi excluído.')
                 msg.setText('Este cliente foi deletado com sucesso!')
@@ -219,7 +222,6 @@ class App(Ui_Login):
 
         def saveCli():
             try:
-                banco = Database('database.db')
                 name = self.cliedit.leName.text().title()
                 assert name, 'Digite o nome do cliente!'
                 birth = self.cliedit.deBirthFun.date().toString('dd/MM/yyyy')
@@ -237,7 +239,8 @@ class App(Ui_Login):
                     cell2 = '{self.cliedit.leCell2.text()}', tel = '{self.cliedit.leTel.text()}', email = NULLIF('{email}', ''), cep = '{self.cliedit.leCep.text()}',
                     adress = '{self.cliedit.leStreet.text()}', number = '{self.cliedit.leNumber.text()}', adress2 = '{self.cliedit.leComp.text()}',
                     district = '{self.cliedit.leDistrict.text()}', city = '{self.cliedit.leCity.text()}', state = '{self.cliedit.leState.text()}', contry = '{self.cliedit.leContry.text()}' WHERE id={int(self.cliedit.leCodCli.text())}"""
-                    banco.queryDB(sql)
+                    #dbConn = Database('database.db')
+                    self.dbConn.queryDB(sql)
                     loadCli(int(self.cliedit.leCodCli.text()))
                 else:
                     sql = f"""INSERT INTO clients (regdate, altdate, lastAlter, regtype, blocked,
@@ -256,7 +259,8 @@ class App(Ui_Login):
                     '{self.cliedit.leDistrict.text()}', '{self.cliedit.leCity.text()}',
                     '{self.cliedit.leState.text()}', '{self.cliedit.leContry.text()}')"""
                     print('SQL SaveCli: ', sql)
-                    lrid = banco.queryDB(sql)
+                    #dbConn = Database('database.db')
+                    lrid = self.dbConn.queryDB(sql)
                     print('Last row id: ', lrid)
                     loadCli(lrid)
 
@@ -384,11 +388,11 @@ class App(Ui_Login):
     # Start openSO
     def openSO(self, id = 0, idC = 0):
         def loadOs(id):
-            banco = Database('database.db')
             if not idC:
+                #dbConn = Database('database.db')
                 sql = f"""SELECT clients.name, clients.birthFun, clients.sex, clients.cpfcnpj, clients.rgie, clients.cell1op, clients.cell1, clients.cell2op, clients.cell2, clients.tel, clients.email, clients.adress, clients.number, clients.adress2, clients.cep, clients.district, clients.city, clients.state, clients.contry, service_order.* FROM service_order INNER JOIN clients ON clients.id=service_order.idCli WHERE service_order.id={id}"""
                 print('SQL loadOS: ', sql)
-                result = banco.queryDB(sql)
+                result = self.dbConn.queryDB(sql)
                 print('Resultado: ', result)
                 self.sorder.leName.setText(result[0][0])
                 self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'dd/MM/yyyy'))
@@ -450,8 +454,8 @@ class App(Ui_Login):
                     self.sorder.pbDelivery.setEnabled(True)
                 else:
                     self.sorder.pbDelivery.setEnabled(False)
-
-                result = banco.queryDB(f"""SELECT * FROM os_itens WHERE osId={id}""")
+                #dbConn = Database('database.db')
+                result = dbConn.queryDB(f"""SELECT * FROM os_itens WHERE osId={id}""")
                 print(result)
                 defectFound = self.sorder.leDefectsFound.text()
                 if result:
@@ -468,9 +472,10 @@ class App(Ui_Login):
                 defectFound = self.sorder.leDefectsFound.text()
 
             else:
+                #dbConn = Database('database.db')
                 sql = f"""SELECT name, birthFun, sex, cpfcnpj, rgie, cell1op, cell1, cell2op, cell2, tel, email, adress, number, adress2, cep, district, city, state, contry FROM clients WHERE id={idC}"""
                 print('SQL loadOS: ', sql)
-                result = banco.queryDB(sql)
+                result = self.dbConn.queryDB(sql)
                 print('Resultado: ', result)
                 self.sorder.leCodCli.setText(str(idC))
                 self.sorder.leName.setText(result[0][0])
@@ -498,7 +503,6 @@ class App(Ui_Login):
                 self.sorder.leContry.setText(result[0][18])
 
         def saveOs():
-            banco = Database('database.db')
             try:
                 print('Salvando OS...')
                 idCli = int(self.sorder.leCodCli.text())
@@ -540,7 +544,8 @@ class App(Ui_Login):
                 deviceType='{type}', brand='{brand}', model='{model}', color='{color}', ns='{ns}', barCode='{br}', imei1='{imei1}', imei2='{imei2}',
                 acessories='{acessories}', deviceStatus='{deviceStatus}', defect='{defect}', obs1='{obs1}', defectFound='{defectFound}', serviceDone='{serviceDone}',
                 partTotalValue={partsValue}, serviceValue={serviceValue}, total={total}, obs2='{obs2}', status='{status}' WHERE id={id}"""
-                banco.queryDB(sql)
+                #dbConn = Database('database.db')
+                self.dbConn.queryDB(sql)
                 print(rnumber)
                 if rnumber:
                     for row in range(rnumber):
@@ -549,9 +554,10 @@ class App(Ui_Login):
                         value = float(self.sorder.twBudget.item(row, 2).text())
                         stotal = float(self.sorder.twBudget.item(row, 3).text())
                         sql = f"INSERT INTO os_itens (osId, description, amount, value, subTotal) VALUES ({id}, '{desc}', {amount}, {value}, {stotal})"
+                        #dbConn = Database('database.db')
                         print('SQL', sql)
                         try:
-                            banco.queryDB(sql)
+                            self.dbConn.queryDB(sql)
                         except:
                             pass
                 loadOs(id)
@@ -565,7 +571,8 @@ class App(Ui_Login):
                 '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}',
                 '{serviceDone}', {partsValue}, {serviceValue}, {total}, '{obs2}', '{status}')"""
                 print('SQL saveCli: ', sql)
-                lrid = banco.queryDB(sql)
+                #dbConn = Database('database.db')
+                lrid = self.dbConn.queryDB(sql)
                 self.openSO(lrid)
 
         def printSo(id):
