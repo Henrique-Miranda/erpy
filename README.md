@@ -2,7 +2,6 @@
 # Clients and Service Order manager.
 
 <b>Features:</b><br>
-
 Optional encrypted sqlite3 database using SqlCipher. (Config database.py)<br>
 Modern QT GUI<br>
 Multiplataform.<br>

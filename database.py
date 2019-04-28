@@ -15,11 +15,10 @@ class Database(object):
 
     def createDB(self):
         self.connDB()
-
         self.cursor.execute(
             '''
             CREATE TABLE IF NOT EXISTS users (
-            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             login TEXT NOT NULL,
             passwd TEXT);
@@ -29,23 +28,23 @@ class Database(object):
         self.cursor.execute(
             '''
             CREATE TABLE IF NOT EXISTS clients (
-            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             regdate TEXT NOT NULL,
             altdate TEXT NOT NULL,
-            lastAlter INTEGER NOT NULL,
+            lastAlter INTEGER,
             regType INTEGER NOT NULL,
             blocked INTEGER DEFAULT 0,
             name TEXT NOT NULL,
             birthFun TEXT NOT NULL,
             sex INTEGER NOT NULL,
             cpfcnpj TEXT NOT NULL UNIQUE,
-            rgie TEXT,
+            rgie TEXT UNIQUE,
             cell1op TEXT,
             cell1 TEXT,
             cell2op TEXT,
             cell2 TEXT,
             tel TEXT,
-            email TEXT,
+            email TEXT UNIQUE,
             cep TEXT,
             adress TEXT,
             number TEXT,
@@ -62,7 +61,7 @@ class Database(object):
             '''
             CREATE TABLE IF NOT EXISTS service_order (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            idCli INTEGER NOT NULL,
+            idCli INTEGER,
             entryDate TEXT NOT NULL,
             altDate TEXT NOT NULL,
             outDate TEXT,
@@ -94,7 +93,7 @@ class Database(object):
         self.cursor.execute(
             '''
             CREATE TABLE IF NOT EXISTS company (
-            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             logo TEXT,
             name TEXT NOT NULL,
             slogan TEXT,
@@ -118,12 +117,25 @@ class Database(object):
         )
         self.cursor.execute(
             '''
+            CREATE TABLE IF NOT EXISTS products (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            description TEXT NOT NULL,
+            amount REAL NOT NULL,
+            bValue REAL NOT NULL,
+            sValue REAL NOT NULL,
+            barCode TEXT UNIQUE);
+            '''
+        )
+        self.cursor.execute(
+            '''
             CREATE TABLE IF NOT EXISTS os_itens (
-            osId INTEGER NOT NULL PRIMARY KEY,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            osId INTEGER,
             description TEXT NOT NULL,
             amount REAL NOT NULL,
             value REAL NOT NULL,
-            subTotal REAL NOT NULL);
+            subTotal REAL NOT NULL,
+            FOREIGN KEY(osId) REFERENCES service_order(id) ON UPDATE CASCADE);
             '''
         )
 
@@ -136,7 +148,7 @@ class Database(object):
         self.cursor.execute(
             '''
             INSERT INTO company (logo, name, slogan, tel, cell1, cell2, email, site, cep, adress, number, adress2, district, city, state)
-            VALUES ('/home/alset/Hotep/IMG/logoblack.png', 'HL INFORMÁTICA', 'Assistência Técnica', '(21) 2617-4353', '(21) 98584-5457', '(21) 98584-5417', 'contato@hlinformatica.com', 'www.hlinformatica.com', '24753-660', 'Rua Manuel Gonçalves do Monte', '39', 'Loja 2', 'Rio do Ouro', 'São Gonçalo', 'Rio de Janeiro')
+            VALUES ('/home/alset/erpy/IMG/logoblack.png', 'HL INFORMÁTICA', 'Assistência Técnica', '(21) 2617-4353', '(21) 98584-5457', '(21) 98584-5417', 'contato@hlinformatica.com', 'www.hlinformatica.com', '24753-660', 'Rua Manuel Gonçalves do Monte', '39', 'Loja 2', 'Rio do Ouro', 'São Gonçalo', 'Rio de Janeiro')
             '''
         )
         self.conn.commit()

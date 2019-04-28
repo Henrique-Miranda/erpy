@@ -75,20 +75,20 @@ class App(Ui_Login):
             header = self.home.tableWidget.horizontalHeader()
             header.setSectionResizeMode(QHeaderView.ResizeToContents)
 
-            for column, item in enumerate(result):
-                self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
-                self.home.tableWidget.setItem(column, 1, QTableWidgetItem(item[6]))
-                self.home.tableWidget.setItem(column, 2, QTableWidgetItem(item[7]))
-                self.home.tableWidget.setItem(column, 3, QTableWidgetItem(item[8]))
-                self.home.tableWidget.setItem(column, 4, QTableWidgetItem(item[9]))
-                self.home.tableWidget.setItem(column, 5, QTableWidgetItem(item[10]))
-                self.home.tableWidget.setItem(column, 6, QTableWidgetItem(item[11]))
-                self.home.tableWidget.setItem(column, 7, QTableWidgetItem(item[12]))
-                self.home.tableWidget.setItem(column, 8, QTableWidgetItem(item[13]))
-                self.home.tableWidget.setItem(column, 9, QTableWidgetItem(item[14]))
-                self.home.tableWidget.setItem(column, 10, QTableWidgetItem(item[15]))
-                self.home.tableWidget.setItem(column, 11, QTableWidgetItem(item[16]))
-                self.home.tableWidget.setItem(column, 12, QTableWidgetItem(item[17]))
+            for row, item in enumerate(result):
+                self.home.tableWidget.setItem(row, 0, QTableWidgetItem(str(item[0])))
+                self.home.tableWidget.setItem(row, 1, QTableWidgetItem(item[6]))
+                self.home.tableWidget.setItem(row, 2, QTableWidgetItem(item[7]))
+                self.home.tableWidget.setItem(row, 3, QTableWidgetItem(item[8]))
+                self.home.tableWidget.setItem(row, 4, QTableWidgetItem(item[9]))
+                self.home.tableWidget.setItem(row, 5, QTableWidgetItem(item[10]))
+                self.home.tableWidget.setItem(row, 6, QTableWidgetItem(item[11]))
+                self.home.tableWidget.setItem(row, 7, QTableWidgetItem(item[12]))
+                self.home.tableWidget.setItem(row, 8, QTableWidgetItem(item[13]))
+                self.home.tableWidget.setItem(row, 9, QTableWidgetItem(item[14]))
+                self.home.tableWidget.setItem(row, 10, QTableWidgetItem(item[15]))
+                self.home.tableWidget.setItem(row, 11, QTableWidgetItem(item[16]))
+                self.home.tableWidget.setItem(row, 12, QTableWidgetItem(item[17]))
 
         if local == 'Ordem de Serviço':
             try:
@@ -116,20 +116,20 @@ class App(Ui_Login):
             header = self.home.tableWidget.horizontalHeader()
             header.setSectionResizeMode(QHeaderView.ResizeToContents)
 
-            for column, item in enumerate(result):
-                self.home.tableWidget.setItem(column, 0, QTableWidgetItem(str(item[0])))
-                self.home.tableWidget.setItem(column, 1, QTableWidgetItem(item[1]))
-                self.home.tableWidget.setItem(column, 2, QTableWidgetItem(item[2]))
-                self.home.tableWidget.setItem(column, 3, QTableWidgetItem(item[3]))
-                self.home.tableWidget.setItem(column, 4, QTableWidgetItem(item[4]))
-                self.home.tableWidget.setItem(column, 5, QTableWidgetItem(item[5]))
-                self.home.tableWidget.setItem(column, 6, QTableWidgetItem(item[6]))
-                self.home.tableWidget.setItem(column, 7, QTableWidgetItem(item[7]))
-                self.home.tableWidget.setItem(column, 8, QTableWidgetItem(item[8]))
-                self.home.tableWidget.setItem(column, 9, QTableWidgetItem(item[9]))
-                self.home.tableWidget.setItem(column, 10, QTableWidgetItem(item[10]))
-                self.home.tableWidget.setItem(column, 11, QTableWidgetItem(item[11]))
-                self.home.tableWidget.setItem(column, 12, QTableWidgetItem(item[12]))
+            for row, item in enumerate(result):
+                self.home.tableWidget.setItem(row, 0, QTableWidgetItem(str(item[0])))
+                self.home.tableWidget.setItem(row, 1, QTableWidgetItem(item[1]))
+                self.home.tableWidget.setItem(row, 2, QTableWidgetItem(item[2]))
+                self.home.tableWidget.setItem(row, 3, QTableWidgetItem(item[3]))
+                self.home.tableWidget.setItem(row, 4, QTableWidgetItem(item[4]))
+                self.home.tableWidget.setItem(row, 5, QTableWidgetItem(item[5]))
+                self.home.tableWidget.setItem(row, 6, QTableWidgetItem(item[6]))
+                self.home.tableWidget.setItem(row, 7, QTableWidgetItem(item[7]))
+                self.home.tableWidget.setItem(row, 8, QTableWidgetItem(item[8]))
+                self.home.tableWidget.setItem(row, 9, QTableWidgetItem(item[9]))
+                self.home.tableWidget.setItem(row, 10, QTableWidgetItem(item[10]))
+                self.home.tableWidget.setItem(row, 11, QTableWidgetItem(item[11]))
+                self.home.tableWidget.setItem(row, 12, QTableWidgetItem(item[12]))
         try:
             self.home.tableWidget.itemDoubleClicked.disconnect()
         except:
@@ -224,7 +224,7 @@ class App(Ui_Login):
                 assert name, 'Digite o nome do cliente!'
                 birth = self.cliedit.deBirthFun.date().toString('dd/MM/yyyy')
                 idade = int(QtCore.QDate.currentDate().toString('dd/MM/yyyy')[6:10]) - int(birth[6:10])
-                if self.cliedit.buttonGroup.checkedButton() == 'PF':
+                if self.cliedit.buttonGroup.checkedButton().text() == 'PF':
                     assert idade >= 18, 'Este cliente tem menos de 18 anos!'
                 cpfcnpj = self.cliedit.leCpfCnpj.text().strip()
                 assert cpfcnpjv.validate(cpfcnpj), 'CPF/CNPJ inválido!'
@@ -232,9 +232,9 @@ class App(Ui_Login):
                 email = self.cliedit.leMail.text().strip()
                 if self.cliedit.leCodCli.text():
                     sql = f"""UPDATE clients SET altdate = '{QtCore.QDateTime.currentDateTime().toString("dd/MM/yyyy hh:mm:ss")}', lastAlter={self.userId}, blocked = '{int(self.cliedit.checkBox.isChecked())}',
-                    name = '{name}', birthFun = '{birth}', sex = {self.cliedit.buttonGroup_2.checkedId()}, cpfcnpj='{cpfcnpj}', rgie = '{rgie}',
+                    name = '{name}', birthFun = '{birth}', sex = {self.cliedit.buttonGroup_2.checkedId()}, cpfcnpj='{cpfcnpj}', rgie = NULLIF('{rgie}',
                     cell1op = '{self.cliedit.cbCell1.currentText()}', cell1 = '{self.cliedit.leCell1.text()}', cell2op = '{self.cliedit.cbCell2.currentText()}',
-                    cell2 = '{self.cliedit.leCell2.text()}', tel = '{self.cliedit.leTel.text()}', email = '{email}', cep = '{self.cliedit.leCep.text()}',
+                    cell2 = '{self.cliedit.leCell2.text()}', tel = '{self.cliedit.leTel.text()}', email = NULLIF('{email}', cep = '{self.cliedit.leCep.text()}',
                     adress = '{self.cliedit.leStreet.text()}', number = '{self.cliedit.leNumber.text()}', adress2 = '{self.cliedit.leComp.text()}',
                     district = '{self.cliedit.leDistrict.text()}', city = '{self.cliedit.leCity.text()}', state = '{self.cliedit.leState.text()}', contry = '{self.cliedit.leContry.text()}' WHERE id={int(self.cliedit.leCodCli.text())}"""
                     banco.queryDB(sql)
@@ -248,9 +248,9 @@ class App(Ui_Login):
                     {self.userId}, {self.cliedit.buttonGroup.checkedId()},
                     '{int(self.cliedit.checkBox.isChecked())}', '{name}', '{birth}',
                     {self.cliedit.buttonGroup_2.checkedId()},
-                    '{cpfcnpj}', '{rgie}', '{self.cliedit.cbCell1.currentText()}',
+                    '{cpfcnpj}', NULLIF('{rgie}', '{self.cliedit.cbCell1.currentText()}',
                     '{self.cliedit.leCell1.text()}', '{self.cliedit.cbCell2.currentText() }', '{self.cliedit.leCell2.text()}',
-                    '{self.cliedit.leTel.text()}', '{email}',
+                    '{self.cliedit.leTel.text()}', NULLIF('{email}', ''),
                     '{self.cliedit.leCep.text()}', '{self.cliedit.leStreet.text()}',
                     '{self.cliedit.leNumber.text()}', '{self.cliedit.leComp.text()}',
                     '{self.cliedit.leDistrict.text()}', '{self.cliedit.leCity.text()}',
@@ -451,6 +451,19 @@ class App(Ui_Login):
                 else:
                     self.sorder.pbDelivery.setEnabled(False)
 
+                result = banco.queryDB(f"""SELECT * FROM os_itens WHERE osId={id}""")
+                print(result)
+                if result:
+                    self.sorder.twBudget.setRowCount(len(result))
+                    self.sorder.twBudget.setColumnCount(4)
+                    ptotal = 0
+                    for row, item in enumerate(result):
+                        self.sorder.twBudget.setItem(row, 0, QTableWidgetItem(item[2]))
+                        self.sorder.twBudget.setItem(row, 1, QTableWidgetItem(str(item[3])))
+                        self.sorder.twBudget.setItem(row, 2, QTableWidgetItem(str(item[4])))
+                        self.sorder.twBudget.setItem(row, 3, QTableWidgetItem(str(item[5])))
+                        ptotal+=item[4]
+                    self.sorder.spPartsValue.setValue(ptotal)
 
             else:
                 sql = f"""SELECT name, birthFun, sex, cpfcnpj, rgie, cell1op, cell1, cell2op, cell2, tel, email, adress, number, adress2, cep, district, city, state, contry FROM clients WHERE id={idC}"""
@@ -507,16 +520,10 @@ class App(Ui_Login):
                 serviceDone = self.sorder.leServiceDone.text()
                 obs2 = self.sorder.leObs2.text()
                 status = self.sorder.cbStatus.currentText()
-                cnumber = self.sorder.twBudget.columnCount()
+                partsValue = self.sorder.spPartsValue.value()
+                serviceValue = self.sorder.spServiceValue.value()
+                total = partsValue + serviceValue
                 rnumber = self.sorder.twBudget.rowCount()
-                try:
-                    partsValue = self.sorder.spPartsValue.value()
-                    serviceValue = self.sorder.spServiceValue.value()
-                    total = partsValue + serviceValue
-                except:
-                    partsValue = 0
-                    serviceValue = 0
-                    total = 0
 
             except AssertionError as e:
                 msg = QMessageBox()
@@ -532,6 +539,19 @@ class App(Ui_Login):
                 acessories='{acessories}', deviceStatus='{deviceStatus}', defect='{defect}', obs1='{obs1}', defectFound='{defectFound}', serviceDone='{serviceDone}',
                 partTotalValue={partsValue}, serviceValue={serviceValue}, total={total}, obs2='{obs2}', status='{status}' WHERE id={id}"""
                 banco.queryDB(sql)
+                print(rnumber)
+                if rnumber:
+                    for row in range(rnumber):
+                        desc = self.sorder.twBudget.item(row, 0).text()
+                        amount = float(self.sorder.twBudget.item(row, 1).text())
+                        value = float(self.sorder.twBudget.item(row, 2).text())
+                        stotal = float(self.sorder.twBudget.item(row, 3).text())
+                        sql = f"INSERT INTO os_itens (osId, description, amount, value, subTotal) VALUES ({id}, '{desc}', {amount}, {value}, {stotal})"
+                        print('SQL', sql)
+                        try:
+                            banco.queryDB(sql)
+                        except:
+                            pass
                 loadOs(id)
             else:
                 sql = f"""INSERT INTO service_order (idCli, entryDate, altDate, lastAlter,
@@ -572,6 +592,21 @@ class App(Ui_Login):
         self.sorder.pbSearch.clicked.connect(lambda: self.openCliEdit(int(self.sorder.leCodCli.text())))
         self.sorder.cbStatus.currentTextChanged.connect(lambda: self.sorder.lbStatus2.setText(self.sorder.cbStatus.currentText()))
         self.sorder.pbPrint.clicked.connect(lambda: printSo(id))
+        def addToTable():
+            row = self.sorder.twBudget.rowCount()+1
+            self.sorder.twBudget.setRowCount(row)
+            desc = self.sorder.cbAddDesc.currentText()
+            amount = self.sorder.spAddAmount.value()
+            pvalue = self.sorder.spAddValue.value()
+            svalue = amount * pvalue
+            self.sorder.twBudget.setItem(row-1, 0, QTableWidgetItem(desc))
+            self.sorder.twBudget.setItem(row-1, 1, QTableWidgetItem(str(amount)))
+            self.sorder.twBudget.setItem(row-1, 2, QTableWidgetItem(str(pvalue)))
+            self.sorder.twBudget.setItem(row-1, 3, QTableWidgetItem(str(svalue)))
+        self.sorder.twBudget.itemDoubleClicked.connect(lambda: self.sorder.twBudget.removeRow(self.sorder.twBudget.currentRow()))
+        self.sorder.pbAddPart.clicked.connect(addToTable)
+        header = self.sorder.twBudget.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.ResizeToContents)
         self.SOrder.setModal(True)
         self.SOrder.show()
         loadOs(id)
