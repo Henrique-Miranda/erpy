@@ -232,9 +232,9 @@ class App(Ui_Login):
                 email = self.cliedit.leMail.text().strip()
                 if self.cliedit.leCodCli.text():
                     sql = f"""UPDATE clients SET altdate = '{QtCore.QDateTime.currentDateTime().toString("dd/MM/yyyy hh:mm:ss")}', lastAlter={self.userId}, blocked = '{int(self.cliedit.checkBox.isChecked())}',
-                    name = '{name}', birthFun = '{birth}', sex = {self.cliedit.buttonGroup_2.checkedId()}, cpfcnpj='{cpfcnpj}', rgie = NULLIF('{rgie}',
+                    name = '{name}', birthFun = '{birth}', sex = {self.cliedit.buttonGroup_2.checkedId()}, cpfcnpj='{cpfcnpj}', rgie = NULLIF('{rgie}', ''),
                     cell1op = '{self.cliedit.cbCell1.currentText()}', cell1 = '{self.cliedit.leCell1.text()}', cell2op = '{self.cliedit.cbCell2.currentText()}',
-                    cell2 = '{self.cliedit.leCell2.text()}', tel = '{self.cliedit.leTel.text()}', email = NULLIF('{email}', cep = '{self.cliedit.leCep.text()}',
+                    cell2 = '{self.cliedit.leCell2.text()}', tel = '{self.cliedit.leTel.text()}', email = NULLIF('{email}', ''), cep = '{self.cliedit.leCep.text()}',
                     adress = '{self.cliedit.leStreet.text()}', number = '{self.cliedit.leNumber.text()}', adress2 = '{self.cliedit.leComp.text()}',
                     district = '{self.cliedit.leDistrict.text()}', city = '{self.cliedit.leCity.text()}', state = '{self.cliedit.leState.text()}', contry = '{self.cliedit.leContry.text()}' WHERE id={int(self.cliedit.leCodCli.text())}"""
                     banco.queryDB(sql)
@@ -248,7 +248,7 @@ class App(Ui_Login):
                     {self.userId}, {self.cliedit.buttonGroup.checkedId()},
                     '{int(self.cliedit.checkBox.isChecked())}', '{name}', '{birth}',
                     {self.cliedit.buttonGroup_2.checkedId()},
-                    '{cpfcnpj}', NULLIF('{rgie}', '{self.cliedit.cbCell1.currentText()}',
+                    '{cpfcnpj}', NULLIF('{rgie}', ''), '{self.cliedit.cbCell1.currentText()}',
                     '{self.cliedit.leCell1.text()}', '{self.cliedit.cbCell2.currentText() }', '{self.cliedit.leCell2.text()}',
                     '{self.cliedit.leTel.text()}', NULLIF('{email}', ''),
                     '{self.cliedit.leCep.text()}', '{self.cliedit.leStreet.text()}',
@@ -453,6 +453,7 @@ class App(Ui_Login):
 
                 result = banco.queryDB(f"""SELECT * FROM os_itens WHERE osId={id}""")
                 print(result)
+                defectFound = self.sorder.leDefectsFound.text()
                 if result:
                     self.sorder.twBudget.setRowCount(len(result))
                     self.sorder.twBudget.setColumnCount(4)
@@ -464,6 +465,7 @@ class App(Ui_Login):
                         self.sorder.twBudget.setItem(row, 3, QTableWidgetItem(str(item[5])))
                         ptotal+=item[4]
                     self.sorder.spPartsValue.setValue(ptotal)
+                defectFound = self.sorder.leDefectsFound.text()
 
             else:
                 sql = f"""SELECT name, birthFun, sex, cpfcnpj, rgie, cell1op, cell1, cell2op, cell2, tel, email, adress, number, adress2, cep, district, city, state, contry FROM clients WHERE id={idC}"""
@@ -581,7 +583,6 @@ class App(Ui_Login):
             except:
                 import webbrowser
                 webbrowser.open(PDF_PATH)
-
 
         print('Abrindo SO edit')
         self.SOrder = QDialog()
