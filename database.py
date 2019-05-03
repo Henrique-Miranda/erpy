@@ -129,12 +129,10 @@ class Database(object):
         self.cursor.execute(
             '''
             CREATE TABLE IF NOT EXISTS os_itens (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
             osId INTEGER,
             description TEXT NOT NULL,
-            amount REAL NOT NULL,
+            amount INTEGER NOT NULL,
             value REAL NOT NULL,
-            subTotal REAL NOT NULL,
             FOREIGN KEY(osId) REFERENCES service_order(id) ON UPDATE CASCADE);
             '''
         )

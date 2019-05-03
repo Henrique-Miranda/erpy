@@ -442,9 +442,7 @@ class App(Ui_Login):
                 self.sorder.leObs1.setText(result[0][36])
                 self.sorder.leDefectsFound.setText(result[0][37])
                 self.sorder.leServiceDone.setText(result[0][38])
-                self.sorder.spPartsValue.setValue(result[0][39])
                 self.sorder.spServiceValue.setValue(result[0][40])
-                self.sorder.spTotalValue.setValue(result[0][41])
                 self.sorder.leObs2.setText(result[0][42])
                 self.sorder.lbStatus2.setText(result[0][43])
                 self.sorder.cbStatus.setCurrentText(result[0][43])
@@ -454,22 +452,32 @@ class App(Ui_Login):
                     self.sorder.pbDelivery.setEnabled(True)
                 else:
                     self.sorder.pbDelivery.setEnabled(False)
+                if self.sorder.cbStatus.currentText() in ('Oçamento concluído', 'Orçamento aprovado', 'Consertado', 'Em execução do serviço', 'Aguardando peça de reposição'):
+                    self.sorder.pbPrint2.setEnabled(True)
+                else:
+                    self.sorder.pbPrint2.setEnabled(False)
+                if self.sorder.cbStatus.currentText() in ('Consertado', 'Equipamento devolvido'):
+                    self.sorder.pbPrint3.setEnabled(True)
+                else:
+                    self.sorder.pbPrint3.setEnabled(False)
                 #dbConn = Database('database.db')
-                result = dbConn.queryDB(f"""SELECT * FROM os_itens WHERE osId={id}""")
+                result = self.dbConn.queryDB(f"""SELECT * FROM os_itens WHERE osId={id}""")
                 print(result)
                 defectFound = self.sorder.leDefectsFound.text()
+                ptotal = 0
                 if result:
                     self.sorder.twBudget.setRowCount(len(result))
                     self.sorder.twBudget.setColumnCount(4)
-                    ptotal = 0
                     for row, item in enumerate(result):
-                        self.sorder.twBudget.setItem(row, 0, QTableWidgetItem(item[2]))
-                        self.sorder.twBudget.setItem(row, 1, QTableWidgetItem(str(item[3])))
-                        self.sorder.twBudget.setItem(row, 2, QTableWidgetItem(str(item[4])))
-                        self.sorder.twBudget.setItem(row, 3, QTableWidgetItem(str(item[5])))
-                        ptotal+=item[4]
+                        self.sorder.twBudget.setItem(row, 0, QTableWidgetItem(item[1]))
+                        self.sorder.twBudget.setItem(row, 1, QTableWidgetItem(str(item[2])))
+                        self.sorder.twBudget.setItem(row, 2, QTableWidgetItem(str(item[3])))
+                        self.sorder.twBudget.setItem(row, 3, QTableWidgetItem(str(item[2]*item[3])))
+                        ptotal+=float(self.sorder.twBudget.item(row, 3).text())
                     self.sorder.spPartsValue.setValue(ptotal)
-                defectFound = self.sorder.leDefectsFound.text()
+                    header = self.sorder.twBudget.horizontalHeader()
+                    header.setSectionResizeMode(QHeaderView.ResizeToContents)
+                self.sorder.spTotalValue.setValue(ptotal+self.sorder.spServiceValue.value())
 
             else:
                 #dbConn = Database('database.db')
@@ -507,12 +515,12 @@ class App(Ui_Login):
                 print('Salvando OS...')
                 idCli = int(self.sorder.leCodCli.text())
                 type = self.sorder.cbType.currentText()
-                assert type != '', 'Selecione um tipo de aparelho!'
+                assert type, 'Selecione um tipo de aparelho!'
                 brand = self.sorder.cbBrand.currentText()
-                assert brand != '', 'Selecione uma Marca!'
+                assert brand, 'Selecione uma Marca!'
                 model = self.sorder.leModel.text()
                 color = self.sorder.leColor.text()
-                assert color != '', 'Selecione uma cor!'
+                assert color, 'Selecione uma cor!'
                 ns = self.sorder.leNs.text()
                 br = self.sorder.leBarCode.text()
                 imei1 = self.sorder.leImei1.text()
@@ -520,16 +528,17 @@ class App(Ui_Login):
                 acessories = self.sorder.leAcessories.text()
                 deviceStatus = self.sorder.leDeviceStatus.text()
                 defect = self.sorder.leDefect.text()
-                assert defect != '', 'Descreva o defeito do aparelho!'
+                assert defect, 'Descreva o defeito do aparelho!'
                 obs1 = self.sorder.leObs1.text()
                 defectFound = self.sorder.leDefectsFound.text()
                 serviceDone = self.sorder.leServiceDone.text()
                 obs2 = self.sorder.leObs2.text()
-                status = self.sorder.cbStatus.currentText()
                 partsValue = self.sorder.spPartsValue.value()
                 serviceValue = self.sorder.spServiceValue.value()
                 total = partsValue + serviceValue
-                rnumber = self.sorder.twBudget.rowCount()
+                status = self.sorder.cbStatus.currentText()
+                if status in ('Orçamento aprovado', 'Consertado', 'Aguardando peça de reposição', 'Orçamento concluído', 'Equipamento devolvido consertado', 'Orçamento reprovado', 'Em execução do serviço'):
+                    assert total, 'Antes disso insira um valor de serviço ou peça na aba orçamento.'
 
             except AssertionError as e:
                 msg = QMessageBox()
@@ -546,20 +555,23 @@ class App(Ui_Login):
                 partTotalValue={partsValue}, serviceValue={serviceValue}, total={total}, obs2='{obs2}', status='{status}' WHERE id={id}"""
                 #dbConn = Database('database.db')
                 self.dbConn.queryDB(sql)
-                print(rnumber)
+                rnumber = self.sorder.twBudget.rowCount()
                 if rnumber:
+                    sql = f"DELETE FROM os_itens WHERE osId={id}"
+                    self.dbConn.queryDB(sql)
                     for row in range(rnumber):
                         desc = self.sorder.twBudget.item(row, 0).text()
-                        amount = float(self.sorder.twBudget.item(row, 1).text())
+                        amount = int(self.sorder.twBudget.item(row, 1).text())
                         value = float(self.sorder.twBudget.item(row, 2).text())
-                        stotal = float(self.sorder.twBudget.item(row, 3).text())
-                        sql = f"INSERT INTO os_itens (osId, description, amount, value, subTotal) VALUES ({id}, '{desc}', {amount}, {value}, {stotal})"
+                        sql = f"INSERT INTO os_itens (osId, description, amount, value) VALUES ({id}, '{desc}', {amount}, {value})"
                         #dbConn = Database('database.db')
                         print('SQL', sql)
-                        try:
-                            self.dbConn.queryDB(sql)
-                        except:
-                            pass
+                        self.dbConn.queryDB(sql)
+                if not rnumber and self.sorder.spPartsValue.value():
+                    sql = f"DELETE FROM os_itens WHERE osId={id}"
+                    self.dbConn.queryDB(sql)
+                    self.sorder.spPartsValue.setValue(0.0)
+
                 loadOs(id)
             else:
                 sql = f"""INSERT INTO service_order (idCli, entryDate, altDate, lastAlter,
@@ -575,9 +587,9 @@ class App(Ui_Login):
                 lrid = self.dbConn.queryDB(sql)
                 self.openSO(lrid)
 
-        def printSo(id):
+        def printSo(id, osType):
             from exportPDF import makePDF
-            makePDF(1, id, 'A4')
+            makePDF(id, osType)
             PDF_PATH = f'{os.getcwd()}/OS_DIR/os{id}.pdf'
             try:
                 import platform
@@ -599,7 +611,9 @@ class App(Ui_Login):
         self.sorder.pbSearch.clicked.connect(self.sorder.pbExit.click)
         self.sorder.pbSearch.clicked.connect(lambda: self.openCliEdit(int(self.sorder.leCodCli.text())))
         self.sorder.cbStatus.currentTextChanged.connect(lambda: self.sorder.lbStatus2.setText(self.sorder.cbStatus.currentText()))
-        self.sorder.pbPrint.clicked.connect(lambda: printSo(id))
+        self.sorder.pbPrint.clicked.connect(lambda: printSo(id, 1))
+        self.sorder.pbPrint2.clicked.connect(lambda: printSo(id, 2))
+        self.sorder.pbPrint3.clicked.connect(lambda: printSo(id, 3))
         def addToTable():
             row = self.sorder.twBudget.rowCount()+1
             self.sorder.twBudget.setRowCount(row)
@@ -611,10 +625,8 @@ class App(Ui_Login):
             self.sorder.twBudget.setItem(row-1, 1, QTableWidgetItem(str(amount)))
             self.sorder.twBudget.setItem(row-1, 2, QTableWidgetItem(str(pvalue)))
             self.sorder.twBudget.setItem(row-1, 3, QTableWidgetItem(str(svalue)))
-        self.sorder.twBudget.itemDoubleClicked.connect(lambda: self.sorder.twBudget.removeRow(self.sorder.twBudget.currentRow()))
+        self.sorder.twBudget.itemClicked.connect(lambda: self.sorder.twBudget.removeRow(self.sorder.twBudget.currentRow()))
         self.sorder.pbAddPart.clicked.connect(addToTable)
-        header = self.sorder.twBudget.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.ResizeToContents)
         self.SOrder.setModal(True)
         self.SOrder.show()
         loadOs(id)

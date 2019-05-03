@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>915</width>
-    <height>696</height>
+    <height>698</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1478,15 +1478,24 @@
           <property name="text">
            <string>Descrição</string>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
          </column>
          <column>
           <property name="text">
            <string>Quantidade</string>
           </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
+          </property>
          </column>
          <column>
           <property name="text">
            <string>Valor un</string>
+          </property>
+          <property name="textAlignment">
+           <set>AlignCenter</set>
           </property>
          </column>
          <column>
@@ -1501,29 +1510,6 @@
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_21">
-         <item>
-          <widget class="QLabel" name="lbPartsValue">
-           <property name="text">
-            <string>Valor peças:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="spPartsValue">
-           <property name="buttonSymbols">
-            <enum>QAbstractSpinBox::NoButtons</enum>
-           </property>
-           <property name="prefix">
-            <string>R$</string>
-           </property>
-           <property name="suffix">
-            <string/>
-           </property>
-           <property name="maximum">
-            <double>10000000000000000146306952306748730309700429878646550592786107871697963642511482159104.000000000000000</double>
-           </property>
-          </widget>
-         </item>
          <item>
           <widget class="QLabel" name="lbServiceValue">
            <property name="text">
@@ -1541,6 +1527,32 @@
            </property>
            <property name="maximum">
             <double>100000000000000001463069523067487303097004298786465505927861078716979636425114821591040.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lbPartsValue">
+           <property name="text">
+            <string>Valor peças:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="spPartsValue">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="buttonSymbols">
+            <enum>QAbstractSpinBox::NoButtons</enum>
+           </property>
+           <property name="prefix">
+            <string>R$</string>
+           </property>
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <double>10000000000000000146306952306748730309700429878646550592786107871697963642511482159104.000000000000000</double>
            </property>
           </widget>
          </item>
@@ -1706,9 +1718,51 @@
        </item>
        <item>
         <property name="text">
-         <string>Equipamento devolvido</string>
+         <string>Equipamento devolvido consertado</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>Equipamento devolvido sem reparo</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Imprimir nota:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pbPrint">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Entrada</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pbPrint2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Orçamento</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pbPrint3">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Saída</string>
+       </property>
       </widget>
      </item>
      <item>
@@ -1732,16 +1786,6 @@
       <widget class="QPushButton" name="pbSave">
        <property name="text">
         <string>Salvar</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pbPrint">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Imprimir</string>
        </property>
       </widget>
      </item>
