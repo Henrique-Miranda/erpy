@@ -120,10 +120,27 @@ class Database(object):
             CREATE TABLE IF NOT EXISTS products (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             description TEXT NOT NULL,
-            amount REAL NOT NULL,
+            amount INTEGER NOT NULL,
             bValue REAL NOT NULL,
             sValue REAL NOT NULL,
             barCode TEXT UNIQUE);
+            '''
+        )
+        # Em edição
+        self.cursor.execute(
+            '''
+            CREATE TABLE IF NOT EXISTS sales (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            idProduct INTEGER,
+            idOs INTEGER,
+            dateTime TEXT NOT NULL,
+            clientName TEXT NOT NULL,
+            saleType TEXT NOT NULL,
+            discount REAL DEFAULT 0,
+            paid REAL,
+            change REAL,
+            FOREIGN KEY(idProduct) REFERENCES products(id) ON UPDATE CASCADE,
+            FOREIGN KEY(idOs) REFERENCES service_order(id) ON UPDATE CASCADE);
             '''
         )
         self.cursor.execute(

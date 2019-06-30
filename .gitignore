@@ -118,3 +118,5 @@ dmypy.json
 .directory
 *.db
 /OS_DIR
+
+*.svg
