@@ -23,3 +23,7 @@ Linux users:<br>
 <b>Login:</b><br>
 User: admin<br>
 Password: admin<br>
+
+<b>Screenshots:<b><br>
+
+![alt text](https://raw.githubusercontent.com/Henrique-Miranda/erpy/master/screenshots/login.png)
