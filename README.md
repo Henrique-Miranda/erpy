@@ -26,20 +26,20 @@ Password: admin<br>
 
 <b>Screenshots:<b><br>
 
-![alt text](https://raw.githubusercontent.com/Henrique-Miranda/erpy/master/screenshots/erpy_login.png)
+![Login](https://raw.githubusercontent.com/Henrique-Miranda/erpy/master/screenshots/erpy_login.png)
 
 <br>
 
-![alt text](https://raw.githubusercontent.com/Henrique-Miranda/erpy/master/screenshots/erpy_home.png)
+![Home](https://raw.githubusercontent.com/Henrique-Miranda/erpy/master/screenshots/erpy_home.png)
 
 <br>
 
-![alt text](https://raw.githubusercontent.com/Henrique-Miranda/erpy/master/screenshots/erpy_clients.png)
+![Clients](https://raw.githubusercontent.com/Henrique-Miranda/erpy/master/screenshots/erpy_clients.png)
 
 <br>
 
-![alt text](https://raw.githubusercontent.com/Henrique-Miranda/erpy/master/screenshots/erpy_serviceorder.png)
+![Service Order](https://raw.githubusercontent.com/Henrique-Miranda/erpy/master/screenshots/erpy_serviceorder.png)
 
 <br>
 
-![alt text](https://raw.githubusercontent.com/Henrique-Miranda/erpy/master/screenshots/erpy_serviceorder2.png)
+![Service Order](https://raw.githubusercontent.com/Henrique-Miranda/erpy/master/screenshots/erpy_serviceorder2.png)
