@@ -22,35 +22,6 @@
     <enum>QLayout::SetFixedSize</enum>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_12">
-     <item>
-      <widget class="QLabel" name="lbWindow">
-       <property name="maximumSize">
-        <size>
-         <width>250</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="text">
-        <string>Ordem de Serviço</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_23">
      <item>
       <widget class="QLabel" name="lbOs">
@@ -450,21 +421,21 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QLabel" name="lbCell1">
+             <widget class="QLabel" name="lbPhone1">
               <property name="text">
                <string>Celular 1</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="leCell1">
+             <widget class="QLineEdit" name="lePhone1">
               <property name="readOnly">
                <bool>true</bool>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="cbCell1">
+             <widget class="QComboBox" name="cbPhone1">
               <property name="maximumSize">
                <size>
                 <width>70</width>
@@ -507,21 +478,21 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lbCell2">
+             <widget class="QLabel" name="lbPhone2">
               <property name="text">
                <string>Celular 2:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="leCell2">
+             <widget class="QLineEdit" name="lePhone2">
               <property name="readOnly">
                <bool>true</bool>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="cbCell2">
+             <widget class="QComboBox" name="cbPhone2">
               <property name="maximumSize">
                <size>
                 <width>70</width>
@@ -572,7 +543,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="leTel">
+             <widget class="QLineEdit" name="lePhone3">
               <property name="maximumSize">
                <size>
                 <width>120</width>

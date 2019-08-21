@@ -25,25 +25,6 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="lbMenuCli">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-     <property name="text">
-      <string>Menu Clientes</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="lbCodCli">
@@ -344,14 +325,14 @@
       <item>
        <layout class="QHBoxLayout" name="hl4">
         <item>
-         <widget class="QLabel" name="lbCell1">
+         <widget class="QLabel" name="lbPhone1">
           <property name="text">
            <string>Celular 1</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="leCell1">
+         <widget class="QLineEdit" name="lePhone1">
           <property name="inputMethodHints">
            <set>Qt::ImhDigitsOnly</set>
           </property>
@@ -364,7 +345,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="cbCell1">
+         <widget class="QComboBox" name="cbPhone1">
           <property name="maximumSize">
            <size>
             <width>70</width>
@@ -404,14 +385,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="lbCell2">
+         <widget class="QLabel" name="lbPhone2">
           <property name="text">
            <string>Celular 2:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="leCell2">
+         <widget class="QLineEdit" name="lePhone2">
           <property name="inputMethodHints">
            <set>Qt::ImhDigitsOnly</set>
           </property>
@@ -430,7 +411,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="cbCell2">
+         <widget class="QComboBox" name="cbPhone2">
           <property name="maximumSize">
            <size>
             <width>70</width>
@@ -474,14 +455,14 @@
       <item>
        <layout class="QHBoxLayout" name="hl5">
         <item>
-         <widget class="QLabel" name="lbTel">
+         <widget class="QLabel" name="lbPhone3">
           <property name="text">
            <string>Telefone:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="leTel">
+         <widget class="QLineEdit" name="lePhone3">
           <property name="maximumSize">
            <size>
             <width>120</width>
@@ -734,11 +715,11 @@
   <tabstop>rbF</tabstop>
   <tabstop>leCpfCnpj</tabstop>
   <tabstop>leRgIe</tabstop>
-  <tabstop>leCell1</tabstop>
-  <tabstop>cbCell1</tabstop>
-  <tabstop>leCell2</tabstop>
-  <tabstop>cbCell2</tabstop>
-  <tabstop>leTel</tabstop>
+  <tabstop>lePhone1</tabstop>
+  <tabstop>cbPhone1</tabstop>
+  <tabstop>lePhone2</tabstop>
+  <tabstop>cbPhone2</tabstop>
+  <tabstop>lePhone3</tabstop>
   <tabstop>leMail</tabstop>
   <tabstop>leCep</tabstop>
   <tabstop>leStreet</tabstop>
@@ -773,7 +754,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

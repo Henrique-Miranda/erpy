@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>193</width>
-    <height>264</height>
+    <height>152</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -119,7 +119,9 @@
   <tabstop>leuser</tabstop>
   <tabstop>lepass</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../logo.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

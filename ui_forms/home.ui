@@ -172,19 +172,45 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <spacer name="hSearch">
+         <spacer name="hsCbox_4">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>40</width>
+            <width>20</width>
             <height>20</height>
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Pesquisar por: </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="cbSearch">
+          <item>
+           <property name="text">
+            <string>Cliente</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Ordem de Serviço</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Produto</string>
+           </property>
+          </item>
+         </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="leSearch">
@@ -205,55 +231,6 @@
            <iconset>
             <normaloff>IMG/magnifying-glass.png</normaloff>IMG/magnifying-glass.png</iconset>
           </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="hsSearch_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
-         <spacer name="hsCbox_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QComboBox" name="cbSearch">
-          <item>
-           <property name="text">
-            <string>Cliente</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Ordem de Serviço</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Produto</string>
-           </property>
-          </item>
          </widget>
         </item>
         <item>
@@ -304,6 +281,15 @@
         <attribute name="horizontalHeaderVisible">
          <bool>true</bool>
         </attribute>
+        <attribute name="horizontalHeaderCascadingSectionResizes">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderMinimumSectionSize">
+         <number>49</number>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
         <attribute name="verticalHeaderVisible">
          <bool>false</bool>
         </attribute>
@@ -337,6 +323,7 @@
     </widget>
     <addaction name="menuNew"/>
     <addaction name="actionSair"/>
+    <addaction name="actionSobre"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -413,6 +400,11 @@
   <action name="actionSair">
    <property name="text">
     <string>Sair</string>
+   </property>
+  </action>
+  <action name="actionSobre">
+   <property name="text">
+    <string>Sobre</string>
    </property>
   </action>
  </widget>

@@ -9,28 +9,28 @@ from reportlab.lib.units import mm
 from reportlab.lib import colors
 paper = '58mm'
 
-def makePDF(osId = 1, osType = 2):
+def makePDF(soId = 1, osType = 2):
     banco = Database('database.db')
-    # Company info
-    result = resultc = banco.queryDB(f"""SELECT logo, name, slogan, adress, number,
-    adress2, district, city, state, tel, cell1, cell2, email, site FROM company WHERE id=1""")
+    # companies info
+    resultc = banco.queryDB(f"""SELECT logo, name, slogan, adress, number,
+    adress2, district, city, state, phone3, phone1, phone2, email, site FROM companies WHERE id=1""")
     logo = resultc[0][0]
     compName = resultc[0][1]
     slogan = resultc[0][2]
     compAdress = f'{resultc[0][3]}, {resultc[0][4]}, {resultc[0][5]}, {resultc[0][6]}, {resultc[0][7]} - {resultc[0][8]}'
-    compTel = f'{resultc[0][9]} / {resultc[0][10]}'
+    companyPhones = f'{resultc[0][9]} / {resultc[0][10]}'
     compEmail = resultc[0][12]
     compSite = resultc[0][13]
-    # END Company info
+    # END companies info
 
     # OS info
-    result = banco.queryDB(f'SELECT clients.name, entryDate, clients.adress, clients.number,clients.adress2, clients.district, clients.city, clients.state, clients.tel, clients.cell1, clients.cell2, deviceType, brand, model, color, acessories, deviceStatus, defect, defectFound, obs1, obs2, status, partTotalValue, serviceValue, total FROM service_order INNER JOIN clients ON clients.id=service_order.idCli WHERE service_order.id={osId}')
+    result = banco.queryDB(f'SELECT clients.name, entryDate, clients.adress, clients.number,clients.adress2, clients.district, clients.city, clients.state, clients.phone3, clients.phone1, clients.phone2, deviceType, brand, model, color, acessories, deviceStatus, defect, defectFound, obs1, obs2, status, serviceValue FROM serviceOrders INNER JOIN clients ON clients.id=serviceOrders.idCli WHERE serviceOrders.id={soId}')
     print('RES: ', result)
-    osNumber = osId
+    osNumber = soId
     cliName = result[0][0]
     entryDate = result[0][1]
     adress = f'{result[0][2]}, {result[0][3]}, {result[0][4]}, {result[0][5]}, {result[0][6]}, {result[0][7]}'
-    tel = f'{result[0][8]} {result[0][9]} {result[0][10]}'
+    cliPhones = f'{result[0][8]} {result[0][9]} {result[0][10]}'
     device = result[0][11]
     brand = result[0][12]
     model = result[0][13]
@@ -42,16 +42,29 @@ def makePDF(osId = 1, osType = 2):
     obs = result[0][19]
     obs2 = result[0][19]
     status = result[0][21]
-    partTotalValue = result[0][22]
-    serviceValue = result[0][23]
-    total = result[0][24]
+    resultParts = banco.queryDB(f"""SELECT * FROM soProducts WHERE soId={soId}""")
+    print('SQL PARTS: ', resultParts)
+    if resultParts:
+        partTotalValue = 0.0
+        data=[('Descrição', 'Quantidade', 'Valor Un')]
+        for part in resultParts:
+            partTotalValue += part[2] * part[3]
+            part = list(part)
+            part.pop(0)
+            data.append(part)
+        print('DATA: ', data)
+    else:
+        partTotalValue = 0.0
+        data=[]
+    serviceValue = result[0][22]
+    total = serviceValue + partTotalValue
     printDate = time.strftime("%d/%m/%Y %H:%M:%S")
     Terms = [
     'Ao deixar seu equipamento retire o chip e cartão de memória, não nos responsabilizamos por estes itens.',
     'Os aparelhos não retirados no prazo máximo de 90 dias contados a partir da data em que for orçado, será cobrado uma taxa de R$10,00 por dia para cobrir custos de armazenamento.',
     'O aparelho só será devolvido para o titular deste documento, caso necessário o titular poderá solicitar retirada por terceiros.']
     warrantyTerms = [
-    'A empresa da 90 dias de garantia nas peças aplicadas e serviços realizados.',
+    'A empresa da 90 dias de garantia nas PEÇAS E VALORES e serviços realizados.',
     'A garantia não cobre defeitos causados pelo usuário ou mau uso do aparelho, como quebra ou arranhões nas peças trocas.',
     'A violação do lacre de garantia ou a desmontagem do aparelho por pessoas não autorizadas acarretará na perca da garantia.']
     # END OS info
@@ -73,7 +86,7 @@ def makePDF(osId = 1, osType = 2):
         Story.append(Paragraph(ptext, style["center"]))
         ptext = f"{slogan}"
         Story.append(Paragraph(ptext, style["center"]))
-        ptext = f"{compTel}"
+        ptext = f"{companyPhones}"
         Story.append(Paragraph(ptext, style["center"]))
         ptext = f"{compEmail}"
         Story.append(Paragraph(ptext, style["center"]))
@@ -97,7 +110,7 @@ def makePDF(osId = 1, osType = 2):
         Story.append(Paragraph(ptext, style["left"]))
         ptext = f"<b>End'80mm'ereço:</b> {adress}"
         Story.append(Paragraph(ptext, style["left"]))
-        ptext = f"<b>Tel.:</b> { tel}"
+        ptext = f"<b>Tel.:</b> {cliPhones}"
         Story.append(Paragraph(ptext, style["left"]))
         ptext = f"<b>Equipamento:</b> {device}"
         Story.append(Paragraph(ptext, style["left"]))
@@ -170,7 +183,7 @@ def makePDF(osId = 1, osType = 2):
         Story.append(Paragraph(ptext, style["center"]))
         ptext = f"{slogan}"
         Story.append(Paragraph(ptext, style["center"]))
-        ptext = f"{compTel}"
+        ptext = f"{companyPhones}"
         Story.append(Paragraph(ptext, style["center"]))
         ptext = f"{compEmail}"
         Story.append(Paragraph(ptext, style["center"]))
@@ -192,7 +205,7 @@ def makePDF(osId = 1, osType = 2):
         Story.append(Spacer(1, 12))
         ptext = f"<b>Nome:</b> {cliName}"
         Story.append(Paragraph(ptext, style["left"]))
-        ptext = f"<b>Tel.:</b> { tel}"
+        ptext = f"<b>Tel.:</b> {cliPhones}"
         Story.append(Paragraph(ptext, style["left"]))
         ptext = f"<b>Equipamento:</b> {device}"
         Story.append(Paragraph(ptext, style["left"]))
@@ -213,18 +226,17 @@ def makePDF(osId = 1, osType = 2):
         Story.append(Spacer(1, 12))
         # END OS DATA
 
-        ptext = '<b>PEÇAS APLICADAS:</b>'
+        ptext = '<b>PEÇAS E VALORES:</b>'
         Story.append(Paragraph(ptext, style["center"]))
         Story.append(Spacer(1, 20))
-        data=[('Descrição', 'Quantidade', 'Valor Un', 'Subtotal'),
-            ('Touch Samsung G530', 1, 15, 15)]
-        table = Table(data)
-        table.setStyle(TableStyle([('INNERGRID', (0,0), (-1, -1), 0.25, colors.black),
+        if data:
+            table = Table(data)
+            table.setStyle(TableStyle([('INNERGRID', (0,0), (-1, -1), 0.25, colors.black),
                                     ('BOX', (0,0), (-1, -1), 0.25, colors.black),
                                     ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
                                     ('ALIGN', (0,0), (-1,-1), 'CENTER')]))
-        Story.append(table)
-        Story.append(Spacer(1, 20))
+            Story.append(table)
+            Story.append(Spacer(1, 20))
         ptext = f'<b>Valor total de peças:</b> {partTotalValue}'
         Story.append(Paragraph(ptext, style["center"]))
         ptext = f'<b>Valor da Mão de Obra</b>: {serviceValue}'
@@ -265,7 +277,7 @@ def makePDF(osId = 1, osType = 2):
         Story.append(Paragraph(ptext, style["center"]))
         ptext = f"{slogan}"
         Story.append(Paragraph(ptext, style["center"]))
-        ptext = f"{compTel}"
+        ptext = f"{companyPhones}"
         Story.append(Paragraph(ptext, style["center"]))
         ptext = f"{compEmail}"
         Story.append(Paragraph(ptext, style["center"]))
@@ -296,7 +308,7 @@ def makePDF(osId = 1, osType = 2):
         ptext = f"<b>Complemento:</b> {adress2}"
         Story.append(Paragraph(ptext, style["left"]))
         '''
-        ptext = f"<b>Tel.:</b> { tel}"
+        ptext = f"<b>Tel.:</b> {cliPhones}"
         Story.append(Paragraph(ptext, style["left"]))
         ptext = f"<b>Equipamento:</b> {device}"
         Story.append(Paragraph(ptext, style["left"]))
@@ -368,7 +380,7 @@ def makePDF(osId = 1, osType = 2):
         Story.append(Paragraph(ptext, style["center"]))
         ptext = f"{slogan}"
         Story.append(Paragraph(ptext, style["center"]))
-        ptext = f"{compTel}"
+        ptext = f"{companyPhones}"
         Story.append(Paragraph(ptext, style["center"]))
         ptext = f"{compEmail}"
         Story.append(Paragraph(ptext, style["center"]))
@@ -391,7 +403,7 @@ def makePDF(osId = 1, osType = 2):
         Story.append(Spacer(1, 3))
         ptext = f"<b>Nome:</b> {cliName}"
         Story.append(Paragraph(ptext, style["left"]))
-        ptext = f"<b>Tel.:</b> { tel}"
+        ptext = f"<b>Tel.:</b> {cliPhones}"
         Story.append(Paragraph(ptext, style["left"]))
         ptext = f"<b>Equipamento:</b> {device}"
         Story.append(Paragraph(ptext, style["left"]))
@@ -412,20 +424,19 @@ def makePDF(osId = 1, osType = 2):
         Story.append(Spacer(1, 3))
         # END OS DATA
 
-        ptext = '<b>PEÇAS APLICADAS:</b>'
+        ptext = '<b>PEÇAS E VALORES:</b>'
         Story.append(Paragraph(ptext, style["center"]))
         Story.append(Spacer(1, 3))
-        data=[('Des.', 'Quan.', 'Val.Un', 'Sub.'),
-            ('Touch Samsung G530', 1, 15, 15)]
-        table = Table(data)
-        table.setStyle(TableStyle([('INNERGRID', (0,0), (-1,-1), 0.50, colors.black),
+        if data:
+            table = Table(data)
+            table.setStyle(TableStyle([('INNERGRID', (0,0), (-1,-1), 0.50, colors.black),
                                     ('BOX', (0,0), (-1, -1), 0.50, colors.black),
                                     ('FONTNAME', (0,0), (-1,-1), 'Helvetica-Bold'),
                                     ('ALIGN', (0,0), (-1,-1), 'CENTER'),
                                     ('FONTSIZE', (0,0), (-1,-1), 5),
                                     ('VALIGN', (0,0), (-1,-1), 'MIDDLE')]))
-        Story.append(table)
-        Story.append(Spacer(1, 3))
+            Story.append(table)
+            Story.append(Spacer(1, 3))
         ptext = f'<b>Valor total de peças:</b> {partTotalValue}'
         Story.append(Paragraph(ptext, style["center"]))
         ptext = f'<b>Valor da Mão de Obra</b>: {serviceValue}'
@@ -454,6 +465,7 @@ def makePDF(osId = 1, osType = 2):
     if not 'OS_DIR' in os.listdir():
         os.mkdir('OS_DIR')
 
+# # TODO: implementar modelos de 80mm e modelos de notas de saída em todas medidas
     if osType == 1:
         if paper == 'A4':
             entryA4()
