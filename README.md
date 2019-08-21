@@ -9,8 +9,8 @@ Multiplataform.<br>
 <b>Requirements:</b><br>
 Python 3.7+<br>
 PySide2<br>
-PySqlCipher3<br>
-SqlCipher https://www.zetetic.net/sqlcipher/open-source/<br>
+PySqlCipher3 (Optional)<br>
+SqlCipher (Optional) https://www.zetetic.net/sqlcipher/open-source/<br>
 
 <b>Installation:</b><br>
 Windows users download at: https://github.com/Henrique-Miranda/erpy/releases<br>
