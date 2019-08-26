@@ -1575,12 +1575,20 @@
       <widget class="QTableWidget" name="twCliHistory">
        <property name="geometry">
         <rect>
-         <x>45</x>
+         <x>5</x>
          <y>11</y>
-         <width>681</width>
-         <height>371</height>
+         <width>881</width>
+         <height>421</height>
         </rect>
        </property>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>OS</string>
+        </property>
+       </column>
        <column>
         <property name="text">
          <string>Data entrada</string>
@@ -1588,7 +1596,7 @@
        </column>
        <column>
         <property name="text">
-         <string>OS</string>
+         <string>Data saída</string>
         </property>
        </column>
        <column>
@@ -1613,7 +1621,7 @@
        </column>
        <column>
         <property name="text">
-         <string>Valor</string>
+         <string>Valor pago</string>
         </property>
        </column>
       </widget>

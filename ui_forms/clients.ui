@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>622</width>
-    <height>628</height>
+    <height>652</height>
    </rect>
   </property>
   <property name="font">
@@ -110,562 +110,633 @@
     </layout>
    </item>
    <item>
-    <widget class="QGroupBox" name="gb1">
-     <property name="baseSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-     <property name="title">
-      <string>Identificação </string>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <layout class="QHBoxLayout" name="hl1">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Tipo de Cliente:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioButton">
-          <property name="focusPolicy">
-           <enum>Qt::NoFocus</enum>
-          </property>
-          <property name="whatsThis">
-           <string/>
-          </property>
-          <property name="accessibleName">
-           <string/>
-          </property>
-          <property name="accessibleDescription">
-           <string/>
-          </property>
-          <property name="text">
-           <string>PF</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-          <property name="autoExclusive">
-           <bool>false</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">buttonGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioButton_2">
-          <property name="focusPolicy">
-           <enum>Qt::NoFocus</enum>
-          </property>
-          <property name="whatsThis">
-           <string comment="Pessoa Jurídica" extracomment="Pessoa Jurídica">Pessoa Jurídica</string>
-          </property>
-          <property name="text">
-           <string>PJ</string>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">buttonGroup</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBox">
-          <property name="focusPolicy">
-           <enum>Qt::NoFocus</enum>
-          </property>
-          <property name="text">
-           <string>Bloquear?</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="hs2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="hl2">
-        <item>
-         <widget class="QLabel" name="lbName">
-          <property name="text">
-           <string>Nome:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leName"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="lbBirthFun">
-          <property name="text">
-           <string>Nascimento:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDateEdit" name="deBirthFun">
-          <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::UpDownArrows</enum>
-          </property>
-          <property name="calendarPopup">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="hl3">
-        <item>
-         <widget class="QLabel" name="lbSex">
-          <property name="text">
-           <string>Sexo:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="rbM">
-          <property name="text">
-           <string>M</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">buttonGroup_2</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="rbF">
-          <property name="text">
-           <string>F</string>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">buttonGroup_2</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="lbCpfCnpj">
-          <property name="text">
-           <string>CPF:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leCpfCnpj">
-          <property name="inputMethodHints">
-           <set>Qt::ImhDigitsOnly</set>
-          </property>
-          <property name="inputMask">
-           <string/>
-          </property>
-          <property name="maxLength">
-           <number>14</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="lbRgIe">
-          <property name="text">
-           <string>RG:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leRgIe">
-          <property name="inputMethodHints">
-           <set>Qt::ImhDigitsOnly</set>
-          </property>
-          <property name="inputMask">
-           <string/>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="maxLength">
-           <number>12</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="gb2">
-     <property name="title">
-      <string>Contato</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <layout class="QHBoxLayout" name="hl4">
-        <item>
-         <widget class="QLabel" name="lbPhone1">
-          <property name="text">
-           <string>Celular 1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lePhone1">
-          <property name="inputMethodHints">
-           <set>Qt::ImhDigitsOnly</set>
-          </property>
-          <property name="inputMask">
-           <string/>
-          </property>
-          <property name="maxLength">
-           <number>14</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="cbPhone1">
-          <property name="maximumSize">
-           <size>
-            <width>70</width>
-            <height>16777215</height>
-           </size>
-          </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Dados</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QGroupBox" name="gb1">
+         <property name="baseSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Identificação </string>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <property name="text">
-            <string/>
-           </property>
+           <layout class="QHBoxLayout" name="hl1">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Tipo de Cliente:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton">
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
+              </property>
+              <property name="whatsThis">
+               <string/>
+              </property>
+              <property name="accessibleName">
+               <string/>
+              </property>
+              <property name="accessibleDescription">
+               <string/>
+              </property>
+              <property name="text">
+               <string>PF</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_2">
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
+              </property>
+              <property name="whatsThis">
+               <string comment="Pessoa Jurídica" extracomment="Pessoa Jurídica">Pessoa Jurídica</string>
+              </property>
+              <property name="text">
+               <string>PJ</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox">
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
+              </property>
+              <property name="text">
+               <string>Bloquear?</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="hs2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
           <item>
-           <property name="text">
-            <string>Oi</string>
-           </property>
+           <layout class="QHBoxLayout" name="hl2">
+            <item>
+             <widget class="QLabel" name="lbName">
+              <property name="text">
+               <string>Nome:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leName"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbBirthFun">
+              <property name="text">
+               <string>Nascimento:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateEdit" name="deBirthFun">
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::UpDownArrows</enum>
+              </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <property name="text">
-            <string>Vivo</string>
-           </property>
+           <layout class="QHBoxLayout" name="hl3">
+            <item>
+             <widget class="QLabel" name="lbSex">
+              <property name="text">
+               <string>Sexo:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rbM">
+              <property name="text">
+               <string>M</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup_2</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rbF">
+              <property name="text">
+               <string>F</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroup_2</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbCpfCnpj">
+              <property name="text">
+               <string>CPF:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leCpfCnpj">
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="maxLength">
+               <number>14</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbRgIe">
+              <property name="text">
+               <string>RG:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leRgIe">
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="maxLength">
+               <number>12</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gb2">
+         <property name="title">
+          <string>Contato</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QHBoxLayout" name="hl4">
+            <item>
+             <widget class="QLabel" name="lbPhone1">
+              <property name="text">
+               <string>Celular 1</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lePhone1">
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="maxLength">
+               <number>14</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cbPhone1">
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <item>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Oi</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Vivo</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Tim</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Claro</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Nextel</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbPhone2">
+              <property name="text">
+               <string>Celular 2:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lePhone2">
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="maxLength">
+               <number>14</number>
+              </property>
+              <property name="placeholderText">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cbPhone2">
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <item>
+               <property name="text">
+                <string/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Vivo</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Tim</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Claro</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Nextel</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Oi</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <property name="text">
-            <string>Tim</string>
-           </property>
+           <layout class="QHBoxLayout" name="hl5">
+            <item>
+             <widget class="QLabel" name="lbPhone3">
+              <property name="text">
+               <string>Telefone:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lePhone3">
+              <property name="maximumSize">
+               <size>
+                <width>120</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="maxLength">
+               <number>13</number>
+              </property>
+              <property name="cursorPosition">
+               <number>0</number>
+              </property>
+              <property name="placeholderText">
+               <string/>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbMail">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>E-mail:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leMail">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>1677215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gb3">
+         <property name="title">
+          <string>Endereço</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QHBoxLayout" name="hl6">
+            <item>
+             <widget class="QLabel" name="lbCep">
+              <property name="text">
+               <string>CEP:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leCep">
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="maxLength">
+               <number>9</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="hs3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
           <item>
-           <property name="text">
-            <string>Claro</string>
-           </property>
+           <layout class="QHBoxLayout" name="hl7">
+            <item>
+             <widget class="QLabel" name="lbStreet">
+              <property name="text">
+               <string>Logradouro:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leStreet"/>
+            </item>
+           </layout>
           </item>
           <item>
-           <property name="text">
-            <string>Nextel</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="lbPhone2">
-          <property name="text">
-           <string>Celular 2:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lePhone2">
-          <property name="inputMethodHints">
-           <set>Qt::ImhDigitsOnly</set>
-          </property>
-          <property name="inputMask">
-           <string/>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="maxLength">
-           <number>14</number>
-          </property>
-          <property name="placeholderText">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="cbPhone2">
-          <property name="maximumSize">
-           <size>
-            <width>70</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <item>
-           <property name="text">
-            <string/>
-           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="lbNumber">
+              <property name="text">
+               <string>Nº:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leNumber">
+              <property name="maximumSize">
+               <size>
+                <width>60</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbComp">
+              <property name="text">
+               <string>Complemento:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leComp"/>
+            </item>
+           </layout>
           </item>
           <item>
-           <property name="text">
-            <string>Vivo</string>
-           </property>
+           <layout class="QHBoxLayout" name="hl8">
+            <item>
+             <widget class="QLabel" name="lbDistrict">
+              <property name="text">
+               <string>Bairro:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leDistrict"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbCity">
+              <property name="text">
+               <string>Cidade:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leCity"/>
+            </item>
+           </layout>
           </item>
           <item>
-           <property name="text">
-            <string>Tim</string>
-           </property>
+           <layout class="QHBoxLayout" name="hl9">
+            <item>
+             <widget class="QLabel" name="lbState">
+              <property name="text">
+               <string>Estado:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leState"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbContry">
+              <property name="text">
+               <string>País:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="leContry"/>
+            </item>
+           </layout>
           </item>
-          <item>
-           <property name="text">
-            <string>Claro</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Nextel</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Oi</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="hl5">
-        <item>
-         <widget class="QLabel" name="lbPhone3">
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Histórico</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="rowCount">
+          <number>0</number>
+         </property>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
           <property name="text">
-           <string>Telefone:</string>
+           <string>OS</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lePhone3">
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="inputMethodHints">
-           <set>Qt::ImhDigitsOnly</set>
-          </property>
-          <property name="inputMask">
-           <string/>
-          </property>
-          <property name="maxLength">
-           <number>13</number>
-          </property>
-          <property name="cursorPosition">
-           <number>0</number>
-          </property>
-          <property name="placeholderText">
-           <string/>
-          </property>
-          <property name="clearButtonEnabled">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="lbMail">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
+         </column>
+         <column>
           <property name="text">
-           <string>E-mail:</string>
+           <string>Data entrada</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leMail">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>1677215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="gb3">
-     <property name="title">
-      <string>Endereço</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
-      <item>
-       <layout class="QHBoxLayout" name="hl6">
-        <item>
-         <widget class="QLabel" name="lbCep">
+         </column>
+         <column>
           <property name="text">
-           <string>CEP:</string>
+           <string>Data saída</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leCep">
-          <property name="maximumSize">
-           <size>
-            <width>150</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="inputMethodHints">
-           <set>Qt::ImhDigitsOnly</set>
-          </property>
-          <property name="inputMask">
-           <string/>
-          </property>
-          <property name="maxLength">
-           <number>9</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="hs3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="hl7">
-        <item>
-         <widget class="QLabel" name="lbStreet">
+         </column>
+         <column>
           <property name="text">
-           <string>Logradouro:</string>
+           <string>Equipamento</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leStreet"/>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QLabel" name="lbNumber">
+         </column>
+         <column>
           <property name="text">
-           <string>Nº:</string>
+           <string>Marca</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leNumber">
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="lbComp">
+         </column>
+         <column>
           <property name="text">
-           <string>Complemento:</string>
+           <string>Modelo</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leComp"/>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="hl8">
-        <item>
-         <widget class="QLabel" name="lbDistrict">
+         </column>
+         <column>
           <property name="text">
-           <string>Bairro:</string>
+           <string>Cor</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leDistrict"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="lbCity">
+         </column>
+         <column>
           <property name="text">
-           <string>Cidade:</string>
+           <string>Valor pago</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leCity"/>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="hl9">
-        <item>
-         <widget class="QLabel" name="lbState">
-          <property name="text">
-           <string>Estado:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leState"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="lbContry">
-          <property name="text">
-           <string>País:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="leContry"/>
-        </item>
-       </layout>
-      </item>
-     </layout>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
    <item>
@@ -754,7 +825,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

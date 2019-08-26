@@ -18,7 +18,6 @@ class App(object):
         self.dbConn = Database('database.db')
         if 'database.db' not in os.listdir():
             self.dbConn.createDB()
-            print('Criado')
 
         self.loginW = self.loadUI('login.ui')
         self.loginW.buttonBox.accepted.connect(self.loginCheck)
@@ -86,7 +85,7 @@ class App(object):
                 self.homeW.tableWidget.setItem(row, 0, QTableWidgetItem(str(item[0])))
                 self.homeW.tableWidget.setItem(row, 1, QTableWidgetItem(item[6]))
                 self.homeW.tableWidget.setItem(row, 2, QTableWidgetItem(item[7]))
-                self.homeW.tableWidget.setItem(row, 3, QTableWidgetItem(item[8]))
+                self.homeW.tableWidget.setItem(row, 3, QTableWidgetItem('Masculino' if item[8] == -2 else 'Feminino'))
                 self.homeW.tableWidget.setItem(row, 4, QTableWidgetItem(item[9]))
                 self.homeW.tableWidget.setItem(row, 5, QTableWidgetItem(item[10]))
                 self.homeW.tableWidget.setItem(row, 6, QTableWidgetItem(item[11]))
@@ -143,8 +142,8 @@ class App(object):
             self.homeW.tableWidget.itemDoubleClicked.connect(lambda: self.openSO(int(result[self.homeW.tableWidget.currentRow()][0])))
         if local == 'Cliente':
             self.homeW.tableWidget.itemDoubleClicked.connect(lambda: self.openCliEdit(int(result[self.homeW.tableWidget.currentRow()][0])))
-        print('SQL Search: ', sql)
-        print('Result OS: ', result)
+        #print('SQL Search: ', sql)
+        #print('Result OS: ', result)
     # End loadSearch
     # Start openCliEdit
     def openCliEdit(self, data = 0):
@@ -165,9 +164,9 @@ class App(object):
         def loadCli(data):
 
             sql = f'SELECT * FROM clients WHERE id={data}'
-            print('SQL loadcli:', sql)
+            #print('SQL loadcli:', sql)
             result = self.dbConn.queryDB(sql)
-            print('Resultado loadcli: ', result)
+            #print('Resultado loadcli: ', result)
             self.cliedit.leCodCli.setText(str(result[0][0]))
             self.cliedit.dateTimeCad.setEnabled(True)
             self.cliedit.dateTimeCad.setDateTime(QtCore.QDateTime.fromString(result[0][1], 'dd/MM/yyyy hh:mm:ss'))
@@ -208,7 +207,24 @@ class App(object):
             self.cliedit.leCodCli.setEnabled(True)
             self.cliedit.pbDelete.setEnabled(True)
             self.cliedit.pbNew.setEnabled(True)
+            self.loadHistory(self.cliedit.tableWidget, data)
 
+            '''
+            sql = f"""SELECT id, entryDate, outDate, deviceType, brand, model, color, serviceValue, sum(amount*value) FROM serviceOrders INNER JOIN soProducts ON id=soId WHERE idCli={data} GROUP BY id HAVING status = 'Consertado'"""
+            result = self.dbConn.queryDB(sql)
+            print(result)
+            self.cliedit.tableWidget.setRowCount(len(result))
+            for row, item in enumerate(result):
+                print(f'ROW: {row} ITEM: {item}')
+                self.cliedit.tableWidget.setItem(row, 0, QTableWidgetItem(str(item[0])))
+                self.cliedit.tableWidget.setItem(row, 1, QTableWidgetItem(item[1]))
+                self.cliedit.tableWidget.setItem(row, 2, QTableWidgetItem(str(item[2])))
+                self.cliedit.tableWidget.setItem(row, 3, QTableWidgetItem(item[3]))
+                self.cliedit.tableWidget.setItem(row, 4, QTableWidgetItem(item[4]))
+                self.cliedit.tableWidget.setItem(row, 5, QTableWidgetItem(item[5]))
+                self.cliedit.tableWidget.setItem(row, 6, QTableWidgetItem(item[6]))
+                self.cliedit.tableWidget.setItem(row, 7, QTableWidgetItem(f'R${item[7] + item[8]:.2f}'.replace('.', ',')))
+            '''
         def delCli(id):
 
             sql = f"DELETE FROM clients WHERE id = '{id}'"
@@ -259,15 +275,15 @@ class App(object):
                     '{self.cliedit.leNumber.text()}', '{self.cliedit.leComp.text()}',
                     '{self.cliedit.leDistrict.text()}', '{self.cliedit.leCity.text()}',
                     '{self.cliedit.leState.text()}', '{self.cliedit.leContry.text()}')"""
-                    print('SQL SaveCli: ', sql)
+                    #print('SQL SaveCli: ', sql)
                     lrid = self.dbConn.queryDB(sql)
-                    print('Last row id: ', lrid)
+                    #print('Last row id: ', lrid)
                     loadCli(lrid)
 
             except sqlite3.IntegrityError as e:
                 msg = QMessageBox()
                 msg.setWindowTitle('Falha ao salvar.')
-                print(e.args)
+                #print(e.args)
                 if 'clients.email' in e.args[0]:
                     msg.setText(f'Este E-mail já está sendo utilizado.')
                 if 'clients.cpfcnpj' in e.args[0]:
@@ -278,11 +294,11 @@ class App(object):
             except AssertionError as e:
                 msg = QMessageBox()
                 msg.setWindowTitle('Falha ao salvar.')
-                print(e.args)
+                #print(e.args)
                 msg.setText(e.args[0])
                 msg.exec_()
 
-        print('Abrindo Cli edit')
+        #print('Abrindo Cli edit')
         self.cliedit = self.loadUI('clients.ui')
         def mask(widget, maskk = ''):
             if widget == self.cliedit.leCpfCnpj and self.cliedit.buttonGroup.checkedButton().text() == 'PJ' and not maskk:
@@ -384,13 +400,13 @@ class App(object):
     # End openCliEdit
     # Start openSO
     def openSO(self, id = 0, idC = 0):
-        print("o IDC é: ", idC, type(idC))
+        #print("o IDC é: ", idC, type(idC))
         def loadOs(id):
             if not idC:
                 sql = f"""SELECT clients.name, clients.birthFun, clients.sex, clients.cpfcnpj, clients.rgie, clients.phone1op, clients.phone1, clients.phone1op, clients.phone2, clients.phone3, clients.email, clients.adress, clients.number, clients.adress2, clients.cep, clients.district, clients.city, clients.state, clients.contry, serviceOrders.* FROM serviceOrders INNER JOIN clients ON clients.id=serviceOrders.idCli WHERE serviceOrders.id={id}"""
-                print('SQL loadOS: ', sql)
+                #print('SQL loadOS: ', sql)
                 result = self.dbConn.queryDB(sql)
-                print('Resultado: ', result)
+                #print('Resultado: ', result)
                 self.sorder.leName.setText(result[0][0])
                 self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'dd/MM/yyyy'))
                 self.sorder.buttonGroup.button(result[0][2]).setChecked(True)
@@ -458,7 +474,7 @@ class App(object):
                 else:
                     self.sorder.pbPrint3.setEnabled(False)
                 result = self.dbConn.queryDB(f"""SELECT * FROM soProducts WHERE soId={id}""")
-                print(result)
+                #print(result)
                 defectFound = self.sorder.leDefectsFound.text()
                 ptotal = 0
                 if result:
@@ -472,12 +488,13 @@ class App(object):
                         ptotal+=float(self.sorder.twBudget.item(row, 3).text())
                     self.sorder.spPartsValue.setValue(ptotal)
                 self.sorder.spTotalValue.setValue(ptotal+self.sorder.spServiceValue.value())
+                self.loadHistory(self.sorder.twCliHistory, int(self.sorder.leCodCli.text()))
 
             else:
                 sql = f"""SELECT name, birthFun, sex, cpfcnpj, rgie, phone1op, phone1, phone1op, phone2, phone3, email, adress, number, adress2, cep, district, city, state, contry FROM clients WHERE id={idC}"""
-                print('SQL loadOS: ', sql)
+                #print('SQL loadOS: ', sql)
                 result = self.dbConn.queryDB(sql)
-                print('Resultado: ', result)
+                #print('Resultado: ', result)
                 self.sorder.leCodCli.setText(str(idC))
                 self.sorder.leName.setText(result[0][0])
                 self.sorder.dtBirth.setDate(QtCore.QDate.fromString(result[0][1], 'dd/MM/yyyy'))
@@ -505,7 +522,7 @@ class App(object):
 
         def saveOs():
             try:
-                print('Salvando OS...')
+                #print('Salvando OS...')
                 idCli = int(self.sorder.leCodCli.text())
                 type = self.sorder.cbType.currentText()
                 assert type, 'Selecione um tipo de aparelho!'
@@ -534,7 +551,7 @@ class App(object):
             except AssertionError as e:
                 msg = QMessageBox()
                 msg.setWindowTitle('Falha ao salvar.')
-                print(e.args)
+                #print(e.args)
                 msg.setText(e.args[0])
                 msg.exec_()
 
@@ -555,7 +572,7 @@ class App(object):
                         amount = int(self.sorder.twBudget.item(row, 1).text())
                         value = float(self.sorder.twBudget.item(row, 2).text())
                         sql = f"INSERT INTO soProducts (soId, description, amount, value) VALUES ({id}, '{desc}', {amount}, {value})"
-                        print('SQL', sql)
+                        #print('SQL', sql)
                         self.dbConn.queryDB(sql)
                 if not rnumber and self.sorder.spPartsValue.value():
                     sql = f"DELETE FROM soProducts WHERE soId={id}"
@@ -572,7 +589,7 @@ class App(object):
                 '{brand}', '{model}', '{color}', '{ns}', '{br}', '{imei1}', '{imei2}',
                 '{acessories}', '{deviceStatus}', '{defect}', '{obs1}', '{defectFound}',
                 '{serviceDone}', {serviceValue}, '{obs2}', '{status}')"""
-                print('SQL saveCli: ', sql)
+                #print('SQL saveCli: ', sql)
                 lrid = self.dbConn.queryDB(sql)
                 self.openSO(lrid)
 
@@ -592,7 +609,7 @@ class App(object):
                 import webbrowser
                 webbrowser.open(PDF_PATH)
 
-        print('Abrindo SO edit')
+        #print('Abrindo SO edit')
         self.sorder = self.loadUI('sorder.ui')
         self.sorder.pbSave.clicked.connect(saveOs)
         self.sorder.pbSearch.clicked.connect(self.sorder.pbExit.click)
@@ -619,6 +636,23 @@ class App(object):
         self.sorder.show()
         loadOs(id)
     # End openSO
+    # Start loadHistory
+    def loadHistory(self, table, idCli):
+        sql = f"""SELECT id, entryDate, outDate, deviceType, brand, model, color, serviceValue, sum(amount*value) FROM serviceOrders INNER JOIN soProducts ON id=soId WHERE idCli={idCli} GROUP BY id HAVING status = 'Consertado'"""
+        result = self.dbConn.queryDB(sql)
+        print(result)
+        table.setRowCount(len(result))
+        for row, item in enumerate(result):
+            print(f'ROW: {row} ITEM: {item}')
+            table.setItem(row, 0, QTableWidgetItem(str(item[0])))
+            table.setItem(row, 1, QTableWidgetItem(item[1]))
+            table.setItem(row, 2, QTableWidgetItem(str(item[2])))
+            table.setItem(row, 3, QTableWidgetItem(item[3]))
+            table.setItem(row, 4, QTableWidgetItem(item[4]))
+            table.setItem(row, 5, QTableWidgetItem(item[5]))
+            table.setItem(row, 6, QTableWidgetItem(item[6]))
+            table.setItem(row, 7, QTableWidgetItem(f'R${item[7] + item[8]:.2f}'.replace('.', ',')))
+
 
 if __name__ == '__main__':
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
